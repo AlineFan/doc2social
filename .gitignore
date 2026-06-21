@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# 备份文件
+*.bak
+*.bak-*
+
+# 测试产物（可重新生成：baoyu 渲染 HTML + perbrand / baoyu 生成的图片）
+test/**/*.png
+test/**/*.html
+test/*.html
+
+# baoyu skill 本地配置（含 chrome profile / SSH identity 路径等，不入库）
+.baoyu-skills/
