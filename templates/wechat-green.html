@@ -1,0 +1,65 @@
+<!--
+  微信公众号 HTML 模板 — 绿色主题
+  主题色: #00a86b
+  字体: PingFang SC 无衬线体
+  参考: https://mp.weixin.qq.com/s/Sa5r0nZeQgyScEWKzSClyw 样式
+
+  使用方法:
+  1. 把文章内容填入 {{CONTENT}} 区域
+  2. 所有样式已 inline，直接粘贴到公众号编辑器
+
+  样式速查（复制粘贴用）:
+
+  【容器】
+  <div style="max-width:677px;margin:0 auto;padding:20px;font-family:'PingFang SC',-apple-system,BlinkMacSystemFont,'Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:16px;color:rgb(58,58,58);line-height:2;letter-spacing:1.2px;">
+
+  【正文段落】
+  <p style="margin:2em 0px;font-size:16px;color:rgb(58,58,58);line-height:2;letter-spacing:1.2px;text-align:justify;">文字</p>
+
+  【绿色高亮文字】
+  <strong style="color:#00a86b;">重点文字</strong>
+
+  【标题（h3 带左边框+底色）】
+  <h3 style="font-size:20px;font-weight:bold;color:#00a86b;margin:2.5em 0px 1.5em;padding:8px 14px;background-color:rgba(0,168,107,0.08);border-left:5px solid #00a86b;border-radius:4px;line-height:1.4;letter-spacing:2px;">标题文字</h3>
+
+  【居中大字公式/金句】
+  <p style="text-align:center;font-size:22px;color:#00a86b;font-weight:bold;margin:2.5em 0px 1.5em;letter-spacing:2px;line-height:1.4;">公式或金句</p>
+
+  【引用块（四边框+圆角，正体，14px）】
+  <blockquote style="margin:2em 0px;padding:20px 24px;border:1.5px solid rgba(0,168,107,0.35);border-radius:8px;background:rgba(0,168,107,0.03);color:rgb(58,58,58);font-style:normal;">
+    <p style="margin:0.3em 0px;font-size:14px;color:rgb(58,58,58);line-height:2em;letter-spacing:0px;text-align:justify;">引用文字</p>
+  </blockquote>
+
+  【图片（绿色细边框+阴影）】
+  <img src="图片路径" alt="描述" style="display:block;max-width:100%;width:auto;height:auto;margin:2em 0px;border:1.5px solid rgba(0,168,107,0.35);border-radius:6px;object-fit:contain;box-shadow:rgba(0,168,107,0.06) 0px 1px 3px;box-sizing:border-box;" />
+
+  【图片占位符（截图未上传时）】
+  <div style="display:block;max-width:100%;width:auto;height:auto;margin:2em 0px;border:1.5px solid rgba(0,168,107,0.35);border-radius:6px;object-fit:contain;box-shadow:rgba(0,168,107,0.06) 0px 1px 3px;box-sizing:border-box;text-align:center;color:#999;font-size:14px;min-height:60px;line-height:60px;">[ 图片：描述 ]</div>
+
+  【绿底色块（飞轮/重点段落）】
+  <div style="background:rgba(0,168,107,0.04);border-radius:12px;padding:20px 24px;margin:2em 0;border:1.5px solid rgba(0,168,107,0.15);">
+    <p style="margin:0.3em 0px;font-size:15px;color:rgb(58,58,58);line-height:2em;letter-spacing:0.5px;text-align:center;">内容</p>
+  </div>
+
+  【虚线分隔符】
+  <div style="border-top:1px dashed rgba(0,168,107,0.3);margin:2.5em 0;"></div>
+
+  【code 标签】
+  <code style="background:rgba(0,168,107,0.08);padding:2px 6px;border-radius:4px;font-size:14px;">CLAUDE.md</code>
+-->
+
+<!-- ========== 模板示例开始 ========== -->
+
+<div style="max-width:677px;margin:0 auto;padding:20px;font-family:'PingFang SC',-apple-system,BlinkMacSystemFont,'Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:16px;color:rgb(58,58,58);line-height:2;letter-spacing:1.2px;">
+
+<p style="margin:2em 0px;font-size:16px;color:rgb(58,58,58);line-height:2;letter-spacing:1.2px;text-align:justify;">{{CONTENT: 正文段落}}</p>
+
+<h3 style="font-size:20px;font-weight:bold;color:#00a86b;margin:2.5em 0px 1.5em;padding:8px 14px;background-color:rgba(0,168,107,0.08);border-left:5px solid #00a86b;border-radius:4px;line-height:1.4;letter-spacing:2px;">{{CONTENT: 标题}}</h3>
+
+<blockquote style="margin:2em 0px;padding:20px 24px;border:1.5px solid rgba(0,168,107,0.35);border-radius:8px;background:rgba(0,168,107,0.03);color:rgb(58,58,58);font-style:normal;">
+<p style="margin:0.3em 0px;font-size:14px;color:rgb(58,58,58);line-height:2em;letter-spacing:0px;text-align:justify;">{{CONTENT: 引用文字}}</p>
+</blockquote>
+
+<img src="{{IMAGE_PATH}}" alt="{{IMAGE_ALT}}" style="display:block;max-width:100%;width:auto;height:auto;margin:2em 0px;border:1.5px solid rgba(0,168,107,0.35);border-radius:6px;object-fit:contain;box-shadow:rgba(0,168,107,0.06) 0px 1px 3px;box-sizing:border-box;" />
+
+</div>

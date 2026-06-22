@@ -1,9 +1,9 @@
 ---
 name: obsidian-publish
 description: |
-  把多份零散素材（Obsidian 笔记 / 想法记录 / 网页摘录 / 对话片段 / 第一手观察 等）**创作**成三个平台的内容：微信公众号长文（markdown）、X 线程（多条推文）、小红书图文（标题 + 文案 + 卡片图分段 + tag）。沿用 dontbesilent 的内容创作哲学（文字洁癖 / 反对干货陷阱 / 认知劫持）、khazix 的 L1-L4 自检体系 / 5 种文章原型 / AI 角色边界、dbs 75 个小红书标题公式。
-  触发方式：/obsidian-publish、/多平台、/三平台、「这些素材帮我写成公众号 X 小红书」「整合多份笔记成文章」「一稿三发」「用我的素材写一篇」「cross-post from notes」「multi-platform create」
-  Create three-platform content (WeChat MP long-form markdown, X thread, Xiaohongshu image-text) from multiple raw materials (Obsidian notes, raw observations, snippets).
+  把多份零散素材（Obsidian 笔记 / 想法记录 / 网页摘录 / 对话片段 / 第一手观察 / 播客访谈转录稿 等）**创作**成多平台内容：微信公众号长文（markdown）、X 线程（多条推文）、小红书图文（标题 + 文案 + 卡片图分段 + tag）、访谈实录整理稿。沿用 dontbesilent 的内容创作哲学（文字洁癖 / 反对干货陷阱 / 认知劫持）、khazix 的 L1-L4 自检体系 / 5 种文章原型 / AI 角色边界、dbs 75 个小红书标题公式。
+  触发方式：/obsidian-publish、/多平台、/三平台、/访谈、/interview、「这些素材帮我写成公众号 X 小红书」「整合多份笔记成文章」「一稿三发」「用我的素材写一篇」「这个播客帮我整理」「把这个访谈写成文章」「cross-post from notes」「multi-platform create」
+  Create multi-platform content (WeChat MP, X thread, Xiaohongshu, interview transcript) from raw materials (Obsidian notes, observations, podcast transcripts).
 ---
 
 # obsidian-publish：素材集合 → 三平台一稿多创
@@ -79,9 +79,18 @@ description: |
 - 用户只说"看看 X""分析 X" → 不够明示，**问一次**："你想做研究模式（用 STORM 从这个主题延伸）还是有素材给我？"
 - 关键词必须命中"研究" / "STORM" / "话题" / "没素材" / "深入研究"之一才算明示
 
+### 路径 C：访谈整理模式
+
+用户提供**播客 / 视频访谈的转录稿或整理稿**时启用。
+
+→ 先进 **Step 0.8：访谈分析**（详见 `references/interview-analysis.md`），输出结构化素材包，再进 **访谈实录写作**（详见 `references/interview-writing.md`）。
+
+**判断口径**：
+- 关键词必须命中“分析文案稿“/ "访谈稿" / "视频稿" /”采访稿“ 之一才算明示
+
 ---
 
-**可选附带信息**（两条路径都适用）：
+**可选附带信息**（三条路径都适用）：
 - 核心主题（如果用户没说，从素材提炼；路径 B 中主题就是输入本身）
 - 偏向哪种文章原型（如果用户没说，按素材 / briefing 性质自动判断）
 - 行业 / 受众（影响小红书标题公式选择）
@@ -96,6 +105,7 @@ description: |
 
 **路径 A（多素材）**：5 步 → Step 1-5
 **路径 B（STORM 研究）**：6 步 → Step 0.5 → Step 1-5
+**路径 C（访谈整理）**：Step 0.8 → 访谈实录（默认） / 可追加 Step 2-5 三平台适配
 
 ### Step 0.5：STORM 研究（**条件触发：路径 B 才走**）
 
@@ -118,6 +128,28 @@ description: |
 
 **进 Step 1 前**，按 `references/storm-research-mode.md` 第五节的格式给用户简短报告（透明声明研究产物来源，预防"假装亲身经历"）。
 
+### Step 0.8：访谈分析（**条件触发：路径 C 才走**）
+
+**触发条件**：用户输入符合路径 C（详见上方"输入格式"）。
+
+**读 `references/interview-analysis.md` 全文**，按 7 个维度分析转录稿：
+
+1. **核心信息点提取**（标签：独家/反常识/具体数字/预测 + 新颖度/可信度/逻辑强度）
+2. **金句收集**（原话 + 主题 + 使用建议）
+3. **叙事素材提取**（类比/故事/情绪高点）
+4. **对话动态分析**（追问/回避/转折点）
+5. **待补充背景**（需 WebSearch 验证的事实）
+6. **值得深挖的点**（言外之意/矛盾/推论）
+7. **访谈实录提纲**（按原始章节顺序）
+
+**输出**：结构化素材包 + 提纲，**询问用户**：提纲是否调整？然后进入访谈实录写作（`references/interview-writing.md`）。
+
+**用户可追加选择**：
+- 默认：只输出访谈实录（公众号 markdown）
+- 追加：把实录作为素材，走 Step 2-5 生成 X 线程 + 小红书图文
+
+---
+
 ### Step 1：理解素材
 
 读完所有素材，对每份做笔记：
@@ -129,6 +161,8 @@ description: |
   - **K** (Knowledge)：有信息量吗？
   - **R** (Resonance)：戳中情绪吗？
   - S 级三项兼备；及格线至少 2/3；只占 1 项或全空 → 提示用户补素材
+
+**深度分析（条件启用）**：当素材符合 `references/content-analyzer.md` 的触发条件时（≥2 篇且含他人长文 / 单篇 >2000 字论证复杂 / 用户主动要求），在上述基础提取后追加：批判性审视 + 价值提取 + 叙事技巧分析。深度分析的输出直接喂给 Step 2 的选题判断和 Step 3 的原型选择。
 
 ### Step 2：选题确认
 
@@ -312,6 +346,8 @@ description: |
 | 何时读 | 读什么 |
 |--------|--------|
 | **Step 0.5（路径 B 触发时必读）** | **`references/storm-research-mode.md`**（4 个 prompt 原文 + 设计点 + briefing 接口） |
+| **Step 0.8（路径 C 触发时必读）** | **`references/interview-analysis.md`**（7 维分析框架）→ **`references/interview-writing.md`**（实录写作规范） |
+| **Step 1 深度分析（条件启用）** | **`references/content-analyzer.md`**（批判性审视 + 价值提取 + 叙事技巧） |
 | Step 2 选题判断 | `prompts/dbs-rules.md`（dbs 五维诊断） |
 | Step 3 选原型 | `references/article-archetypes.md`（5 种原型 + 适配表） |
 | Step 4 写公众号 | `references/wechat-mp.md`（结构模板 + markdown 规范） |
