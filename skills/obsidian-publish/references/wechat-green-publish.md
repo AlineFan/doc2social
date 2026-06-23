@@ -86,4 +86,4 @@ bash scripts/publish-to-wechat.sh <笔记名>-wechat.html --jpeg   # 体积压 ~
 - **配图绝不自动**——只有用户明确说「配图」才跑 illustrate.sh（花钱）
 - **发布副本不污染原始沉淀笔记**——所有配图引用、渲染产物都在副本/衍生文件上
 - **配图文件名带 `<笔记名>-` 前缀**——否则 vault 内多篇 `![[perbrand-01]]` 会歧义、inline 抓错图
-- **X 线程 / 小红书发布仍走 opencli**——绿色路线只管公众号
+- **绿色路线只管公众号**——小红书走 `note-to-xshots.sh`（X 长文风 → 3:4 截图，见发布段路径 B / `REQUIREMENTS.md` §16.10），X 线程走 opencli

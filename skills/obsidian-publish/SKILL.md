@@ -299,18 +299,26 @@ description: |
 
 ---
 
-## 发布到公众号（绿色路线，定稿后）
+## 发布（定稿后，两条路径）
 
-创作定稿（公众号 markdown，通常在 Obsidian vault 笔记）后，发布走这套——图片**全部 base64 内嵌**，粘贴公众号自动上传素材库。**完整流程见 `references/wechat-green-publish.md`**。
+创作定稿（公众号 markdown，通常在 Obsidian vault 笔记）后发布。公众号详见 `references/wechat-green-publish.md`；小红书详见 `REQUIREMENTS.md` §16.10。
 
-顺序：**定稿笔记 →（配图，明确指令才触发）→ 发布副本+插入 → 套绿色样式 → 内嵌 → 粘贴**
+**共同前置**（两条路径都先做这两步）：
 
 1. **perbrand 配图（明确指令才触发，⚠️ 生图花钱）**：用户明确说「配图」才跑 `scripts/illustrate.sh <笔记.md>` → 生图 + shotlist。只用截图就跳过。
 2. **发布副本**：复制 `<笔记名>-publish.md`（**原笔记不动**），按 shotlist 锚点插 `![[<笔记名>-perbrand-0N.png]]`，截图 `![[截屏xxx]]` 保留原位。
+
+**→ 然后明确问用户发哪个平台，不要默认走某一个：**
+
+### 路径 A · 公众号（绿色长文 HTML）
 3. **套绿色样式**：读 `templates/wechat-green.html`，副本 markdown → 绿色 inline HTML，图片 `![[]]` → `<img src="文件名">`。
 4. **内嵌发布**：`scripts/publish-to-wechat.sh <绿色.html>` → 配图+截图 base64 内嵌（截图从 vault 自动抓）+ 拷贝 → 粘贴公众号。
 
-**铁律**：配图绝不自动（明确指令才生图）；发布副本不污染原始沉淀笔记；配图名带 `<笔记名>-` 前缀避免 vault 冲突。
+### 路径 B · 小红书（X 长文风 3:4 截图）
+3. **渲染 + 自动截图**：`scripts/note-to-xshots.sh <副本.md> [--banner <置顶图>]` → 渲染成 @林锵锵 X 长文视觉 → 切成多张 3:4 PNG（默认 `<副本同目录>/xshots/01.png …`）。它自己从 vault 抓 `![[]]` 图，不丢图。
+4. **发布**：3:4 图直接发小红书（v2 自动走 `opencli xiaohongshu publish`）。
+
+**铁律**：配图绝不自动（明确指令才生图）；发布副本不污染原始沉淀笔记；配图名带 `<笔记名>-` 前缀避免 vault 冲突；**平台选择必须明确问用户，不默认**。
 
 ---
 
@@ -366,7 +374,8 @@ description: |
 | Step 2 选题判断 | `prompts/dbs-rules.md`（dbs 五维诊断） |
 | Step 3 选原型 | `references/article-archetypes.md`（5 种原型 + 适配表） |
 | Step 4 写公众号 | `references/wechat-mp.md`（结构模板 + markdown 规范） |
-| **发布公众号（定稿后）** | **`references/wechat-green-publish.md`**（配图→副本→绿色样式→base64 内嵌 完整流程） |
+| **发布·公众号（定稿后）** | **`references/wechat-green-publish.md`**（配图→副本→绿色样式→base64 内嵌） |
+| **发布·小红书（定稿后）** | **`REQUIREMENTS.md` §16.10**（note-to-xshots.sh：X 长文风 → 多张 3:4 截图） |
 | Step 4 写 X 线程 | `references/x-thread.md`（字符权重 + hook 规则） |
 | Step 4 写小红书 | `references/xiaohongshu.md` + `prompts/dbs-xhs-titles.md`（75 公式） |
 | 任何需要"活人感"措辞 | `references/voice-vocabulary.md`（口语词组库） |
@@ -390,8 +399,9 @@ description: |
 |---|---|
 | 用户对结果不满意，反复让你改 | 「可能是选题问题，不是创作问题。用 `/dbs-content` 重新诊断选题。」 |
 | 小红书标题反复都不满意 | 「这话题可能不适合小红书。换个角度，或者把这内容只发公众号 + X。」 |
-| 用户要发公众号 | 「走绿色路线（见『发布到公众号』段）：配图(明确指令)→副本→绿色样式→base64 内嵌→粘贴。」 |
-| 用户要发 X / 小红书 | 「用 opencli：`opencli twitter post`、`opencli xiaohongshu publish`。」 |
+| 用户要发公众号 | 「走『发布』段路径 A：套绿色样式 → base64 内嵌 → 粘贴。」 |
+| 用户要发小红书 | 「走『发布』段路径 B：`note-to-xshots.sh` 渲染 X 长文风 → 3:4 截图 → 发小红书。」 |
+| 用户要发 X 线程 | 「用 opencli：`opencli twitter post`，多条串 thread 见 `scripts/post-x-thread.sh`。」 |
 | 素材都是别人的观点摘录 | 「这批素材里缺第一手观察。建议补 1-2 个你自己的经历再来。」 |
 
 ---
