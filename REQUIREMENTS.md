@@ -907,6 +907,45 @@ cat /path/to/article.md | codex exec \
 
 ---
 
+### 16.10 note-to-xhs — **笔记 → 小红书图文物料（完整工作流）**（2026-06-23 新增）
+
+**一句话定位**：给 1 篇 markdown 笔记，一条龙产出小红书可发物料 = **X 长文样式 3:4 长截图 + 标题 + 正文文案 + 话题标签**。填了 §10 决策表「小红书图片 v1 砍掉、未来重做」槽位。
+
+**触发**：「把这篇笔记发小红书」「这篇做成小红书图文」「/note-to-xhs」「按 X 样式做小红书长截图」「给这篇配标题和文案」
+
+**工作流（4 步，由 `note-to-xhs` skill 编排）**：
+
+| 步 | 做什么 | 用什么 |
+|---|---|---|
+| 1 渲染 | md → N 张 3:4 长截图（X 长文样式） | `scripts/note-to-xshots.sh` |
+| 2 标题 | 75 公式匹配，候选 + Top 3 | 调 `/dbs-xhs-title` |
+| 3 文案 | ≤100 字，固定内容风格 | `skills/note-to-xhs/references/caption-style.md` |
+| 4 标签 | 核心固定 + 按主题补，8–12 个 | skill 内置 |
+
+**关键文件**：
+- 编排 skill：`skills/note-to-xhs/SKILL.md`（软链 `~/.claude/skills/note-to-xhs`）
+- **文案内容风格**：`skills/note-to-xhs/references/caption-style.md`（用户定稿风格：开门见山抛反差 → 点破本质 → 对仗金句收尾；0 emoji；不强行加互动钩子；≤100 字）
+- 渲染脚本：`scripts/note-to-xshots.sh` + `scripts/render-xshots.ts`
+- 模板：`templates/x-longform.html` ｜ 头像：`assets/avatar-linqq.png`（codex perbrand 生成，base64 内嵌进模板）
+
+**底层渲染脚本 note-to-xshots.sh**：
+- 用法：`bash scripts/note-to-xshots.sh <note.md> [--banner <图>] [--out <目录>] [--keep-html]`
+- 输出：`<out>/01.png …`，每张 **1196×1594（3:4）**
+- 标题取笔记**顶部** H1，否则文件名（去末尾日期）；身份固定 = **林锵锵 + 蓝标 + 绿衣丸子头头像**；互动数字随机（评论 100-500 / 转发 1k-5k / 赞 8k-20k / 浏览 1M-8M）
+- 图片：`![[img]]` / `![](path)` 按 basename 去 `$OBSIDIAN_VAULT` 递归找 → `file://` 绝对路径，chromium 直接加载（**不丢 vault 图**）
+- **智能连续切（黑名单式）**：默认切在 tile 边界、最大化填充；唯一约束「文字不切半行」（文字行设为禁区，切线落入则上移到行顶）；**图片可像长截图一样自由拦腰跨页**；留白极小
+- 截图：`playwright-core` 复用已缓存 ms-playwright chromium（无则回退系统 Chrome），零浏览器下载
+
+**技术栈**：Bun + playwright-core + marked（proj04 根目录 `bun add`，有 `package.json` / `node_modules`）
+
+**踩坑（已修，详见 workspace `01_Gotchas.md`）**：① 标题误取正文中段 `#` → 只认顶部 `#` ② `<script>` 无布局盒致 contentBottom=0 → 用最大内容底 ③ Playwright `clip` 大 y 越界 → 改 `scrollTo` + 截视口
+
+**未来（v2）**：自动发布走 `opencli xiaohongshu publish`；圈选打码（用户 2026-06-23 明确 **v1 不需要打码**）
+
+**不做**：不是 Web 工具（终端原生，对齐项目本质）；不改写正文长文（那是 obsidian-publish 的活）；一次只处理一篇
+
+---
+
 **文档结束。**
 
 > 这份文档够一个完全陌生的开发者按图施工。

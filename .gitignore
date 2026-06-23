@@ -23,3 +23,10 @@ output/**/*.png
 
 # baoyu skill 本地配置（含 chrome profile / SSH identity 路径等，不入库）
 .baoyu-skills/
+
+# Node/Bun（render-xshots 依赖：playwright-core + marked，可 bun install 重装）
+node_modules/
+
+# xshots 输出目录（3:4 截图，可重新生成）
+xshots/
+_preview.html
