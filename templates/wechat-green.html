@@ -1,65 +1,142 @@
 <!--
   微信公众号 HTML 模板 — 绿色主题
-  主题色: #00a86b
-  字体: PingFang SC 无衬线体
-  参考: https://mp.weixin.qq.com/s/Sa5r0nZeQgyScEWKzSClyw 样式
+  主题色: #00a86b（不变）；黄金强调底 #FDE68A；浅绿下划线 #A7F3D0
+  字体: WeChatSansStd-Medium（微信黑体）→ PingFang SC 兜底
+  排版参考: https://mp.weixin.qq.com/s/qGdmYj-3B9AB8TTu2vSWFw
+    小字号 15px + 大行高 1.9 + 无字间距 + 三种正文强调 + 大数字分节标题 + 横滚目录卡片
 
-  使用方法:
-  1. 把文章内容填入 {{CONTENT}} 区域
-  2. 所有样式已 inline，直接粘贴到公众号编辑器
+  使用方法: 把内容套进对应样式，所有样式 inline，直接粘公众号。
 
-  样式速查（复制粘贴用）:
+  ========== 样式速查 ==========
 
   【容器】
-  <div style="max-width:677px;margin:0 auto;padding:20px;font-family:'PingFang SC',-apple-system,BlinkMacSystemFont,'Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:16px;color:rgb(58,58,58);line-height:2;letter-spacing:1.2px;">
+  <div style="max-width:677px;margin:0 auto;padding:20px;font-family:'WeChatSansStd-Medium','PingFang SC',-apple-system,BlinkMacSystemFont,'Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:15px;color:rgb(58,58,58);line-height:1.9;">
 
-  【正文段落】
-  <p style="margin:2em 0px;font-size:16px;color:rgb(58,58,58);line-height:2;letter-spacing:1.2px;text-align:justify;">文字</p>
+  【正文段落】正常文字=黑色，15px/行高1.9/无字间距/两端对齐
+  <p style="margin:0 0 20px;font-size:15px;color:rgb(58,58,58);line-height:1.9;text-align:justify;">文字</p>
 
-  【绿色高亮文字】
-  <strong style="color:#00a86b;">重点文字</strong>
+  ── 正文强调三种（套在正文段落内的关键词上，别滥用，一段最多 1-2 处）──
+  【① 绿色加粗】= 核心概念 / 产品名 / 关键结论
+  <strong style="color:#00a86b;">重点概念</strong>
 
-  【标题（h3 带左边框+底色）】
-  <h3 style="font-size:20px;font-weight:bold;color:#00a86b;margin:2.5em 0px 1.5em;padding:8px 14px;background-color:rgba(0,168,107,0.08);border-left:5px solid #00a86b;border-radius:4px;line-height:1.4;letter-spacing:2px;">标题文字</h3>
+  【② 黄金渐变底】= 数字 / 最该一眼被看到的关键词
+  <span style="background:linear-gradient(120deg,#FDE68A 0%,rgba(255,255,255,0) 100%);padding:0 4px;border-radius:2px;font-weight:600;color:#111827;">几十年</span>
 
-  【居中大字公式/金句】
-  <p style="text-align:center;font-size:22px;color:#00a86b;font-weight:bold;margin:2.5em 0px 1.5em;letter-spacing:2px;line-height:1.4;">公式或金句</p>
+  【③ 绿色下划线】= 次级强调 / 专有名词
+  <span style="border-bottom:2px solid #A7F3D0;font-weight:600;">多智能体协作</span>
+
+  【分节标题（大数字 + 竖线 + 中文标题 + 英文副标题）→ 替代旧的绿色色块标题】
+  <section style="display:flex;align-items:center;gap:16px;margin:2.5em 0 1.2em;">
+    <section style="text-align:center;flex-shrink:0;">
+      <p style="margin:0;font-size:28px;font-weight:900;color:#00a86b;line-height:1;letter-spacing:-2px;">01</p>
+      <p style="margin:0;font-size:8px;font-weight:700;color:#D1D5DB;letter-spacing:2px;">PART</p>
+    </section>
+    <span style="width:1px;height:36px;background:#E5E7EB;flex-shrink:0;display:inline-block;"></span>
+    <section>
+      <p style="margin:0 0 1px;font-size:17px;font-weight:900;color:#111827;letter-spacing:0.3px;">中文标题</p>
+      <p style="margin:0;font-size:11px;font-weight:600;color:#9CA3AF;letter-spacing:1.5px;">ENGLISH</p>
+    </section>
+  </section>
+
+  【小标题（黑粗标题 + 绿色左竖条）→ 用于二级 ## 标题，区别于一级的大数字标题】
+  ⚠️ 不要加 STEP / 步骤 / 方法 等文本里没有的词；标题文字直接用 ## 后的原文
+  <h4 style="font-size:16px;font-weight:800;color:#111827;margin:2em 0 12px;padding-left:12px;border-left:4px solid #00a86b;line-height:1.4;">小标题</h4>
+
+  【横滚目录卡片（文章开头，N 个部分 N 张卡，第 1 张绿色高亮）】
+  <section style="margin:0 0 32px;">
+    <section style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <p style="font-size:10px;color:#9CA3AF;margin:0;text-transform:uppercase;letter-spacing:2px;font-weight:600;">📦 N Parts</p>
+      <p style="font-size:10px;color:#9CA3AF;margin:0;">👉 滑动</p>
+    </section>
+    <section style="overflow-x:scroll;white-space:nowrap;padding-bottom:8px;">
+      <section style="display:inline-block;white-space:normal;vertical-align:top;width:110px;background:linear-gradient(135deg,#00a86b,#33c98d);border-radius:12px;padding:12px;margin-right:8px;">
+        <p style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.75);letter-spacing:1px;margin:0 0 5px;">PART 01</p>
+        <p style="font-size:13px;font-weight:800;color:#fff;margin:0 0 3px;">短标题</p>
+        <p style="font-size:10px;color:rgba(255,255,255,0.75);margin:0;">副标题</p>
+      </section>
+      <section style="display:inline-block;white-space:normal;vertical-align:top;width:110px;background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:12px;margin-right:8px;box-shadow:rgba(0,0,0,0.04) 0px 2px 6px;">
+        <p style="font-size:9px;font-weight:700;color:#9CA3AF;letter-spacing:1px;margin:0 0 5px;">PART 02</p>
+        <p style="font-size:13px;font-weight:800;color:#111827;margin:0 0 3px;">短标题</p>
+        <p style="font-size:10px;color:#9CA3AF;margin:0;">副标题</p>
+      </section>
+      <!-- 后续部分都用上面这种白卡，PART 编号递增 -->
+    </section>
+  </section>
+
+  【居中大字金句】
+  <p style="text-align:center;font-size:20px;color:#00a86b;font-weight:800;margin:2.2em 0px;letter-spacing:1px;line-height:1.5;">公式或金句</p>
 
   【引用块（四边框+圆角，正体，14px）】
   <blockquote style="margin:2em 0px;padding:20px 24px;border:1.5px solid rgba(0,168,107,0.35);border-radius:8px;background:rgba(0,168,107,0.03);color:rgb(58,58,58);font-style:normal;">
-    <p style="margin:0.3em 0px;font-size:14px;color:rgb(58,58,58);line-height:2em;letter-spacing:0px;text-align:justify;">引用文字</p>
+    <p style="margin:0.3em 0px;font-size:14px;color:rgb(58,58,58);line-height:1.8;text-align:justify;">引用文字</p>
   </blockquote>
 
   【图片（绿色细边框+阴影）】
   <img src="图片路径" alt="描述" style="display:block;max-width:100%;width:auto;height:auto;margin:2em 0px;border:1.5px solid rgba(0,168,107,0.35);border-radius:6px;object-fit:contain;box-shadow:rgba(0,168,107,0.06) 0px 1px 3px;box-sizing:border-box;" />
 
-  【图片占位符（截图未上传时）】
-  <div style="display:block;max-width:100%;width:auto;height:auto;margin:2em 0px;border:1.5px solid rgba(0,168,107,0.35);border-radius:6px;object-fit:contain;box-shadow:rgba(0,168,107,0.06) 0px 1px 3px;box-sizing:border-box;text-align:center;color:#999;font-size:14px;min-height:60px;line-height:60px;">[ 图片：描述 ]</div>
-
   【绿底色块（飞轮/重点段落）】
   <div style="background:rgba(0,168,107,0.04);border-radius:12px;padding:20px 24px;margin:2em 0;border:1.5px solid rgba(0,168,107,0.15);">
-    <p style="margin:0.3em 0px;font-size:15px;color:rgb(58,58,58);line-height:2em;letter-spacing:0.5px;text-align:center;">内容</p>
+    <p style="margin:0.3em 0px;font-size:15px;color:rgb(58,58,58);line-height:1.9;text-align:center;">内容</p>
   </div>
 
   【虚线分隔符】
   <div style="border-top:1px dashed rgba(0,168,107,0.3);margin:2.5em 0;"></div>
 
-  【code 标签】
+  【行内 code】
   <code style="background:rgba(0,168,107,0.08);padding:2px 6px;border-radius:4px;font-size:14px;">CLAUDE.md</code>
+
+  【金句卡片（虚线绿框 + 居中绿字 + 黄金下划线）】= 单独强调一句核心观点
+  <section style="background:#FFF;border:1px dashed #BBF7D0;border-radius:8px;padding:14px 16px;margin:0 0 24px;text-align:center;">
+    <p style="margin:0;line-height:1.6;"><span style="font-size:15px;color:#00a86b;font-weight:bold;border-bottom:3px solid #FDE68A;padding-bottom:2px;">核心金句</span></p>
+  </section>
+
+  【内容标签（绿色圆角胶囊）】= 标注某段属于什么（如 Coding Session — Team Agent）
+  <span style="display:inline-block;font-size:13px;font-weight:700;color:#00a86b;background:rgba(0,168,107,0.08);padding:3px 10px;border-radius:999px;">标签文字</span>
+
+  【代码块（Mac 风格框，多行代码/命令/prompt）】链接/特殊部分用蓝色 rgb(14,14,255)
+  <section style="background:rgb(250,250,250);display:block;margin:2em 0px;line-height:26px;border:1px solid rgba(0,0,0,0.08);border-radius:6px;font-family:Menlo,Monaco,Consolas,'Courier New',monospace;box-shadow:rgba(140,140,160,0.08) 0px 1px 4px;overflow:hidden;">
+    <span style="display:block;padding:4px 10px;font-size:15px;line-height:1;color:rgb(187,187,187);letter-spacing:2px;background-color:rgb(242,242,242);border-bottom:1px solid rgba(0,0,0,0.04);">●</span>
+    <pre style="background:rgb(255,255,255);margin:0px;white-space:nowrap;overflow-x:auto;padding:0.6em 1em 1em;"><code style="white-space:pre-wrap;display:block;font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:12px;background:transparent;color:rgb(56,58,66);padding:0px;">代码内容，链接用 <span style="color:rgb(14,14,255);">蓝色</span></code></pre>
+  </section>
 -->
 
 <!-- ========== 模板示例开始 ========== -->
 
-<div style="max-width:677px;margin:0 auto;padding:20px;font-family:'PingFang SC',-apple-system,BlinkMacSystemFont,'Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:16px;color:rgb(58,58,58);line-height:2;letter-spacing:1.2px;">
+<div style="max-width:677px;margin:0 auto;padding:20px;font-family:'WeChatSansStd-Medium','PingFang SC',-apple-system,BlinkMacSystemFont,'Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:15px;color:rgb(58,58,58);line-height:1.9;">
 
-<p style="margin:2em 0px;font-size:16px;color:rgb(58,58,58);line-height:2;letter-spacing:1.2px;text-align:justify;">{{CONTENT: 正文段落}}</p>
+<section style="margin:0 0 32px;">
+<section style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+<p style="font-size:10px;color:#9CA3AF;margin:0;text-transform:uppercase;letter-spacing:2px;font-weight:600;">📦 N Parts</p>
+<p style="font-size:10px;color:#9CA3AF;margin:0;">👉 滑动</p>
+</section>
+<section style="overflow-x:scroll;white-space:nowrap;padding-bottom:8px;">
+<section style="display:inline-block;white-space:normal;vertical-align:top;width:110px;background:linear-gradient(135deg,#00a86b,#33c98d);border-radius:12px;padding:12px;margin-right:8px;">
+<p style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.75);letter-spacing:1px;margin:0 0 5px;">PART 01</p>
+<p style="font-size:13px;font-weight:800;color:#fff;margin:0 0 3px;">{{短标题}}</p>
+<p style="font-size:10px;color:rgba(255,255,255,0.75);margin:0;">{{副标题}}</p>
+</section>
+</section>
+</section>
 
-<h3 style="font-size:20px;font-weight:bold;color:#00a86b;margin:2.5em 0px 1.5em;padding:8px 14px;background-color:rgba(0,168,107,0.08);border-left:5px solid #00a86b;border-radius:4px;line-height:1.4;letter-spacing:2px;">{{CONTENT: 标题}}</h3>
+<section style="display:flex;align-items:center;gap:16px;margin:2.5em 0 1.2em;">
+<section style="text-align:center;flex-shrink:0;">
+<p style="margin:0;font-size:28px;font-weight:900;color:#00a86b;line-height:1;letter-spacing:-2px;">01</p>
+<p style="margin:0;font-size:8px;font-weight:700;color:#D1D5DB;letter-spacing:2px;">PART</p>
+</section>
+<span style="width:1px;height:36px;background:#E5E7EB;flex-shrink:0;display:inline-block;"></span>
+<section>
+<p style="margin:0 0 1px;font-size:17px;font-weight:900;color:#111827;letter-spacing:0.3px;">{{中文标题}}</p>
+<p style="margin:0;font-size:11px;font-weight:600;color:#9CA3AF;letter-spacing:1.5px;">{{ENGLISH}}</p>
+</section>
+</section>
+
+<p style="margin:0 0 20px;font-size:15px;color:rgb(58,58,58);line-height:1.9;text-align:justify;">{{正文段落}}，关键概念用 <strong style="color:#00a86b;">绿色加粗</strong>，数字用 <span style="background:linear-gradient(120deg,#FDE68A 0%,rgba(255,255,255,0) 100%);padding:0 4px;border-radius:2px;font-weight:600;color:#111827;">黄金底</span>，专名用 <span style="border-bottom:2px solid #A7F3D0;font-weight:600;">绿色下划线</span>。</p>
 
 <blockquote style="margin:2em 0px;padding:20px 24px;border:1.5px solid rgba(0,168,107,0.35);border-radius:8px;background:rgba(0,168,107,0.03);color:rgb(58,58,58);font-style:normal;">
-<p style="margin:0.3em 0px;font-size:14px;color:rgb(58,58,58);line-height:2em;letter-spacing:0px;text-align:justify;">{{CONTENT: 引用文字}}</p>
+<p style="margin:0.3em 0px;font-size:14px;color:rgb(58,58,58);line-height:1.8;text-align:justify;">{{引用文字}}</p>
 </blockquote>
 
 <img src="{{IMAGE_PATH}}" alt="{{IMAGE_ALT}}" style="display:block;max-width:100%;width:auto;height:auto;margin:2em 0px;border:1.5px solid rgba(0,168,107,0.35);border-radius:6px;object-fit:contain;box-shadow:rgba(0,168,107,0.06) 0px 1px 3px;box-sizing:border-box;" />
 
 </div>
+<!-- ========== 模板示例结束 ========== -->
