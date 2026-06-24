@@ -1,0 +1,454 @@
+{
+  "aggregate": {
+    "huanjue": {
+      "per_dim": {
+        "A1_认知落差": {
+          "scores": [
+            7,
+            7,
+            7
+          ],
+          "median": 7,
+          "range": 0,
+          "low_conf": false
+        },
+        "A2_标题钩子": {
+          "scores": [
+            6,
+            6,
+            6
+          ],
+          "median": 6,
+          "range": 0,
+          "low_conf": false
+        },
+        "A3_表达效率": {
+          "scores": [
+            6,
+            6,
+            6
+          ],
+          "median": 6,
+          "range": 0,
+          "low_conf": false
+        },
+        "A4_文字洁癖": {
+          "scores": [
+            7,
+            6,
+            5
+          ],
+          "median": 6,
+          "range": 2,
+          "low_conf": false
+        },
+        "A5_承载力": {
+          "scores": [
+            7,
+            7,
+            7
+          ],
+          "median": 7,
+          "range": 0,
+          "low_conf": false
+        },
+        "B1_L1硬规则": {
+          "scores": [
+            7,
+            5,
+            6
+          ],
+          "median": 6,
+          "range": 2,
+          "low_conf": false
+        },
+        "B2_L2风格": {
+          "scores": [
+            6,
+            5,
+            6
+          ],
+          "median": 6,
+          "range": 1,
+          "low_conf": false
+        },
+        "B3_L3内容质量": {
+          "scores": [
+            7,
+            6,
+            6
+          ],
+          "median": 6,
+          "range": 1,
+          "low_conf": false
+        },
+        "B4_L4活人感": {
+          "scores": [
+            5,
+            5,
+            5
+          ],
+          "median": 5,
+          "range": 0,
+          "low_conf": false
+        }
+      },
+      "overall_scores": [
+        6.5,
+        6.01,
+        6.05
+      ],
+      "overall_median": 6.05,
+      "overall_range": 0.49,
+      "verdicts": [
+        "小修可发",
+        "返工一轮",
+        "返工一轮"
+      ],
+      "archetypes": [
+        "方法论分享型",
+        "方法论分享型",
+        "现象解读型"
+      ]
+    },
+    "skillopt": {
+      "per_dim": {
+        "A1_认知落差": {
+          "scores": [
+            8,
+            7,
+            8
+          ],
+          "median": 8,
+          "range": 1,
+          "low_conf": false
+        },
+        "A2_标题钩子": {
+          "scores": [
+            6,
+            6,
+            6
+          ],
+          "median": 6,
+          "range": 0,
+          "low_conf": false
+        },
+        "A3_表达效率": {
+          "scores": [
+            8,
+            7,
+            8
+          ],
+          "median": 8,
+          "range": 1,
+          "low_conf": false
+        },
+        "A4_文字洁癖": {
+          "scores": [
+            8,
+            7,
+            7
+          ],
+          "median": 7,
+          "range": 1,
+          "low_conf": false
+        },
+        "A5_承载力": {
+          "scores": [
+            8,
+            8,
+            8
+          ],
+          "median": 8,
+          "range": 0,
+          "low_conf": false
+        },
+        "B1_L1硬规则": {
+          "scores": [
+            7,
+            6,
+            7
+          ],
+          "median": 7,
+          "range": 1,
+          "low_conf": false
+        },
+        "B2_L2风格": {
+          "scores": [
+            7,
+            8,
+            8
+          ],
+          "median": 8,
+          "range": 1,
+          "low_conf": false
+        },
+        "B3_L3内容质量": {
+          "scores": [
+            7,
+            7,
+            7
+          ],
+          "median": 7,
+          "range": 0,
+          "low_conf": false
+        },
+        "B4_L4活人感": {
+          "scores": [
+            7,
+            7,
+            7
+          ],
+          "median": 7,
+          "range": 0,
+          "low_conf": false
+        }
+      },
+      "overall_scores": [
+        7.4,
+        7.05,
+        7.43
+      ],
+      "overall_median": 7.4,
+      "overall_range": 0.38,
+      "verdicts": [
+        "小修可发",
+        "小修可发",
+        "小修可发"
+      ],
+      "archetypes": [
+        "现象解读型",
+        "现象解读型",
+        "现象解读型"
+      ]
+    },
+    "wx-game": {
+      "per_dim": {
+        "A1_认知落差": {
+          "scores": [
+            6,
+            5,
+            5
+          ],
+          "median": 5,
+          "range": 1,
+          "low_conf": false
+        },
+        "A2_标题钩子": {
+          "scores": [
+            7,
+            7,
+            7
+          ],
+          "median": 7,
+          "range": 0,
+          "low_conf": false
+        },
+        "A3_表达效率": {
+          "scores": [
+            6,
+            6,
+            6
+          ],
+          "median": 6,
+          "range": 0,
+          "low_conf": false
+        },
+        "A4_文字洁癖": {
+          "scores": [
+            7,
+            5,
+            6
+          ],
+          "median": 6,
+          "range": 2,
+          "low_conf": false
+        },
+        "A5_承载力": {
+          "scores": [
+            7,
+            7,
+            7
+          ],
+          "median": 7,
+          "range": 0,
+          "low_conf": false
+        },
+        "B1_L1硬规则": {
+          "scores": [
+            5,
+            4,
+            4
+          ],
+          "median": 4,
+          "range": 1,
+          "low_conf": false
+        },
+        "B2_L2风格": {
+          "scores": [
+            6,
+            6,
+            6
+          ],
+          "median": 6,
+          "range": 0,
+          "low_conf": false
+        },
+        "B3_L3内容质量": {
+          "scores": [
+            6,
+            6,
+            6
+          ],
+          "median": 6,
+          "range": 0,
+          "low_conf": false
+        },
+        "B4_L4活人感": {
+          "scores": [
+            5,
+            5,
+            5
+          ],
+          "median": 5,
+          "range": 0,
+          "low_conf": false
+        }
+      },
+      "overall_scores": [
+        6.0,
+        5.65,
+        5.71
+      ],
+      "overall_median": 5.71,
+      "overall_range": 0.35,
+      "verdicts": [
+        "返工一轮",
+        "返工一轮",
+        "返工一轮"
+      ],
+      "archetypes": [
+        "产品体验型",
+        "产品体验型",
+        "产品体验型"
+      ]
+    },
+    "wx-2": {
+      "per_dim": {
+        "A1_认知落差": {
+          "scores": [
+            6,
+            5,
+            5
+          ],
+          "median": 5,
+          "range": 1,
+          "low_conf": false
+        },
+        "A2_标题钩子": {
+          "scores": [
+            7,
+            6,
+            6
+          ],
+          "median": 6,
+          "range": 1,
+          "low_conf": false
+        },
+        "A3_表达效率": {
+          "scores": [
+            5,
+            5,
+            5
+          ],
+          "median": 5,
+          "range": 0,
+          "low_conf": false
+        },
+        "A4_文字洁癖": {
+          "scores": [
+            7,
+            6,
+            6
+          ],
+          "median": 6,
+          "range": 1,
+          "low_conf": false
+        },
+        "A5_承载力": {
+          "scores": [
+            7,
+            7,
+            7
+          ],
+          "median": 7,
+          "range": 0,
+          "low_conf": false
+        },
+        "B1_L1硬规则": {
+          "scores": [
+            7,
+            7,
+            7
+          ],
+          "median": 7,
+          "range": 0,
+          "low_conf": false
+        },
+        "B2_L2风格": {
+          "scores": [
+            5,
+            4,
+            5
+          ],
+          "median": 5,
+          "range": 1,
+          "low_conf": false
+        },
+        "B3_L3内容质量": {
+          "scores": [
+            6,
+            7,
+            6
+          ],
+          "median": 6,
+          "range": 1,
+          "low_conf": false
+        },
+        "B4_L4活人感": {
+          "scores": [
+            5,
+            4,
+            4
+          ],
+          "median": 4,
+          "range": 1,
+          "low_conf": false
+        }
+      },
+      "overall_scores": [
+        5.98,
+        5.51,
+        5.47
+      ],
+      "overall_median": 5.51,
+      "overall_range": 0.51,
+      "verdicts": [
+        "返工一轮",
+        "返工一轮",
+        "返工一轮"
+      ],
+      "archetypes": [
+        "现象解读型",
+        "现象解读型",
+        "现象解读型"
+      ]
+    }
+  },
+  "judge_ranking": [
+    "skillopt",
+    "huanjue",
+    "wx-game",
+    "wx-2"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "_meta": {
+    "description": "文章元信息",
+    "article_type": "section"
+  },
+  "container": {
+    "description": "外层容器",
+    "tag": "div",
+    "style": {
+      "max-width": "100%",
+      "width": "100%",
+      "display": "inline-block",
+      "box-sizing": "border-box"
+    },
+    "sample": ""
+  },
+  "image": {
+    "description": "图片（含容器）",
+    "tag": "section > img",
+    "style": {
+      "container": {
+        "text-align": "center",
+        "justify-content": "center",
+        "display": "flex",
+        "flex-flow": "row nowrap",
+        "box-sizing": "border-box",
+        "max-width": "100%"
+      },
+      "frame": {
+        "border": "4px solid rgb(48, 66, 202)"
+      },
+      "img": {
+        "width": "128px",
+        "pointer-events": "initial",
+        "height": "auto !important"
+      }
+    },
+    "sample": "[图片]"
+  }
+}

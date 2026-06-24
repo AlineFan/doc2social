@@ -1,0 +1,326 @@
+{
+  "_meta": {
+    "description": "文章元信息",
+    "article_type": "section"
+  },
+  "container": {
+    "description": "外层容器",
+    "tag": "div",
+    "style": {
+      "max-width": "677px",
+      "margin": "0 auto",
+      "background": "#ffffff",
+      "font-family": "-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif",
+      "color": "#374151",
+      "line-height": "1.75",
+      "letter-spacing": "0.5px",
+      "overflow-x": "hidden"
+    },
+    "sample": ""
+  },
+  "body_text": {
+    "description": "正文段落",
+    "tag": "p",
+    "style": {
+      "font-size": "14px",
+      "line-height": "1.9",
+      "margin-bottom": "24px",
+      "text-align": "justify",
+      "color": "#374151"
+    },
+    "sample": "先看实际视频这是《错位时空：送信者》，一款治愈系解谜游戏"
+  },
+  "emphasis_bold_color": {
+    "description": "彩色加粗强调（核心概念）",
+    "tag": "strong",
+    "style": {
+      "color": "#059669"
+    },
+    "sample": "《错位时空：送信者》"
+  },
+  "emphasis_highlight": {
+    "description": "渐变底色高亮（数字/关键词）",
+    "tag": "span",
+    "style": {
+      "background": "linear-gradient(120deg,#FDE68A 0%,rgba(255,255,255,0) 100%)",
+      "padding": "0 4px",
+      "border-radius": "2px",
+      "font-weight": "600",
+      "color": "#111827"
+    },
+    "sample": "几十年"
+  },
+  "emphasis_underline": {
+    "description": "下划线强调（专有名词）",
+    "tag": "span",
+    "style": {
+      "border-bottom": "2px solid #A7F3D0",
+      "font-weight": "600"
+    },
+    "sample": "打开时间窗"
+  },
+  "part_heading": {
+    "description": "分节大数字标题（01 PART | 中文标题 / ENGLISH）",
+    "tag": "section",
+    "style": {
+      "display": "flex",
+      "align-items": "center",
+      "gap": "16px",
+      "margin-bottom": "24px"
+    },
+    "sub_styles": {
+      "number": {
+        "margin": "0",
+        "font-size": "28px",
+        "font-weight": "900",
+        "color": "#059669",
+        "line-height": "1",
+        "letter-spacing": "-2px"
+      },
+      "title": {
+        "margin": "0 0 1px",
+        "font-size": "17px",
+        "font-weight": "900",
+        "color": "#111827",
+        "letter-spacing": "0.3px"
+      },
+      "english": {
+        "margin": "0",
+        "font-size": "11px",
+        "font-weight": "600",
+        "color": "#9CA3AF",
+        "letter-spacing": "1.5px"
+      },
+      "separator": {
+        "width": "1px",
+        "height": "36px",
+        "background": "#E5E7EB"
+      }
+    },
+    "sample": "01 PART | 灵感 · 从抖音到游戏 / INSPIRATION"
+  },
+  "sub_heading_h4": {
+    "description": "小标题（h4 粗体）",
+    "tag": "h4",
+    "style": {
+      "font-size": "15px",
+      "font-weight": "800",
+      "color": "#111827",
+      "margin": "0"
+    },
+    "sample": "聊出世界观"
+  },
+  "sub_heading_highlight": {
+    "description": "小标题（黄底渐变标注式）",
+    "tag": "p > span",
+    "style": {
+      "p": {
+        "font-size": "15px",
+        "font-weight": "900",
+        "color": "#111827",
+        "margin-bottom": "16px"
+      },
+      "span": {
+        "background": "linear-gradient(180deg,transparent 65%,#FDE68A 65%)",
+        "padding": "0 4px"
+      }
+    },
+    "sample": "第一层：时间窗"
+  },
+  "tag_capsule": {
+    "description": "内容标签胶囊（绿色圆角）",
+    "tag": "span",
+    "style": {
+      "display": "inline-block",
+      "font-size": "13px",
+      "font-weight": "700",
+      "color": "#059669",
+      "background": "rgba(5,150,105,0.08)",
+      "padding": "3px 10px",
+      "border-radius": "999px"
+    },
+    "sample": "独立记忆"
+  },
+  "tag_step": {
+    "description": "步骤标签（深色底 + 白字）",
+    "tag": "span",
+    "style": {
+      "display": "inline-block",
+      "background": "#111827",
+      "color": "#fff",
+      "font-size": "10px",
+      "font-weight": "700",
+      "padding": "2px 8px",
+      "border-radius": "12px"
+    },
+    "sample": "STEP 01"
+  },
+  "content_padding": {
+    "description": "内容区水平 padding（section 层）",
+    "tag": "section",
+    "style": {
+      "padding": "0 20px"
+    },
+    "sample": "出现 25 次"
+  },
+  "image": {
+    "description": "图片（含容器）",
+    "tag": "section > img",
+    "style": {
+      "container": {
+        "text-align": "center",
+        "margin": "0 20px 24px",
+        "border-radius": "12px",
+        "overflow": "hidden"
+      },
+      "frame": {},
+      "img": {
+        "background-color": "transparent"
+      }
+    },
+    "sample": "[图片]"
+  },
+  "cover_card": {
+    "description": "顶部封面卡片（圆角绿边框，含分类标签行+标题+封面图+底部绿色渐变作者条）",
+    "tag": "section",
+    "style": {
+      "card": {
+        "margin": "0 0 32px",
+        "background": "#fff",
+        "border": "1.5px solid rgba(5,150,105,0.15)",
+        "border-radius": "20px",
+        "overflow": "hidden",
+        "box-shadow": "0 4px 20px rgba(0,0,0,0.06)",
+        "width": "100%"
+      },
+      "inner_padding": "32px 28px 28px",
+      "category_label": {
+        "font-size": "11px",
+        "font-weight": "700",
+        "letter-spacing": "3px",
+        "color": "#059669"
+      },
+      "category_dot": {
+        "width": "6px",
+        "height": "6px",
+        "background": "#059669",
+        "border-radius": "50%"
+      },
+      "category_line": {
+        "flex": "1",
+        "height": "1px",
+        "background": "linear-gradient(to right,rgba(5,150,105,0.12),transparent)"
+      },
+      "date": {
+        "font-size": "10px",
+        "color": "#D1D5DB",
+        "font-weight": "600"
+      },
+      "strikethrough_title": {
+        "font-size": "15px",
+        "color": "#D1D5DB",
+        "text-decoration": "line-through",
+        "letter-spacing": "0.5px"
+      },
+      "main_title": {
+        "font-size": "24px",
+        "font-weight": "900",
+        "color": "#111827",
+        "line-height": "1.05",
+        "letter-spacing": "-2px"
+      },
+      "main_title_green": {
+        "font-size": "24px",
+        "font-weight": "900",
+        "color": "#059669",
+        "line-height": "1.05",
+        "letter-spacing": "-2px"
+      },
+      "accent_bar": {
+        "width": "48px",
+        "height": "3px",
+        "background": "linear-gradient(to right,#059669,#34D399)",
+        "border-radius": "2px"
+      },
+      "subtitle": {
+        "font-size": "13px",
+        "color": "#9CA3AF",
+        "line-height": "1.7",
+        "letter-spacing": "0.5px"
+      },
+      "cover_img": {
+        "width": "110px",
+        "height": "110px",
+        "border-radius": "16px",
+        "border": "1px solid rgba(5,150,105,0.1)",
+        "box-shadow": "0 4px 12px rgba(0,0,0,0.06)"
+      },
+      "author_bar": {
+        "background": "linear-gradient(135deg,#059669,#10B981)",
+        "padding": "12px 28px"
+      },
+      "author_text": {
+        "font-size": "12px",
+        "color": "rgba(255,255,255,0.9)",
+        "font-weight": "600",
+        "letter-spacing": "0.5px"
+      },
+      "tag_pill": {
+        "background": "rgba(255,255,255,0.2)",
+        "padding": "1px 6px",
+        "border-radius": "3px",
+        "font-size": "8px",
+        "color": "#fff",
+        "font-weight": "600"
+      }
+    },
+    "sample": "文章顶部的视觉入口卡片"
+  },
+  "footer_triple_action": {
+    "description": "底部三连引导（点赞/在看/转发 SVG 图标卡片）",
+    "tag": "section",
+    "style": {
+      "card": {
+        "background": "radial-gradient(circle at center,#F9FAFB 0%,#FFFFFF 100%)",
+        "border": "1px solid #E5E7EB",
+        "border-radius": "16px",
+        "padding": "32px 20px",
+        "text-align": "center",
+        "box-shadow": "0 4px 12px rgba(0,0,0,0.03)",
+        "margin": "0 0 24px"
+      },
+      "prompt_text": {
+        "font-size": "13px",
+        "font-weight": "bold",
+        "color": "#111827",
+        "margin-bottom": "20px"
+      },
+      "icon_box": {
+        "width": "40px",
+        "height": "40px",
+        "background": "#fff",
+        "border-radius": "12px",
+        "box-shadow": "0 2px 4px rgba(0,0,0,0.05)",
+        "border": "1px solid #F3F4F6"
+      },
+      "icon_box_green": {
+        "width": "40px",
+        "height": "40px",
+        "background": "#ECFDF5",
+        "border-radius": "12px",
+        "box-shadow": "0 2px 4px rgba(5,150,105,0.15)",
+        "border": "1px solid #A7F3D0"
+      },
+      "label": {
+        "font-size": "10px",
+        "font-weight": "600"
+      },
+      "footer_text": {
+        "font-size": "10px",
+        "color": "#9CA3AF",
+        "letter-spacing": "1px"
+      }
+    },
+    "sample": "点赞 / 在看 / 转发"
+  }
+}

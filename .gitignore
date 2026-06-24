@@ -30,3 +30,4 @@ node_modules/
 # xshots 输出目录（3:4 截图，可重新生成）
 xshots/
 _preview.html
+.gstack/
