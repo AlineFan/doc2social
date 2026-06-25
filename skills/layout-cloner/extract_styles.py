@@ -230,7 +230,14 @@ def generate_preview_generic(components: dict, skeleton_dir: str = None) -> str:
             def _sl(m, slots=slots):
                 sd = slots.get(m.group(1), {}) if isinstance(slots, dict) else {}
                 if isinstance(sd, dict) and sd.get("is_image"):
-                    return "https://placehold.co/600x360/eee/999?text=image"  # 图槽位→占位图，让边框/居中等图框样式显出来
+                    url = sd.get("src") or ""
+                    if not url and isinstance(sd.get("sources"), list) and sd["sources"]:
+                        url = sd["sources"][0] if isinstance(sd["sources"][0], str) else ""
+                    if not url and isinstance(sd.get("example"), str):
+                        url = sd["example"]
+                    url = url if isinstance(url, str) and url.startswith("http") else ""
+                    # 抓到真实图地址→显示参考原图（让你看见抓到了什么）；否则占位图（看图框样式）
+                    return esc(url) if url else "https://placehold.co/600x360/eee/999?text=image"
                 v = sd.get("example") or sd.get("default") or sd.get("from") or m.group(1)
                 return esc(re.split(r'\s*(?:[（(]禁|←)', str(v))[0][:60])
             P.append(f'<p class="comp-label">{esc(comp.get("description", key))}</p>')
@@ -310,8 +317,11 @@ def build_style_inventory(js: str) -> str:
 
 
 def build_cleaned_view(js: str) -> str:
-    """清洗结构视图：去噪声属性、折叠空 span 与 svg，保留嵌套 + style（复合件靠它被认出）。"""
+    """清洗结构视图：去噪声属性、折叠空 span 与 svg，但**保住图片真实地址**（公众号图地址在 data-src，
+    要留给提取去抓——用不用是套用时用户的决定）。"""
     c = js
+    c = re.sub(r'\s+src="data:[^"]*"', '', c)        # 去掉懒加载的 base64 占位 src
+    c = re.sub(r'\s+data-src=', ' src=', c)          # 真实图地址 data-src → src，保住
     c = re.sub(r'\s+(leaf|textstyle|data-[\w-]+|nodeleaf|powered-by|class|id|mpa-[\w-]+|hm_[\w-]+)="[^"]*"', '', c)
     c = re.sub(r'<span>\s*</span>', '', c)
     c = re.sub(r'<svg\b.*?</svg>', '<svg/>', c, flags=re.DOTALL)
