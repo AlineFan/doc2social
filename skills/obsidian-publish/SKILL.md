@@ -306,19 +306,19 @@ description: |
 **共同前置**（两条路径都先做这两步）：
 
 1. **perbrand 配图（明确指令才触发，⚠️ 生图花钱）**：用户明确说「配图」才跑 `scripts/illustrate.sh <笔记.md>` → 生图 + shotlist。只用截图就跳过。
-2. **发布副本**：复制 `<笔记名>-publish.md`（**原笔记不动**），按 shotlist 锚点插 `![[<笔记名>-perbrand-0N.png]]`，截图 `![[截屏xxx]]` 保留原位。
+2. **发布副本 + 回写插图（配图后立即做，别停）**：复制 `<笔记名>-publish.md`（**原笔记不动**），**马上**按 shotlist 锚点把 `![[<笔记名>-perbrand-0N.png]]` 插回副本对应位置，截图 `![[截屏xxx]]` 保留原位。⚠️ **codex 生图只产 PNG + shotlist，不会自己把图回写进文章**——插入是这一步的 Claude 活；生成完别跳去问平台，否则用户会发现「图片没回写进文章」。
 
 **→ 然后明确问用户发哪个平台，不要默认走某一个：**
 
 ### 路径 A · 公众号（绿色长文 HTML）
-3. **套绿色样式**：读 `templates/wechat-green.html`，副本 markdown → 绿色 inline HTML，图片 `![[]]` → `<img src="文件名">`。
+3. **套品牌样式（layout-cloner）**：用 layout-cloner §B 把副本 markdown 套成 **`绿色科技风`**（用户公众号品牌模板：封面卡 @林锵锵 头像 + art2 灰盒代码块 + harness 风引用框）→ `output/<标题>-绿色科技风.html`。图片 `![[]]` → `<img src="文件名">`。⚠️ `templates/wechat-green.html` **已删除，别再找它**；公众号默认就用 `绿色科技风`，**别因为「文章有代码块」就改用 harness教程风** 等别的模板（详见记忆 [[wechat-template-harness-vs-green]]）。
 4. **内嵌发布**：`scripts/publish-to-wechat.sh <绿色.html>` → 配图+截图 base64 内嵌（截图从 vault 自动抓）+ 拷贝 → 粘贴公众号。
 
 ### 路径 B · 小红书（完整物料，交给 note-to-xhs skill）
 3. **走 `note-to-xhs` skill**（输入发布副本 `.md`，可选 `--banner`）→ 一条龙产出 4 件套：X 长文风 3:4 长截图 + 小红书标题（dbs 公式）+ 正文文案 + 话题标签。它内部调 `note-to-xshots.sh` 出图、`/dbs-xhs-title` 出标题、`caption-style` 写文案——**别在这里手搓截图，直接委托给它**。
 4. **发布**：拿它给的「发布物料卡」发小红书（v2 自动走 `opencli xiaohongshu publish`）。
 
-**铁律**：配图绝不自动（明确指令才生图）；发布副本不污染原始沉淀笔记；配图名带 `<笔记名>-` 前缀避免 vault 冲突；**平台选择必须明确问用户，不默认**。
+**铁律**：配图绝不自动（明确指令才生图）；**配图生成后必须立即把图回写插入文章（别停在生成就问平台）**；发布副本不污染原始沉淀笔记；配图名带 `<笔记名>-` 前缀避免 vault 冲突；**公众号默认套 `绿色科技风`（wechat-green.html 已废弃），不自作主张换模板**；**平台选择必须明确问用户，不默认**。
 
 ---
 
@@ -326,7 +326,9 @@ description: |
 
 > 每次跑这个 skill 遇到的坑，及时追加到这里，未来 Claude 自动避开。
 
-- **【公众号】创作阶段出 markdown，发布阶段才转 HTML**（2026-06-18 立、2026-06-22 更新）：**创作时**只产 markdown（HTML 不可读、改字麻烦），markdown 是源。**定稿后的发布**走绿色路线——Claude 套 `templates/wechat-green.html` 转绿色 HTML + base64 内嵌（见『发布到公众号』段）。两者分开：创作不碰 HTML，发布才转。
+- **【公众号·错误复盘 2026-06-28】codex 配图必须立即回写插入，别停在生成**：`illustrate.sh` 跑 codex perbrand **只产 PNG + shotlist，不会自动把图插进文章**。生成完 Claude 必须**马上**按 shotlist 锚点把 `![[…]]` 插回发布副本（共同前置 Step 2），别生成完就跳去问平台——否则用户会发现「图片没回写进文章」。
+- **【公众号·错误复盘 2026-06-28】公众号模板默认 `绿色科技风`，别用错**：`templates/wechat-green.html` 已删；用户公众号品牌样式 = layout-cloner 的 `绿色科技风`（封面 @林锵锵 头像 + art2 灰盒代码块 + harness 引用框）。发布用 layout-cloner §B 套它，**别因为「文章有代码块」就改用 harness教程风**（蓝橙配色、被否过）。详见记忆 [[wechat-template-harness-vs-green]]。
+- **【公众号】创作阶段出 markdown，发布阶段才转 HTML**（2026-06-18 立、2026-06-22 更新；2026-06-28 模板路线改为 layout-cloner）：**创作时**只产 markdown（HTML 不可读、改字麻烦），markdown 是源。**定稿后的发布**——Claude 用 layout-cloner §B 把副本套成 `绿色科技风` HTML + base64 内嵌（见『发布』段）。两者分开：创作不碰 HTML，发布才转。
 - **【公众号】图片发布时 base64 内嵌，不再手动插**（2026-06-22 更新，取代旧占位方案）：发布副本里图片用 `![[xxx.png]]` 引用，`publish-to-wechat.sh` 发布时自动转 base64 内嵌，粘贴公众号会自动上传素材库——**不用再手动插图**。截图从 vault 自动抓，配图用 perbrand 生成（见『发布到公众号』段）。
 - **【公众号】markdown 要"公众号友好"**：避免复杂嵌套表格、避免脚注、避免 HTML 内联标签。引用块（`>`）、加粗（`**`）、列表、小标题（`##` `###`）是安全集。
 - **【公众号】绝大多数文章不用 markdown 小标题**：除非是"方法论分享型"原型用数字编号分条目，否则**不要 `## 一、xxx`**。板块间用口语化转场词衔接（「说到这个」「回到 xxx 这块」），这是 dbs 和 khazix 都强调的活人感。

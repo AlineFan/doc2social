@@ -139,12 +139,40 @@
     font-family: "SF Mono", Menlo, Consolas, monospace;
     color: #0f1419;
   }
-  .article-body blockquote {
-    border-left: 3px solid #1d9bf0;
-    padding-left: 16px;
-    margin: 20px 0;
-    color: #536471;
+  /* 代码块：harness教程风 深色块 + 自动换行（长行不裁切） */
+  .article-body pre {
+    background: #111111;
+    color: #f5f5f5;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 0 0 20px;
+    overflow-x: hidden;
   }
+  .article-body pre code {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    color: inherit;
+    font-size: 14px;
+  }
+  /* 引用块 / 金句框：harness教程风 样式（深色左竖条 #111 + 浅灰底 #f3f3f3） */
+  .article-body blockquote {
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    font-size: 16px;
+    line-height: 1.6;
+    border-left: 3px solid #111111;
+    background: #f3f3f3;
+    color: #111111;
+  }
+  .article-body blockquote p { margin: 0; }
   .article-body ul, .article-body ol { padding-left: 24px; margin-bottom: 20px; }
   .article-body li { margin-bottom: 8px; }
   .article-body .inline-img {

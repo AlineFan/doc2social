@@ -162,6 +162,8 @@ renderer.image = (token: any) => {
   return `<img src="${url}" alt="${alt}">`;
 };
 marked.setOptions({ renderer, breaks: false, gfm: true });
+// 路径里的 ~（如 ~/.claude/skills/）别被 GFM 单/双波浪号当成删除线：非代码区的 ~ 转义成字面量
+raw = raw.replace(/(```[\s\S]*?```|`[^`]*`)|~/g, (_m, code) => (code ? code : "\\~"));
 const bodyHtml = marked.parse(raw) as string;
 
 // ───────────────────────── 填模板 ─────────────────────────
@@ -188,6 +190,12 @@ tpl = tpl.replace(/\{\{BANNER_URL\}\}/g, bannerUrl);
 mkdirSync(outDir, { recursive: true });
 const filledHtml = join(outDir, "_preview.html");
 writeFileSync(filledHtml, tpl, "utf-8");
+
+// --html-only：只出 HTML 供确认，不跑截图
+if (process.argv.includes("--html-only")) {
+  console.log(JSON.stringify({ title, htmlOnly: true, html: filledHtml }));
+  process.exit(0);
+}
 
 // ───────────────────────── 找 chromium ─────────────────────────
 function findChromium(): string {

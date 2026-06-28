@@ -1,5 +1,9 @@
 # 公众号绿色发布流程（定稿后）
 
+> ⚠️ **2026-06-28 两处更正**：
+> ① **Step 3 套样式已改**——不再用已删除的 `templates/wechat-green.html`，改用 **layout-cloner §B 套 `绿色科技风`**（用户公众号品牌模板：封面 @林锵锵 头像 + art2 灰盒代码块 + harness 引用框）。
+> ② **Step 1 配图生成后必须立即做 Step 2 回写插图**——codex 只产 PNG+shotlist，不会自动插回文章；别停在生成。
+
 文章在 obsidian-publish 创作定稿后（通常是 Obsidian vault 笔记）走这套发布到公众号。
 图片**全部 base64 内嵌**，粘贴公众号编辑器时会自动上传素材库——已实测可行。
 
@@ -43,7 +47,7 @@ bash scripts/illustrate.sh <vault笔记.md> --dry-run # 不花钱看 prompt
 
 ## Step 3：套绿色样式 → 绿色 HTML
 
-读 `templates/wechat-green.html` 的样式速查表，把副本 markdown **逐段**套成绿色 inline HTML：
+⚠️ **已改用 layout-cloner**（`templates/wechat-green.html` 已删）：用 layout-cloner §B 把副本 markdown 套成 `绿色科技风` HTML（见 SKILL.md『发布』段路径 A）。下面这套手搓「样式速查表」仅作历史参考：
 
 | markdown | → 绿色 inline 样式（见模板） |
 |---|---|
