@@ -68,6 +68,9 @@
   .rlink:hover{text-decoration:underline}
   .themestrip{display:flex;flex-wrap:wrap;gap:8px}
   .chip{font-family:var(--mono);font-size:12.5px;padding:7px 13px;border:1px solid var(--line);color:var(--muted)}
+  .note{font-size:14px;color:var(--muted);line-height:1.75;margin:22px 0 0;max-width:62ch}
+  .note a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+  .note code{font-family:var(--mono);font-size:12.5px;background:var(--line-2);padding:1px 6px;border-radius:3px;color:var(--text)}
   footer.home-foot{border-top:1px solid var(--line);padding:40px 0 64px;color:var(--faint);font-size:13px}
   footer.home-foot .wrap{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
   footer.home-foot a{color:var(--muted);font-family:var(--mono)}
@@ -125,7 +128,7 @@
   #xhsCard.tpl-min .article-body img{width:100%;display:block;border-radius:12px;margin:18px 0}
   /* X长文（X 全套 chrome）*/
   #xhsCard.tpl-x{color:#0f1419;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC",sans-serif}
-  #xhsCard.tpl-x .pinned-bar{display:flex;align-items:center;gap:9px;padding:12px 16px 8px;color:#536471;font-size:13px;font-weight:500}
+  #xhsCard.tpl-x .pinned-bar{display:flex;align-items:center;gap:9px;padding:38px 16px 8px;color:#536471;font-size:13px;font-weight:500}
   #xhsCard.tpl-x .pin-icon{width:15px;height:15px;fill:#536471}
   #xhsCard.tpl-x .user-row{display:flex;align-items:flex-start;justify-content:space-between;padding:4px 16px 12px}
   #xhsCard.tpl-x .user-left{display:flex;align-items:center;gap:12px}
@@ -215,8 +218,16 @@
   </div></div></section>
   <section class="block"><div class="wrap"><h2>公众号套版</h2><div class="themestrip">
     <span class="chip">绿色科技风</span><span class="chip">极简黑白（水墨）</span><span class="chip">椰树风</span><span class="chip">极简(支持代码)</span>
-  </div></div></section>
-  <footer class="home-foot"><div class="wrap"><span>开源工具</span><a id="ghlink2" href="#" target="_blank" rel="noopener">GitHub</a><span class="mono" style="color:var(--faint)">纯本地运行，不上传。MIT</span></div></footer>
+  </div>
+    <p class="note">网页版是套用这几款现成套版。想<strong>提取你自己喜欢的任意公众号文章排版</strong>做成套版？去 <a id="skilllink" href="#" target="_blank" rel="noopener">GitHub</a> 下载 skill（<code>gzh-layout-cloner</code>）在本地用：给个链接，它自动归纳组件、渲染预览、存成命名模板。</p>
+  </div></section>
+  <footer class="home-foot"><div class="wrap">
+    <span>made by <strong style="color:var(--text);font-weight:600">林锵锵</strong></span>
+    <a href="https://x.com/ylf1797721" target="_blank" rel="noopener">X ↗</a>
+    <a href="https://www.xiaohongshu.com/user/profile/66e3e0f8000000000b031363?xsec_token=ABeOHZYdLnJZPralUax6t8HKe7YNIjSY-68ve_7tTeeLI=&amp;xsec_source=pc_search" target="_blank" rel="noopener">小红书 ↗</a>
+    <a id="ghlink2" href="#" target="_blank" rel="noopener">GitHub ↗</a>
+    <span class="mono" style="color:var(--faint)">纯本地运行 · MIT</span>
+  </div></footer>
 </div>
 
 <div id="view-tool" class="view">
@@ -257,6 +268,7 @@
 <script>
 const REPO_URL="https://github.com/AlineFan/doc-to-social-render";
 document.getElementById('ghlink').href=REPO_URL; document.getElementById('ghlink2').href=REPO_URL;
+{const sl=document.getElementById('skilllink'); if(sl)sl.href=REPO_URL;}
 
 // 公众号复合件用 inline-block + margin（公众号 paste 会剥 flex/gap，改成它保留的写法）
 const THEMES={
@@ -338,7 +350,14 @@ function replaceComposites(root,t){
 function applyTheme(root,t){root.removeAttribute('style');
   for(const[k,v] of Object.entries(t.container))root.style.setProperty(k,v);
   for(const[sel,st] of Object.entries(t.rules))root.querySelectorAll(sel).forEach(el=>{for(const[k,v] of Object.entries(st))el.style.setProperty(k,v);});}
-async function renderGzh(){const t=THEMES[themeSel.value];gzhPreview.innerHTML=await mdToHtml(editor.value);replaceComposites(gzhPreview,t);applyTheme(gzhPreview,t);}
+async function renderGzh(){
+  const t=THEMES[themeSel.value];
+  gzhPreview.innerHTML=await mdToHtml(editor.value);
+  replaceComposites(gzhPreview,t);applyTheme(gzhPreview,t);
+  // 顶部/底部留白与小红书极简风一致（38px）；首元素去掉 margin-top，避免 margin 塌陷/叠加
+  gzhPreview.style.paddingTop='38px';gzhPreview.style.paddingBottom='40px';
+  const first=gzhPreview.firstElementChild;if(first)first.style.marginTop='0';
+}
 
 async function copyRich(node){
   const html=node.outerHTML;
