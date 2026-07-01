@@ -1,4 +1,4 @@
-# Skill 启动说明：公众号排版克隆器（layout-cloner）
+# Skill 启动说明：公众号排版克隆器（gzh-layout-cloner）
 
 > 给新 session：你没有上一个 session 的上下文。读完这份就能开工——这里是全部需要知道的。
 
@@ -58,7 +58,7 @@
 ## 怎么开工
 
 1. 开分支：`cd ~/Desktop/workspace/proj04-obsidian-publisher && git checkout -b feature/layout-cloner`
-   - **在 proj04 内开发**（复用现成脚本/蓝本，别新建独立项目）。skill 文件放 `skills/layout-cloner/`，跟 `obsidian-publish` 并排；做好后 symlink 到 `~/.claude/skills/layout-cloner`（参考 obsidian-publish 的 symlink 做法）。
+   - **在 proj04 内开发**（复用现成脚本/蓝本，别新建独立项目）。skill 文件放 `skills/gzh-layout-cloner/`，跟 `obsidian-publish` 并排；做好后 symlink 到 `~/.claude/skills/gzh-layout-cloner`（参考 obsidian-publish 的 symlink 做法）。
 2. 精读 `templates/wechat-green.html`（理解目标产物）
 3. **第一步只做「常规组件自动提取」**：curl qGdmYj 文章 → 让 AI 自动扒出 标题/正文/强调/图片 的 inline style（先不碰复杂卡片）→ 渲染预览 → 跟 wechat-green.html 对比，看自动提取够不够准
 4. 准了，再加复杂组件（卡片/横滚目录）的提取
@@ -66,10 +66,11 @@
 
 ## 不要做的
 
+- ❌ **【最致命】不要硬编参考文章的「示例内容」**——严格分离**样式**(保留) vs **内容**(来自用户文本)。典型坑：黑胶囊的样式可以留，但里面写死 `STEP 01` 就错了——`STEP` 是参考文章的示例字；用户文本里是「第一个方法 / 1.」，没有「步骤 / STEP」语义就**绝不能冒出 STEP**。同理：日期、作者名、品牌名、标签文字、英文副标题，**全部从用户的内容来，不是从参考文章抄**。提取组件时，把每个文字位标记成「内容槽位（待用户文本填）」而非固定值。**这是整个 skill 最容易犯、也最毁质量的核心错——主 session 已经栽过两次（STEP 硬编、日期没对齐），务必在套样式逻辑里专门盯。**
 - ❌ 不要让用户挑 HTML 组件（用户不懂 HTML，这是整个 skill 的反面）
 - ❌ 不要纯靠截图视觉提取（拿不到精确 padding/字号/颜色值；截图只能辅助识别「有哪些组件」，精确样式必须从 HTML/computed style 拿）
 - ❌ 颜色等细节要忠实参考；但如果用户指定主题色，按用户的（上个 session 是「颜色不变」保持绿 #00a86b）
 
 ---
 
-**背景补充**：proj04 是「Obsidian 笔记 → 公众号/小红书/X 发布工作流」（独立 git repo，非 home repo）。这个 layout-cloner 是它的自然延伸——把「固定一套绿色样式」泛化成「克隆任意参考文章的样式」。`wechat-green.html` 就是从绿色那一套手动做出来的第一个实例。
+**背景补充**：proj04 是「Obsidian 笔记 → 公众号/小红书/X 发布工作流」（独立 git repo，非 home repo）。这个 gzh-layout-cloner 是它的自然延伸——把「固定一套绿色样式」泛化成「克隆任意参考文章的样式」。`wechat-green.html` 就是从绿色那一套手动做出来的第一个实例。
