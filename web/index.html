@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>md → 公众号 · 最小原型</title>
+<!-- marked：markdown → HTML。生产版把它内联进来即可离线；原型先走 CDN。 -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  :root { --line:#e5e7eb; --muted:#6b7280; --accent:#059669; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+         color:#111827; background:#fafafa; height:100vh; display:flex; flex-direction:column; }
+  header { display:flex; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid var(--line);
+           background:#fff; flex-wrap:wrap; }
+  header h1 { font-size:14px; margin:0; font-weight:800; }
+  header .sp { flex:1; }
+  select, button, .btn { font:inherit; font-size:13px; padding:6px 12px; border:1px solid var(--line);
+           border-radius:8px; background:#fff; cursor:pointer; color:#111827; text-decoration:none; }
+  button.primary, .btn.primary { background:var(--accent); color:#fff; border-color:var(--accent); font-weight:700; }
+  #status { font-size:12px; color:var(--muted); padding:6px 16px; border-bottom:1px solid var(--line); background:#fff; }
+  main { flex:1; display:flex; min-height:0; }
+  .pane { flex:1; min-width:0; display:flex; flex-direction:column; }
+  .pane + .pane { border-left:1px solid var(--line); }
+  .pane .label { font-size:11px; color:var(--muted); padding:6px 12px; background:#fff; border-bottom:1px solid var(--line); }
+  #editor { flex:1; border:0; padding:16px; font-family:ui-monospace,Menlo,monospace; font-size:13px;
+            line-height:1.7; resize:none; outline:none; }
+  #previewWrap { flex:1; overflow:auto; background:#fff; }
+  #preview { padding:24px 0; }
+  #drop { position:fixed; inset:0; background:rgba(5,150,105,.08); border:3px dashed var(--accent);
+          display:none; align-items:center; justify-content:center; font-size:20px; color:var(--accent);
+          font-weight:800; z-index:9; }
+  #drop.on { display:flex; }
+  .hint { font-size:12px; color:var(--muted); }
+  .mdpick { font-size:12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>md → 公众号</h1>
+  <button id="connect" title="Chrome/Edge：一次授权后可直接选 vault 里的 .md">📁 连接 vault</button>
+  <span class="hint">或把笔记文件夹拖进来 →</span>
+  <select id="mdpick" class="mdpick" style="display:none"></select>
+  <span class="sp"></span>
+  <label class="hint">主题</label>
+  <select id="theme"></select>
+  <button id="copy" class="primary">复制到公众号</button>
+  <a id="download" class="btn" href="#" target="_blank" rel="noopener">⬇ 下载 skill</a>
+</header>
+<div id="status">拖入笔记所在文件夹（含图片）→ 图片会自动内嵌；或直接在左侧粘贴 markdown。</div>
+<main>
+  <div class="pane">
+    <div class="label">markdown（支持 <code>![[图片]]</code> / <code>![](图片)</code> / <code>==高亮==</code>）</div>
+    <textarea id="editor" spellcheck="false" placeholder="在这里粘贴 Obsidian 笔记正文…"></textarea>
+  </div>
+  <div class="pane">
+    <div class="label">预览（复制这块到公众号）</div>
+    <div id="previewWrap"><div id="preview"></div></div>
+  </div>
+</main>
+<div id="drop">松手：索引这个文件夹的图片</div>
+
+<script>
+// ============ 配置 ============
+// 仓库推上 GitHub 后，把下面换成真实地址，"下载 skill" 就直达仓库。
+const REPO_URL = "https://github.com/AlineFan/doc-to-social-render";
+
+// ============ 主题 = 我们识别过的套版的「样式层」 ============
+// 每个 templates/<名>.json 的简单组件 style，摊平成 选择器→CSS。语义槽（封面卡文案）不在静态层。
+const THEMES = {
+  "绿色科技风": {
+    container:{'max-width':'677px','margin':'0 auto','background':'#ffffff',
+      'font-family':"-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif",
+      'color':'#374151','line-height':'1.75','letter-spacing':'.3px','padding':'0 20px'},
+    rules:{
+      'p':{'font-size':'15px','line-height':'1.9','margin':'0 0 24px','text-align':'justify','color':'#374151'},
+      'strong':{'color':'#059669','font-weight':'700'},
+      'mark':{'background':'linear-gradient(120deg,#FDE68A 0%,rgba(255,255,255,0) 100%)','padding':'0 4px',
+              'border-radius':'2px','font-weight':'600','color':'#111827'},
+      'h1':{'font-size':'23px','font-weight':'900','color':'#111827','margin':'8px 0 20px','letter-spacing':'-1px'},
+      'h2':{'font-size':'18px','font-weight':'900','color':'#111827','margin':'34px 0 18px','padding-left':'12px',
+            'border-left':'4px solid #059669','line-height':'1.3'},
+      'h3':{'font-size':'15px','font-weight':'800','color':'#111827','margin':'26px 0 14px'},
+      'h4':{'font-size':'15px','font-weight':'800','color':'#111827','margin':'22px 0 12px'},
+      'blockquote':{'border-left':'3px solid #111111','background':'#f3f3f3','margin':'24px 0','padding':'12px 16px',
+                    'border-radius':'4px','color':'#374151'},
+      'blockquote p':{'margin':'0'},
+      'code':{'background':'rgba(5,150,105,.08)','color':'#059669','padding':'2px 6px','border-radius':'4px',
+              'font-family':'ui-monospace,Menlo,monospace','font-size':'13px'},
+      'pre':{'background':'#f6f7f8','border':'1px solid #e5e7eb','border-radius':'8px','padding':'16px',
+             'overflow-x':'auto','margin':'24px 0','line-height':'1.6'},
+      'pre code':{'background':'none','color':'#374151','padding':'0'},
+      'img':{'display':'block','max-width':'100%','margin':'8px auto 24px','border-radius':'12px'},
+      'ul':{'padding-left':'1.4em','margin':'0 0 24px'},'ol':{'padding-left':'1.4em','margin':'0 0 24px'},
+      'li':{'margin':'0 0 8px','line-height':'1.9'},
+      'a':{'color':'#059669'},
+      'hr':{'border':'0','border-top':'1px solid #e5e7eb','margin':'32px 0'}
+    },
+    // 复合件：H2→分节头卡、H3→序号胶囊。NUM/标题=机械可算，纯静态生成。英文副标=语义槽，此处留空。
+    composites:{
+      h1:(num,title)=>`<section style="display:flex;align-items:center;gap:16px;margin:36px 0 22px;box-sizing:border-box">
+        <div style="text-align:center;flex-shrink:0">
+          <div style="font-size:34px;font-weight:900;color:#059669;line-height:1;letter-spacing:-2px">${num}</div>
+          <div style="font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:3px;margin-top:3px">PART</div>
+        </div>
+        <div style="width:1px;height:40px;background:#E5E7EB;flex-shrink:0"></div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:18px;font-weight:900;color:#111827;letter-spacing:.3px;line-height:1.3">${title}</div>
+        </div>
+      </section>`,
+      h2:(num,title)=>`<div style="display:flex;align-items:center;gap:8px;margin:26px 0 12px">
+        <span style="display:inline-block;background:#111827;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;flex-shrink:0">${num}</span>
+        <span style="font-size:15px;font-weight:800;color:#111827">${title}</span>
+      </div>`
+    }
+  },
+  "极简黑白（水墨）": {
+    container:{'max-width':'640px','margin':'0 auto','background':'#fff','color':'#1a1a1a',
+      'font-family':"Georgia,'Songti SC','PingFang SC',serif",'line-height':'1.85','padding':'0 20px'},
+    rules:{
+      'p':{'font-size':'16px','margin':'0 0 22px','color':'#1a1a1a'},
+      'strong':{'font-weight':'700','color':'#000'},
+      'mark':{'background':'#eee','padding':'0 3px'},
+      'h1':{'font-size':'24px','font-weight':'700','margin':'8px 0 20px'},
+      'h2':{'font-size':'19px','font-weight':'700','margin':'34px 0 16px','padding-bottom':'6px','border-bottom':'1px solid #ddd'},
+      'h3':{'font-size':'16px','font-weight':'700','margin':'24px 0 12px'},
+      'h4':{'font-size':'16px','font-weight':'700','margin':'20px 0 10px'},
+      'blockquote':{'border-left':'3px solid #ccc','margin':'22px 0','padding':'4px 16px','color':'#666','font-style':'italic'},
+      'blockquote p':{'margin':'0'},
+      'code':{'background':'#f0f0f0','padding':'2px 6px','border-radius':'3px','font-family':'ui-monospace,Menlo,monospace','font-size':'14px'},
+      'pre':{'background':'#f7f7f7','border':'1px solid #e5e7eb','border-radius':'6px','padding':'16px','overflow-x':'auto','margin':'22px 0'},
+      'pre code':{'background':'none','padding':'0'},
+      'img':{'display':'block','max-width':'100%','margin':'8px auto 22px','border-radius':'4px'},
+      'ul':{'padding-left':'1.4em','margin':'0 0 22px'},'ol':{'padding-left':'1.4em','margin':'0 0 22px'},
+      'li':{'margin':'0 0 6px'},
+      'a':{'color':'#1a1a1a'},
+      'hr':{'border':'0','border-top':'1px solid #ddd','margin':'30px 0'}
+    }
+  },
+  "椰树风": {   // 高对比色块 + 粗黑边「整活」风
+    container:{'max-width':'677px','margin':'0 auto','background':'#fff',
+      'font-family':"'PingFang SC',system-ui,-apple-system,'Microsoft YaHei',sans-serif",
+      'color':'rgba(0,0,0,.9)','line-height':'1.6','letter-spacing':'.03em','padding':'0 20px'},
+    rules:{
+      'p':{'font-size':'17px','margin':'0 0 20px','color':'rgba(0,0,0,.9)'},
+      'strong':{'color':'#D92142','font-weight':'900'},
+      'mark':{'background':'#FFFB00','color':'#D92142','font-weight':'900','padding':'0 4px'},
+      'h1':{'display':'inline-block','background':'#FFFB00','color':'#D92142','font-weight':'900','font-size':'30px','padding':'6px 14px','margin':'8px 0 20px','line-height':'1.2','transform':'rotate(-1deg)'},
+      'h2':{'display':'inline-block','background':'#CC3333','color':'#fff','font-weight':'900','font-size':'22px','padding':'4px 12px','margin':'30px 0 16px'},
+      'h3':{'display':'inline-block','background':'#0066CC','color':'#fff','font-weight':'900','font-size':'18px','padding':'3px 10px','margin':'24px 0 12px'},
+      'blockquote':{'border':'3px solid #1d1d1d','background':'#fff','margin':'22px 0','padding':'12px 16px','font-weight':'700','color':'#1d1d1d'},
+      'blockquote p':{'margin':'0'},
+      'code':{'background':'#000','color':'#FFFB00','padding':'2px 6px','font-weight':'700','font-family':'ui-monospace,Menlo,monospace','font-size':'14px'},
+      'pre':{'background':'#1d1d1d','color':'#FFFB00','padding':'16px','margin':'22px 0','overflow-x':'auto','font-family':'ui-monospace,Menlo,monospace','font-size':'13px','border':'3px solid #000'},
+      'pre code':{'background':'none','color':'#FFFB00','padding':'0'},
+      'img':{'display':'block','max-width':'100%','margin':'8px auto 22px','border':'3px solid #1d1d1d'},
+      'ul':{'padding-left':'1.4em','margin':'0 0 20px'},'ol':{'padding-left':'1.4em','margin':'0 0 20px'},
+      'li':{'margin':'0 0 8px','font-size':'17px'},
+      'a':{'color':'#0066CC','font-weight':'700'},
+      'hr':{'border':'0','border-top':'3px solid #1d1d1d','margin':'28px 0'}
+    }
+  },
+  "极简(支持代码)": {   // 蓝标题 + 橙强调 + 深色代码块（技术教程向）
+    container:{'max-width':'677px','margin':'0 auto','background':'#fff',
+      'font-family':"'PingFang SC',system-ui,-apple-system,'Microsoft YaHei',sans-serif",
+      'color':'#000','line-height':'1.75','padding':'0 20px'},
+    rules:{
+      'p':{'font-size':'16px','line-height':'1.75','margin':'0 0 24px','color':'#000'},
+      'strong':{'color':'#ff6827','font-weight':'700'},
+      'mark':{'background':'#fff3cd','padding':'0 4px'},
+      'h1':{'font-size':'22px','color':'#003399','font-weight':'700','line-height':'1.35','margin':'8px 0 24px'},
+      'h2':{'font-size':'20px','color':'#003399','font-weight':'700','line-height':'1.35','margin':'32px 0 20px'},
+      'h3':{'font-size':'18px','color':'#003399','font-weight':'700','line-height':'1.35','margin':'26px 0 14px'},
+      'blockquote':{'border-left':'3px solid #111111','background':'#f3f3f3','color':'#111111','margin':'24px 0','padding':'12px','font-size':'16px'},
+      'blockquote p':{'margin':'0'},
+      'code':{'background':'#f2f2f2','color':'#111111','font-size':'14px','padding':'2px 6px','border-radius':'4px','font-family':"ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace"},
+      'pre':{'background':'#111111','color':'#f5f5f5','font-size':'14px','line-height':'1.6','padding':'14px','margin':'24px 0','overflow-x':'auto','white-space':'pre-wrap','border-radius':'8px','font-family':"ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace"},
+      'pre code':{'background':'none','color':'#f5f5f5','padding':'0'},
+      'img':{'display':'block','max-width':'100%','margin':'8px auto 24px','border-radius':'4px'},
+      'ul':{'padding-left':'32px','margin':'0 0 32px','list-style-type':'disc'},'ol':{'padding-left':'32px','margin':'0 0 32px','list-style-type':'decimal'},
+      'li':{'margin':'0 0 8px','font-size':'16px'},
+      'a':{'color':'#003399'},
+      'hr':{'border':'0','border-top':'1px solid #ddd','margin':'30px 0'}
+    }
+  }
+};
+
+// ============ DOM ============
+const $ = s => document.querySelector(s);
+const editor=$('#editor'), preview=$('#preview'), themeSel=$('#theme'),
+      statusEl=$('#status'), mdpick=$('#mdpick'), dropEl=$('#drop');
+$('#download').href = REPO_URL;
+
+Object.keys(THEMES).forEach(n=>{ const o=document.createElement('option'); o.value=o.textContent=n; themeSel.appendChild(o); });
+
+let imageIndex = {};   // basename(NFC,lower) -> File
+const norm = s => s.normalize('NFC').toLowerCase();
+const setStatus = (t)=> statusEl.textContent = t;
+
+// ============ 建图片索引（拖拽 / 选择文件夹 两条路都汇到这里）============
+function addFiles(files){ // files: [{name, file}]
+  let imgs=0; const mds=[];
+  const IMG=/\.(png|jpe?g|webp|gif|svg)$/i;
+  for(const {name,file} of files){
+    if(IMG.test(name)) { imageIndex[norm(name.split('/').pop())]=file; imgs++; }
+    else if(/\.md$/i.test(name)) mds.push({name,file});
+  }
+  // 填 .md 选择器
+  if(mds.length){
+    mdpick.style.display=''; mdpick.innerHTML='<option value="">— 选一篇 .md 载入 —</option>';
+    mds.forEach((m,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=m.name.split('/').pop(); mdpick.appendChild(o); });
+    mdpick._files=mds;
+  }
+  setStatus(`已索引 ${imgs} 张图片${mds.length?`、${mds.length} 篇 .md`:''}。粘贴/选择 md 后点「复制到公众号」即可。`);
+  render();
+}
+
+// —— 拖拽文件夹（file:// 也能用，Chromium 系）——
+['dragenter','dragover'].forEach(e=>document.addEventListener(e,ev=>{ev.preventDefault();dropEl.classList.add('on');}));
+['dragleave','drop'].forEach(e=>document.addEventListener(e,ev=>{ if(e==='drop'||ev.target===dropEl){dropEl.classList.remove('on');}}));
+document.addEventListener('drop', async ev=>{
+  ev.preventDefault(); dropEl.classList.remove('on');
+  const items=[...ev.dataTransfer.items].map(i=>i.webkitGetAsEntry&&i.webkitGetAsEntry()).filter(Boolean);
+  if(!items.length){ // 退化：拖的是散图/文件
+    addFiles([...ev.dataTransfer.files].map(f=>({name:f.name,file:f}))); return;
+  }
+  setStatus('读取文件夹中…');
+  const out=[]; for(const it of items) await readEntry(it,out);
+  addFiles(out);
+});
+function readEntry(entry,out){
+  return new Promise(res=>{
+    if(entry.isFile){ entry.file(f=>{out.push({name:entry.fullPath||entry.name,file:f});res();}); }
+    else if(entry.isDirectory){
+      const rd=entry.createReader(), acc=[];
+      const batch=()=>rd.readEntries(async es=>{
+        if(!es.length){ for(const e of acc) await readEntry(e,out); res(); }
+        else { acc.push(...es); batch(); }
+      });
+      batch();
+    } else res();
+  });
+}
+
+// —— showDirectoryPicker（更顺，但需要 https/localhost）——
+$('#connect').addEventListener('click', async ()=>{
+  if(!window.showDirectoryPicker){ setStatus('这个环境不支持「选择文件夹」——请改用「拖文件夹进来」。'); return; }
+  try{
+    const dir=await window.showDirectoryPicker({mode:'read'});
+    setStatus('读取 vault 中…'); const out=[]; await walkHandle(dir,'',out); addFiles(out);
+  }catch(e){ if(e.name!=='AbortError') setStatus('打不开文件夹：'+e.message+'（file:// 下可能被限制，改用拖拽，或用 localhost 打开）'); }
+});
+async function walkHandle(dir,prefix,out){
+  for await(const [name,h] of dir.entries()){
+    if(name.startsWith('.')) continue;
+    if(h.kind==='file'){ out.push({name:prefix+name,file:await h.getFile()}); }
+    else await walkHandle(h,prefix+name+'/',out);
+  }
+}
+
+mdpick.addEventListener('change', async e=>{
+  const i=e.target.value; if(i==='') return;
+  editor.value=await mdpick._files[i].file.text(); render();
+});
+
+// ============ 图片解析：![[x]] / ![](x) → base64 <img> ============
+const fileToDataURL = f => new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(f);});
+async function resolveImages(md){
+  const refs=[];
+  md.replace(/!\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g,(m,p)=>{refs.push([m,p]);return m;});
+  md.replace(/!\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g,(m,p)=>{refs.push([m,p]);return m;});
+  for(const [raw,ref] of refs){
+    const base=norm(ref.split('/').pop().split('\\').pop());
+    const f=imageIndex[base];
+    let rep;
+    if(f){ rep=`<img src="${await fileToDataURL(f)}" alt="">`; }
+    else { rep=`<span style="color:#c0392b">［缺图: ${ref.split('/').pop()}］</span>`; }
+    md=md.split(raw).join(rep);
+  }
+  return md;
+}
+
+// ============ 渲染 + 套主题 ============
+let renderTimer;
+editor.addEventListener('input',()=>{clearTimeout(renderTimer);renderTimer=setTimeout(render,250);});
+themeSel.addEventListener('change',render);
+async function render(){
+  let md=editor.value;
+  md=md.replace(/==([^=]+)==/g,'<mark>$1</mark>');   // Obsidian 高亮
+  md=await resolveImages(md);
+  preview.innerHTML=marked.parse(md,{breaks:false,mangle:false,headerIds:false});
+  replaceComposites(preview, THEMES[themeSel.value]);
+  applyTheme(preview, THEMES[themeSel.value]);
+}
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+// 复合件：把 H2/H3 换成主题自带的骨架（分节头卡 / 序号胶囊）。NUM=出现顺序、标题=原文，均机械可算 → 纯静态。
+function replaceComposites(root,t){
+  if(!t.composites) return;
+  const mk=(fn,num,el)=>{const w=document.createElement('div');
+    w.innerHTML=fn(String(num).padStart(2,'0'), esc(el.textContent.trim())).trim();
+    if(w.firstElementChild) el.replaceWith(w.firstElementChild);};
+  let h1n=0, h2n=0;   // 一级全局计数；二级在每个一级下重新计数
+  [...root.children].forEach(el=>{
+    const tag=el.tagName.toLowerCase();
+    if(tag==='h1' && t.composites.h1){ h1n++; h2n=0; mk(t.composites.h1,h1n,el); }
+    else if(tag==='h2' && t.composites.h2){ h2n++; mk(t.composites.h2,h2n,el); }
+  });
+}
+function applyTheme(root,t){
+  root.removeAttribute('style');
+  for(const [k,v] of Object.entries(t.container)) root.style.setProperty(k,v);
+  for(const [sel,st] of Object.entries(t.rules))
+    root.querySelectorAll(sel).forEach(el=>{ for(const[k,v] of Object.entries(st)) el.style.setProperty(k,v); });
+}
+
+// ============ 复制（选中预览块 → 富文本拷贝，file:// 也可用）============
+$('#copy').addEventListener('click',()=>{
+  if(!preview.textContent.trim()){ setStatus('还没内容可复制。'); return; }
+  const r=document.createRange(); r.selectNodeContents(preview);
+  const s=getSelection(); s.removeAllRanges(); s.addRange(r);
+  const ok=document.execCommand('copy'); s.removeAllRanges();
+  setStatus(ok?'✅ 已复制到剪贴板 → 公众号编辑器正文区 Cmd+V（图片自动上传素材库）':'复制失败，手动选中右侧预览再 Cmd+C。');
+});
+
+// 示例占位
+editor.value = `# 标题写这里\n\n正文段落。**绿色加粗**、==黄底高亮==、\`行内代码\`。\n\n> 引用金句放这里。\n\n![[你的图片.png]]\n\n## 小标题\n\n- 列表项一\n- 列表项二`;
+render();
+</script>
+</body>
+</html>

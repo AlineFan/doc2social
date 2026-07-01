@@ -1,0 +1,161 @@
+{
+  "_meta": {
+    "description": "文章元信息",
+    "article_type": "textstyle"
+  },
+  "body_base": {
+    "description": "正文基础字体（leaf span 上）",
+    "tag": "span leaf",
+    "style": {
+      "font-size": "17px",
+      "font-family": "mp-quote, \"PingFang SC\", system-ui, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", \"Hiragino Sans GB\", \"Microsoft YaHei UI\", \"Microsoft YaHei\", Arial, sans-serif",
+      "color": "rgba(0, 0, 0, 0.9)",
+      "line-height": "1.6",
+      "letter-spacing": "0.034em"
+    },
+    "sample": ""
+  },
+  "paragraph": {
+    "description": "正文段落",
+    "tag": "p",
+    "style": {
+      "margin-left": "32px",
+      "margin-right": "32px"
+    },
+    "sample": "出现 401 次"
+  },
+  "body_text": {
+    "description": "正文文字",
+    "tag": "span textstyle",
+    "style": {
+      "font-size": "14px"
+    },
+    "count": 221,
+    "sample": "了朋友们！"
+  },
+  "tag_rgb204_51_51": {
+    "description": "色块标签（rgb(204, 51, 51) 底 + rgb(255, 255, 255) 字）",
+    "tag": "span textstyle",
+    "style": {
+      "font-size": "20px",
+      "background-color": "rgb(204, 51, 51)",
+      "color": "rgb(255, 255, 255)",
+      "font-weight": "bold"
+    },
+    "count": 195,
+    "sample": "&nbsp;字 母"
+  },
+  "tag_rgb0_102_204": {
+    "description": "色块标签（rgb(0, 102, 204) 底 + rgb(255, 255, 255) 字）",
+    "tag": "span textstyle",
+    "style": {
+      "font-size": "20px",
+      "background-color": "rgb(0, 102, 204)",
+      "color": "rgb(255, 255, 255)",
+      "font-weight": "bold"
+    },
+    "count": 99,
+    "sample": "&nbsp; 瑞幸 &nbsp;"
+  },
+  "inline_tag_rgb0_0_0": {
+    "description": "行内标签（rgb(0, 0, 0) 底 + rgb(255, 255, 255) 字）",
+    "tag": "span textstyle",
+    "style": {
+      "font-size": "14px",
+      "background-color": "rgb(0, 0, 0)",
+      "color": "rgb(255, 255, 255)",
+      "font-weight": "bold"
+    },
+    "count": 62,
+    "sample": "&nbsp; 下面欢迎进入！"
+  },
+  "tag_rgb0_0_0": {
+    "description": "色块标签（rgb(0, 0, 0) 底 + rgb(255, 255, 255) 字）",
+    "tag": "span textstyle",
+    "style": {
+      "font-size": "20px",
+      "background-color": "rgb(0, 0, 0)",
+      "color": "rgb(255, 255, 255)",
+      "font-weight": "bold"
+    },
+    "count": 32,
+    "sample": "&nbsp; 头版 · 特大号外 &nbsp;"
+  },
+  "tag_rgb217_33_66": {
+    "description": "色块标签（rgb(217, 33, 66) 底 + rgb(255, 255, 255) 字）",
+    "tag": "span textstyle",
+    "style": {
+      "font-size": "20px",
+      "background-color": "rgb(217, 33, 66)",
+      "color": "rgb(255, 255, 255)",
+      "font-weight": "bold"
+    },
+    "count": 11,
+    "sample": "&nbsp;葡萄牙队5:0大胜乌兹别克斯坦队&nbsp;"
+  },
+  "splash_headline": {
+    "description": "爆炸大标题（rgb(255, 251, 0) 底 + rgb(217, 33, 66) 字）",
+    "tag": "span textstyle",
+    "style": {
+      "font-size": "50px",
+      "background-color": "rgb(255, 251, 0)",
+      "color": "rgb(217, 33, 66)",
+      "font-weight": "bold"
+    },
+    "count": 6,
+    "sample": "你那么有钱能不能投资几部大制作让C罗演演："
+  },
+  "emphasis_rgb217_33_66": {
+    "description": "强调文字（rgb(217, 33, 66) + bold）",
+    "tag": "span textstyle",
+    "style": {
+      "font-size": "20px",
+      "color": "rgb(217, 33, 66)",
+      "font-weight": "bold"
+    },
+    "count": 5,
+    "sample": "。。。。。。："
+  },
+  "splash_headline_3": {
+    "description": "爆炸大标题（rgb(204, 51, 51) 底 + rgb(255, 255, 255) 字）",
+    "tag": "span textstyle",
+    "style": {
+      "font-size": "40px",
+      "background-color": "rgb(204, 51, 51)",
+      "color": "rgb(255, 255, 255)",
+      "font-weight": "bold"
+    },
+    "count": 3,
+    "sample": "&nbsp;一个长期处于&nbsp;"
+  },
+  "tag_rgb255_251_0": {
+    "description": "色块标签（rgb(255, 251, 0) 底 + rgb(217, 33, 66) 字）",
+    "tag": "span textstyle",
+    "style": {
+      "font-size": "30px",
+      "background-color": "rgb(255, 251, 0)",
+      "color": "rgb(217, 33, 66)",
+      "font-weight": "bold"
+    },
+    "count": 2,
+    "sample": "&nbsp;大送特送！"
+  },
+  "image": {
+    "description": "图片（含容器）",
+    "tag": "section > img",
+    "style": {
+      "container": {
+        "text-align": "center"
+      },
+      "frame": {
+        "border": "3px solid rgb(29, 29, 29)",
+        "border-radius": "0px",
+        "padding": "0px 25px"
+      },
+      "img": {
+        "width": "100%"
+      }
+    },
+    "sample": "[图片]"
+  }
+}

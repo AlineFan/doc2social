@@ -1,0 +1,126 @@
+{
+  "_meta": {
+    "description": "秀米招聘风 — FreeLab 远程招聘风格，新布鲁塔利主义",
+    "source": "https://mp.weixin.qq.com/s/YSjRfTJZ8cR2DhrtsufBqQ",
+    "article_type": "xiumi",
+    "visual_style": "Neo-brutalist: 蓝实边框 + 绿偏移阴影 + 灰底内容区"
+  },
+  "color_palette": {
+    "blue": "rgb(48, 66, 202)",
+    "green": "rgb(1, 229, 152)",
+    "light_gray": "rgb(248, 248, 248)",
+    "dark_gray": "rgb(62, 62, 62)",
+    "white": "rgb(255, 255, 255)",
+    "warm_brown": "rgb(206, 175, 151)",
+    "roles": {
+      "blue": "边框、标题文字阴影、品牌标签背景、头部蓝框",
+      "green": "偏移阴影、大号&字符、品牌标签文字、CTA区背景、分隔条",
+      "light_gray": "内容区背景、页面底色",
+      "dark_gray": "CTA区正文色",
+      "white": "大标题文字色、CTA边框"
+    }
+  },
+  "header_banner": {
+    "description": "顶部 banner：背景图 + 蓝框 logo + 大标题 + 品牌标签",
+    "background_image": "全幅背景图（repeat）",
+    "logo_frame": {
+      "style": "border: 4px solid rgb(48, 66, 202); 128x128 圆角图"
+    },
+    "title_50px": {
+      "description": "大标题（如'今日'/'FreeLab'）",
+      "style": {
+        "font-size": "50px",
+        "color": "rgb(248, 248, 248)",
+        "font-weight": "bold",
+        "letter-spacing": "2px",
+        "line-height": "1.2",
+        "text-shadow": "rgb(48, 66, 202) 3px 3px, rgb(1, 229, 152) -2px -2px"
+      }
+    },
+    "ampersand_114px": {
+      "description": "装饰性大号 & 符号",
+      "style": {
+        "font-size": "114px",
+        "color": "rgb(1, 229, 152)",
+        "font-weight": "bold",
+        "line-height": "1"
+      }
+    },
+    "brand_labels": {
+      "description": "品牌标签（右对齐，蓝底绿字）如 FreeLab / Hiring / 远程招聘",
+      "style": {
+        "text-align": "right",
+        "color": "rgb(1, 229, 152)",
+        "letter-spacing": "6px",
+        "line-height": "1.6"
+      },
+      "label_pill": {
+        "background-color": "rgb(48, 66, 202)",
+        "font-weight": "bold",
+        "padding": "inline, 用 &nbsp; 留边距"
+      }
+    }
+  },
+  "green_separator": {
+    "description": "蓝绿分隔条（header 和内容之间）",
+    "style": {
+      "height": "10px",
+      "overflow": "hidden",
+      "background-color": "rgb(1, 229, 152)",
+      "border-style": "none solid solid",
+      "border-width": "1px",
+      "border-color": "rgb(62, 62, 62) rgb(48, 66, 202) rgb(48, 66, 202)"
+    }
+  },
+  "content_card": {
+    "description": "核心内容卡片 — 蓝边框+绿偏移阴影+灰底（所有招聘信息都在这里面）",
+    "outer_wrapper": {
+      "width": "94%",
+      "display": "inline-block"
+    },
+    "card_frame": {
+      "border": "4px solid rgb(48, 66, 202)",
+      "padding": "3px",
+      "box-shadow": "rgb(1, 229, 152) 4px 4px 0px"
+    },
+    "inner_bg": {
+      "background-color": "rgb(248, 248, 248)",
+      "padding": "10px 15px"
+    },
+    "body_text": {
+      "font-size": "14px",
+      "color": "inherit (black/default)",
+      "line-height": "default"
+    }
+  },
+  "cta_bar": {
+    "description": "底部绿色 CTA 区（日期+图片+联系信息）",
+    "style": {
+      "background-color": "rgb(1, 229, 152)",
+      "border": "5px solid rgb(255, 255, 255)"
+    },
+    "text": {
+      "color": "rgb(62, 62, 62)",
+      "padding": "0 20px"
+    },
+    "date": {
+      "text-align": "right",
+      "font-weight": "bold"
+    }
+  },
+  "footer": {
+    "description": "底部灰色区域（二维码、社媒链接等）",
+    "background": "rgb(248, 248, 248)",
+    "contains": "logo + QR code + 社媒图标"
+  },
+  "image": {
+    "description": "图片（蓝色边框框架）",
+    "frame": {
+      "border": "4px solid rgb(48, 66, 202)"
+    },
+    "img": {
+      "max-width": "100%",
+      "height": "auto"
+    }
+  }
+}

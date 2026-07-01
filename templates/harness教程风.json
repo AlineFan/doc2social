@@ -1,0 +1,173 @@
+{
+  "_meta": {
+    "style_name": "harness教程风",
+    "source_url": "mp.weixin.qq.com",
+    "article_type": "技术教程 / 分章节长文（带代码）",
+    "visual_style": "蓝色技术教程风：#003399 蓝色多级标题 + #ff6827 橙色加粗强调 + 浅灰行内代码 + 深色代码块 + 灰色左竖条引用，PingFang 正文"
+  },
+  "container": {
+    "description": "最外层根容器。正文及绝大多数文字的字体（PingFangSC-light）继承自这里——下面 body_text/li 等组件的 style 里都没有 font-family，全靠根容器继承，漏了它正文会渲染成默认字体（这篇上次就栽在这）。同时定基础字号/颜色/对齐。",
+    "tag": "section",
+    "style": {
+      "font-family": "PingFangSC-light",
+      "font-size": "16px",
+      "color": "#000000",
+      "text-align": "left",
+      "box-sizing": "border-box"
+    },
+    "sample": ""
+  },
+  "body_text": {
+    "description": "正文段落，最常见组件。自带 font-size 但无 font-family（继承根容器 PingFangSC-light）。段间距靠 margin-bottom:32px。",
+    "tag": "p",
+    "style": {
+      "margin": "0px",
+      "padding": "0px",
+      "box-sizing": "border-box",
+      "margin-top": "0px",
+      "margin-bottom": "32px",
+      "font-size": "16px",
+      "line-height": "1.75",
+      "text-indent": "0",
+      "padding-left": "8px",
+      "padding-right": "8px"
+    },
+    "sample": "你按部就班把工具都装齐了："
+  },
+  "heading_h1": {
+    "description": "一级标题（章标题，如「第 1 章 …」）。蓝色 #003399 加粗，22px，独占一行。",
+    "tag": "h1",
+    "style": {
+      "margin-top": "0px",
+      "margin-bottom": "32px",
+      "font-size": "22px",
+      "color": "#003399",
+      "font-weight": "700",
+      "line-height": "1.35",
+      "padding-left": "8px",
+      "padding-right": "8px"
+    },
+    "sample": "第 1 章 你装了一堆东西，AI 还是瞎搞，为什么"
+  },
+  "heading_h2": {
+    "description": "二级标题（小节标题，如「1.1 …」）。蓝色 #003399 加粗，20px。",
+    "tag": "h2",
+    "style": {
+      "margin-top": "0px",
+      "margin-bottom": "32px",
+      "font-size": "20px",
+      "color": "#003399",
+      "font-weight": "700",
+      "line-height": "1.35",
+      "padding-left": "8px",
+      "padding-right": "8px"
+    },
+    "sample": "1.1 一个真实的场景"
+  },
+  "heading_h3": {
+    "description": "三级标题（更细的分点标题，如「第 1 件：…」）。蓝色 #003399 加粗，18px。",
+    "tag": "h3",
+    "style": {
+      "margin-top": "0px",
+      "margin-bottom": "32px",
+      "font-size": "18px",
+      "color": "#003399",
+      "font-weight": "700",
+      "line-height": "1.35",
+      "padding-left": "8px",
+      "padding-right": "8px"
+    },
+    "sample": "第 1 件：把愿望清单先备份"
+  },
+  "emphasis_bold": {
+    "description": "行内强调加粗。橙色 #ff6827 + 粗体。文中用来标关键词、术语、结论句。包在正文/标题/列表里行内使用。",
+    "tag": "strong",
+    "style": {
+      "color": "#ff6827",
+      "font-weight": "700"
+    },
+    "sample": "这是 99% 小白的第一反应。也是 99% 小白浪费钱的开始。"
+  },
+  "inline_code": {
+    "description": "行内代码。浅灰底 #f2f2f2、深色字 #111111、小圆角、等宽字体。包在正文/列表里行内使用（如 CLAUDE.md）。",
+    "tag": "code",
+    "style": {
+      "background": "#f2f2f2",
+      "color": "#111111",
+      "font-size": "14px",
+      "padding": "2px 6px",
+      "border-radius": "4px",
+      "font-family": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
+    },
+    "sample": "CLAUDE.md"
+  },
+  "list_unordered": {
+    "description": "无序列表容器（实心圆点）。每个 <li> 用 list_item 的样式。",
+    "tag": "ul",
+    "style": {
+      "margin-top": "0",
+      "margin-bottom": "32px",
+      "font-size": "16px",
+      "padding-left": "32px",
+      "padding-right": "8px",
+      "list-style-type": "disc"
+    },
+    "sample": "装了 Claude Code，配好了国产模型。"
+  },
+  "list_ordered": {
+    "description": "有序列表容器（数字编号）。每个 <li> 用 list_item 的样式。",
+    "tag": "ol",
+    "style": {
+      "margin-top": "0",
+      "margin-bottom": "32px",
+      "font-size": "16px",
+      "padding-left": "32px",
+      "padding-right": "8px",
+      "list-style-type": "decimal"
+    },
+    "sample": "装第一个 Hook（第 5 章，给最不可逆的操作做拦截）"
+  },
+  "list_item": {
+    "description": "列表项（ul/ol 通用）。font-size:16px，项间距 margin-bottom:8px。无 font-family，继承根容器 PingFangSC-light。",
+    "tag": "li",
+    "style": {
+      "margin-bottom": "8px",
+      "font-size": "16px"
+    },
+    "sample": "装了 Claude Code，配好了国产模型。"
+  },
+  "blockquote": {
+    "description": "引用块 / 金句框。左侧深色竖条 #111111 + 浅灰底 #f3f3f3 + 内边距。块内段落用 body_text 样式。用于强调引用、核心结论。",
+    "tag": "blockquote",
+    "style": {
+      "margin-top": "0",
+      "margin-bottom": "32px",
+      "font-size": "16px",
+      "padding": "12px",
+      "border-left": "3px solid #111111",
+      "background": "#f3f3f3",
+      "color": "#111111",
+      "margin-left": "8px",
+      "margin-right": "8px"
+    },
+    "sample": "Harness = 模型之外的一切"
+  },
+  "code_block": {
+    "description": "深色代码块（多行公式 / 命令 / 示意）。复合件：<pre> 外壳定深底 #111111 + 浅字 + 等宽字体 + 圆角；内有一个用于撑顶距的空 <span> 占位，再包一个 display:block 的 <code> 放真正的多行代码（行间用 <br/> 分隔）。",
+    "skeleton": "<pre style=\"margin-top:0;margin-bottom:32px;margin-left:8px;margin-right:8px;padding:14px;background:#111111;color:#f5f5f5;font-size:14px;line-height:1.6;white-space:pre-wrap;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;border-radius:8px;box-sizing:border-box;\"><span style=\"display:inline-block;line-height:1;margin-bottom:10px;\"></span><br /><code style=\"display:block;\">{{CODE_LINES}}</code></pre>",
+    "slots": {
+      "CODE_LINES": {
+        "from": "用户 md 的代码块内容（``` 之间的多行文本）",
+        "when": "有代码块时",
+        "example": "Agent = Model + Harness<br /><br />&nbsp; &nbsp; &nbsp; &nbsp;(大脑) &nbsp; (管大脑的那套系统)"
+      }
+    },
+    "structure_rules": [
+      "<pre> 是带 padding 的块级容器，已补 box-sizing:border-box。",
+      "保留开头那个空 <span style='display:inline-block;...margin-bottom:10px'></span> + <br /> 作为顶部撑距，不要删。",
+      "真正代码放在 <code style='display:block'> 内，多行之间用 <br /> 分隔；保留 white-space:pre-wrap 维持原样换行。",
+      "等宽字体 font-family 写死在 <pre> 上，内层 code 继承即可。"
+    ],
+    "sample": "Agent = Model + Harness"
+  }
+}
