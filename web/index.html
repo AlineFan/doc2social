@@ -68,9 +68,10 @@
   .rlink:hover{text-decoration:underline}
   .themestrip{display:flex;flex-wrap:wrap;gap:8px}
   .chip{font-family:var(--mono);font-size:12.5px;padding:7px 13px;border:1px solid var(--line);color:var(--muted)}
-  .note{font-size:14px;color:var(--muted);line-height:1.75;margin:22px 0 0;max-width:62ch}
-  .note a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
-  .note code{font-family:var(--mono);font-size:12.5px;background:var(--line-2);padding:1px 6px;border-radius:3px;color:var(--text)}
+  .note{font-size:14.5px;color:var(--text);line-height:1.8;margin:26px 0 0;max-width:66ch;background:rgba(111,144,121,.08);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:16px 18px}
+  .note strong{color:var(--accent-deep);font-weight:700}
+  .note a{color:var(--accent-deep);text-decoration:underline;text-underline-offset:2px;font-weight:600}
+  .note code{font-family:var(--mono);font-size:12.5px;background:var(--surface);border:1px solid var(--line);padding:1px 6px;border-radius:3px;color:var(--accent-deep)}
   footer.home-foot{border-top:1px solid var(--line);padding:40px 0 64px;color:var(--faint);font-size:13px}
   footer.home-foot .wrap{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
   footer.home-foot a{color:var(--muted);font-family:var(--mono)}
@@ -219,7 +220,7 @@
   <section class="block"><div class="wrap"><h2>公众号套版</h2><div class="themestrip">
     <span class="chip">绿色科技风</span><span class="chip">极简黑白（水墨）</span><span class="chip">椰树风</span><span class="chip">极简(支持代码)</span>
   </div>
-    <p class="note">当前网页支持简单模板，想要实现更复杂的主题格式，去 <a id="skilllink" href="#" target="_blank" rel="noopener">GitHub</a> 下载 skill（<code>gzh-layout-cloner</code>），提供公众号文章地址，<strong>AI 会自动为你生成套用模板</strong>。</p>
+    <p class="note">当前网页支持简单模板，想要实现<strong>更复杂的主题格式</strong>，去 <a id="skilllink" href="#" target="_blank" rel="noopener">GitHub</a> 下载 skill（<code>gzh-layout-cloner</code>），提供公众号文章地址，<strong>AI 会自动为你生成套用模板</strong>。</p>
   </div></section>
   <footer class="home-foot"><div class="wrap">
     <span>made by <strong style="color:var(--text);font-weight:600">林锵锵</strong></span>
