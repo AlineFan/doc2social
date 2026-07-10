@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "wechat:ensure-copy": "python3 scripts/ensure-wechat-copy.py output",
+    "wechat:check-copy": "python3 scripts/ensure-wechat-copy.py --check output"
+  },
   "dependencies": {
     "marked": "^18.0.5",
     "playwright-core": "^1.61.0"

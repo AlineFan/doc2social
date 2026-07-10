@@ -1,8 +1,9 @@
 #!/bin/bash
-# publish-to-wechat.sh — 把绿色模板 HTML 里的本地图 base64 内嵌后拷到剪贴板
+# publish-to-wechat.sh — 把绿色模板 HTML 里的本地图 base64 内嵌成可复制发布页
 #
 # 绿色路线下，"md → 绿色 HTML" 由 Claude（obsidian-publish skill 读 templates/wechat-green.html
-# 套样式）完成；这个脚本是发布前最后一步：把绿色 HTML 里的本地图内嵌成 base64 + 拷贝。
+# 套样式）完成；这个脚本是发布前最后一步：把绿色 HTML 里的本地图内嵌成 base64，
+# 并注入「复制到公众号」按钮。打开发布页点按钮，才能复制浏览器富文本。
 #
 # 用法：
 #   bash publish-to-wechat.sh <绿色.html> [--jpeg] [--max-width N]
@@ -17,7 +18,7 @@
 #
 # 完成后：
 #   - 生成 <name>-publish.html（图片已 base64 内嵌，可双击预览；原 HTML 不动）
-#   - 该内嵌版已在剪贴板，Cmd+V 粘贴到公众号编辑器，图片会自动上传素材库
+#   - 发布页右上角有「复制到公众号」按钮，点完再 Cmd+V 到公众号编辑器
 
 set -euo pipefail
 
@@ -64,13 +65,11 @@ FROM_VAULT=$(echo "$STATS" | python3 -c "import json,sys; print(json.load(sys.st
 HTML_KB=$(echo "$STATS" | python3 -c "import json,sys; print(round(json.load(sys.stdin).get('htmlBytes',0)/1024))" 2>/dev/null || echo "?")
 MISSING=$(echo "$STATS" | python3 -c "import json,sys; print(chr(10).join(json.load(sys.stdin).get('missing',[])))" 2>/dev/null || echo "")
 
-cat "$OUT" | pbcopy
-
 echo "✅ 内嵌版: $OUT"
-echo "✅ 内嵌图片 $INLINED 张（其中 $FROM_VAULT 张从 vault 自动抓）| 剪贴板已就绪（${HTML_KB} KB）"
+echo "✅ 内嵌图片 $INLINED 张（其中 $FROM_VAULT 张从 vault 自动抓）| HTML ${HTML_KB} KB"
 if [ -n "$MISSING" ]; then
     echo "⚠️ 下列图片找不到，未内嵌（检查 src 路径是否相对 html 文件）："
     echo "$MISSING" | sed 's/^/   - /'
 fi
 echo ""
-echo "👉 公众号编辑器 → 新建图文 → 正文区 Cmd+V（图片会自动上传素材库）"
+echo "👉 打开 $OUT → 点右上角「复制到公众号」→ 公众号正文区 Cmd+V（图片会自动上传素材库）"

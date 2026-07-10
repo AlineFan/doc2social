@@ -7,6 +7,7 @@
   3. Obsidian 截图：<img src="截屏xxx.png">（裸文件名）
                     —— 本地找不到时，去 vault 按文件名递归搜（--search-dir 或 $OBSIDIAN_VAULT）
 本地图缩放/压缩后转 base64 内嵌进 src，公众号粘贴富文本时会自动上传素材库。
+默认还会给输出页注入一个固定的“一键复制富文本”按钮，复制正文容器而不是整页。
 已是 data: / http(s) 的图跳过。
 
 用法:
@@ -20,6 +21,7 @@
     --jpeg           转 JPEG（体积小 ~5x，手绘白底图可能轻微伪影）
     --quality Q      JPEG 质量 0-100（默认 82，仅 --jpeg 生效）
     --no-resize      不缩放，原图内嵌
+    --no-copy-ui     不注入页面右上角的一键复制按钮
 
 相对路径 src 相对 <html> 目录解析。输出 stdout JSON 统计。依赖 sips（macOS 自带）。
 """
@@ -36,6 +38,8 @@ MIME = {
     "webp": "image/webp", "gif": "image/gif",
 }
 IMG_EXT = tuple("." + e for e in MIME)
+COPY_ROOT_ID = "wechat-copy-root"
+COPY_UI_MARKER = "wechat-rich-copy-ui"
 
 
 def unescape_attr(s):
@@ -81,6 +85,82 @@ def encode_image(path, max_width, use_jpeg, quality):
     return b64, mime
 
 
+def inject_copy_ui(html):
+    """Add a file:// friendly rich-copy button for the publish HTML.
+
+    Manual selection from a file page often loses relative images or copies the
+    whole document shell. The button copies only the rendered article root as
+    text/html; if ClipboardItem is blocked, it falls back to selection copy.
+    """
+    if COPY_ROOT_ID not in html:
+        html = re.sub(
+            r'(<body\b[^>]*>\s*<div\b)(?![^>]*\bid=)',
+            rf'\1 id="{COPY_ROOT_ID}"',
+            html,
+            count=1,
+            flags=re.I,
+        )
+
+    if COPY_UI_MARKER in html:
+        return html
+
+    ui = f'''
+<div id="{COPY_UI_MARKER}" style="position:fixed;right:18px;top:18px;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <button type="button" id="wechat-copy-button" style="border:0;border-radius:999px;background:#059669;color:#fff;font-size:14px;font-weight:700;padding:10px 16px;box-shadow:0 8px 24px rgba(5,150,105,.28);cursor:pointer;">复制到公众号</button>
+  <span id="wechat-copy-status" style="display:block;margin-top:8px;text-align:right;font-size:12px;color:#059669;"></span>
+</div>
+<script>
+(function(){{
+  var btn = document.getElementById('wechat-copy-button');
+  var status = document.getElementById('wechat-copy-status');
+  function setStatus(text, ok) {{
+    status.textContent = text;
+    status.style.color = ok ? '#059669' : '#dc2626';
+    btn.textContent = ok ? '已复制' : '复制失败';
+    window.setTimeout(function() {{
+      btn.textContent = '复制到公众号';
+      status.textContent = '';
+    }}, 1800);
+  }}
+  async function copyRich() {{
+    var root = document.getElementById('{COPY_ROOT_ID}') || document.body.firstElementChild;
+    if (!root) return false;
+    var html = root.outerHTML;
+    var text = root.innerText || root.textContent || '';
+    try {{
+      if (navigator.clipboard && window.ClipboardItem) {{
+        await navigator.clipboard.write([new ClipboardItem({{
+          'text/html': new Blob([html], {{ type: 'text/html' }}),
+          'text/plain': new Blob([text], {{ type: 'text/plain' }})
+        }})]);
+        return true;
+      }}
+    }} catch (err) {{}}
+    try {{
+      var range = document.createRange();
+      range.selectNode(root);
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      var ok = document.execCommand('copy');
+      selection.removeAllRanges();
+      return ok;
+    }} catch (err) {{
+      return false;
+    }}
+  }}
+  btn.addEventListener('click', async function() {{
+    var ok = await copyRich();
+    setStatus(ok ? '正文富文本已进剪贴板' : '请手动选中正文复制', ok);
+  }});
+}})();
+</script>
+'''
+    if re.search(r"</body\s*>", html, flags=re.I):
+        return re.sub(r"</body\s*>", ui + "\n</body>", html, count=1, flags=re.I)
+    return html + ui
+
+
 def main():
     args = sys.argv[1:]
     if not args or args[0] in ("-h", "--help"):
@@ -88,7 +168,7 @@ def main():
     html_path = args[0]
     out_path = None
     search_dirs = []
-    max_width, use_jpeg, quality = 1080, False, 82
+    max_width, use_jpeg, quality, add_copy_ui = 1080, False, 82, True
     i = 1
     while i < len(args):
         a = args[i]
@@ -100,6 +180,8 @@ def main():
             max_width = int(args[i + 1]); i += 2
         elif a == "--no-resize":
             max_width = 0; i += 1
+        elif a == "--no-copy-ui":
+            add_copy_ui = False; i += 1
         elif a == "--jpeg":
             use_jpeg = True; i += 1
         elif a == "--quality":
@@ -162,6 +244,11 @@ def main():
         return tag
 
     html = re.sub(r"<img\b[^>]*>", process_img, html)
+    if add_copy_ui:
+        html = inject_copy_ui(html)
+        stats["copyUi"] = True
+    else:
+        stats["copyUi"] = False
     dest = out_path or html_path
     with open(dest, "w", encoding="utf-8") as f:
         f.write(html)
