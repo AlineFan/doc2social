@@ -1,0 +1,31 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>样式提取预览</title>
+<style>body{margin:0;background:#f5f5f5;font-family:-apple-system,sans-serif}
+.preview-wrap{max-width:720px;margin:20px auto;background:#fff;padding:40px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
+.comp-label{font-size:11px;color:#999!important;text-transform:uppercase;letter-spacing:2px!important;margin:32px 0 8px;padding-top:16px;border-top:1px solid #eee;font-family:-apple-system,sans-serif!important}
+.comp-label:first-child{border-top:none;margin-top:0}
+.preview-wrap img{max-width:100%!important;height:auto!important;box-sizing:border-box}
+</style></head><body><div class="preview-wrap" style="font-size:16px;font-family:Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, &quot;PingFang SC&quot;, Cambria, Cochin, Georgia, Times, &quot;Times New Roman&quot;, serif;color:rgb(63, 63, 63);line-height:1.6">
+<h1 style="font-size:20px;color:#333;margin:0 0 8px;font-family:-apple-system,sans-serif">提取样式预览</h1>
+<p style="font-size:11px;color:#bbb;margin:0 0 8px;font-family:-apple-system">根容器基础样式: font-size:16px;font-family:Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, &quot;PingFang SC&quot;, Cambria, Cochin, Georgia, Times, &quot;Times New Roman&quot;, serif;color:rgb(63, 63, 63);line-height:1.6</p>
+<p style="font-size:13px;color:#999;margin:0 0 24px;">克制的苹方周刊：保留参考文的 Optima/PingFang 字体栈与深灰、亮蓝色，使用清晰的段落留白、细灰分隔线、▍ 分节标题和无边框居中配图。</p>
+<p style="font-size:12px;color:#9a3412;background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;padding:8px 10px;margin:0 0 20px;font-family:-apple-system">⚠ 本风格含 <b>1</b> 个图片组件（image_block）——图片不是 CSS 排版、<b>克隆不了</b>，套你自己内容时需换图/重做。其余 <b>8</b> 个是可克隆的 CSS 组件。</p>
+<p class="comp-label">根容器。文章的正文、标题、强调均使用 Optima 优先的衬线字体和深灰文字；字体、字号与行高在此继承。</p>
+<p style="font-size:12px;color:#666;">box-sizing:border-box;font-size:16px;font-family:Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, &quot;PingFang SC&quot;, Cambria, Cochin, Georgia, Times, &quot;Times New Roman&quot;, serif;color:rgb(63, 63, 63);line-height:1.6;font-weight:400;text-align:left</p>
+<p class="comp-label">正文段落。上下各 10px 留白，16px 深灰衬线字，1.6 倍行高。</p>
+<p style="box-sizing:border-box;margin:10px;padding:0px;font-size:16px;font-style:normal;font-weight:400;font-family:Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, &quot;PingFang SC&quot;, Cambria, Cochin, Georgia, Times, &quot;Times New Roman&quot;, serif;text-align:left;color:rgb(63, 63, 63);line-height:1.6">这是一段带有留白与缓慢节奏的正文。</p>
+<p class="comp-label">分节标题。原文使用带 ▍ 装饰前缀的 19.2px 粗体衬线标题，并在标题前留出 40px 间距。</p>
+<p style="box-sizing:border-box;margin:40px 10px 20px;padding:0px;font-weight:bold;font-style:normal;text-align:left;color:rgb(63, 63, 63);line-height:1.5;font-size:19.2px"><strong>▍随便聊聊</strong></p>
+<p class="comp-label">加粗重点句。保持正文同色同字号，只以字重区分，用于不喧闹的结论强调。</p>
+<p style="box-sizing:border-box;margin:0px;padding:0px;text-align:left;color:rgb(63, 63, 63);line-height:1.5;font-size:16px;font-weight:bold"><strong>这是一句被克制加粗的重点。</strong></p>
+<p class="comp-label">行内链接/延伸阅读。使用原文亮蓝色，与正文保持同字号和衬线字体。</p>
+<a style="box-sizing:border-box;margin:0px;padding:0px;text-align:left;color:rgb(13, 117, 252);line-height:1.5;font-size:16px">延伸阅读</a>
+<p class="comp-label">章节之间的细灰分隔线。原文以 1px 线条缩放为半像素视觉重量。</p>
+<hr style="border-style:solid;border-width:1px 0 0;border-color:rgba(0,0,0,0.1);transform-origin:0 0;transform:scale(1, 0.5)">示例文字</hr>
+<p class="comp-label">带圆点的延伸条目。原文用负缩进让圆点悬挂在文字左侧；套 Markdown 列表时保留相近的左缩进与段间距。</p>
+<ul style="padding-left:28px"><li style="box-sizing:border-box;margin:0 10px 10px 0;padding:0 0 0 20px;color:rgb(63, 63, 63);line-height:1.5;font-size:16px;font-family:Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, &quot;PingFang SC&quot;, Cambria, Cochin, Georgia, Times, &quot;Times New Roman&quot;, serif">一条延伸阅读或补充观点。</li></ul>
+<p class="comp-label">正文配图。图片位于居中的 section 中，无描边、无圆角；参考文章的具体图片是内容素材，套新文章时使用用户自己的图。</p>
+<p style="color:#9a3412;font-size:11px;margin:2px 0 6px;font-family:-apple-system">⚠ 图片组件 · 不是 CSS、克隆不了 —— 套你自己内容时换成你的图</p>
+<section style="text-align:center;box-sizing:border-box;"><img src="https://mmecoa.qpic.cn/mmecoa_jpg/YpuDDnEYhHZYumbyAIUAI1ho1ESMb9Cuc8TknYVcghFibxYOkmaKcUoWGcmrzeJzRJMPrCOMQAX7eo52iaV9ImHd8r9pDb9suiaUIjXHJ74aTI/640?wx_fmt=jpeg&amp;from=appmsg" style="display:block;max-width:100%;height:auto;margin:20px auto;box-sizing:border-box;" /></section>
+<p class="comp-label">参考文献区。原文使用 14px 正文与 12.6px、60% 不透明度的编号，可用于文章末尾的来源清单。</p>
+<p style="box-sizing:border-box;margin:10px;padding:0px;font-size:14px;color:rgb(63, 63, 63);line-height:1.5">[1] 参考来源与链接</p>
+</div></body></html>

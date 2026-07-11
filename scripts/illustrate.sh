@@ -84,7 +84,7 @@ fi
 
 mkdir -p "$OUTDIR"
 echo ""
-echo "⏳ codex 生图中（输出→ $LOG，可能几分钟，不要中断）..."
+echo "⏳ codex 生图中（输出→ ${LOG}，可能几分钟，不要中断）..."
 if ! codex exec -C "$ARTICLE_DIR" --dangerously-bypass-approvals-and-sandbox "$PROMPT" < /dev/null > "$LOG" 2>&1; then
     echo "❌ codex 执行失败，看日志: $LOG" >&2
     exit 1

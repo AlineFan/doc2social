@@ -1,0 +1,202 @@
+<section style="font-family:PingFangSC-light;font-size:16px;color:#000000;text-align:left;box-sizing:border-box;">
+
+<blockquote style="margin-top:0;margin-bottom:32px;font-size:16px;padding:12px;border-left:3px solid #111111;background:#f3f3f3;color:#111111;margin-left:8px;margin-right:8px;">
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:8px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">skill 太多会带来 <strong style="color:#ff6827;font-weight:700;">噪声、误触发、上下文占用</strong></p>
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:0px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">解决方法：skill 统一管理，项目级按需软链 skill</p>
+</blockquote>
+
+<h1 style="margin-top:0px;margin-bottom:32px;font-size:22px;color:#003399;font-weight:700;line-height:1.35;padding-left:8px;padding-right:8px;">为什么 skill 还没调用，就已经开始占上下文了</h1>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">Agent 在工作时有一个上下文窗口，你可以把它想象成 claudecode /codex 的办公桌，办公桌的桌面大小 （上下文窗口）是有限的。</p>
+
+<img src="skill管理思路-perbrand-01.png" style="width:100%;border-radius:8px;margin:0 8px 32px;box-sizing:border-box;display:block;" />
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">每次开启一个会话，用户发出第一条消息，harness 就会给模型塞一堆信息，其中就包括 skiLL 的列表和摘要（skill name +descriptions）。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">以 claude 为例，启动+ 用户发出第一条消息时，harness 和 claude 模型之间的数据交互</p>
+
+<pre style="margin-top:0;margin-bottom:32px;margin-left:8px;margin-right:8px;padding:14px;background:#111111;color:#f5f5f5;font-size:14px;line-height:1.6;white-space:pre-wrap;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;border-radius:8px;box-sizing:border-box;"><span style="display:inline-block;line-height:1;margin-bottom:10px;"></span><br /><code style="display:block;">用户<br />&nbsp; ↓<br />Claude Code harness<br />&nbsp; ├─ 【1】读取 CLAUDE.md<br />&nbsp; ├─ 【2】读取 auto memory<br />&nbsp; ├─ 【3】发现的 skill列表（按需加载，本次发出的是name+descriptions） / commands / hooks / MCP<br />&nbsp; ├─ 【4】处理权限与工具调用<br />&nbsp; └─ 把用户消息和以上模块一起，组装上下文发给模型<br />&nbsp; ↓<br />Claude 模型<br />&nbsp; ├─ 判断是否需要某个 skill<br />&nbsp; ├─ 决定是否调用工具<br />&nbsp; └─ 生成回复 / 工具调用<br />&nbsp; ↓<br />Claude Code harness 执行并回传</code></pre>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">skill 列表 中的 name + description</p>
+
+<pre style="margin-top:0;margin-bottom:32px;margin-left:8px;margin-right:8px;padding:14px;background:#111111;color:#f5f5f5;font-size:14px;line-height:1.6;white-space:pre-wrap;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;border-radius:8px;box-sizing:border-box;"><span style="display:inline-block;line-height:1;margin-bottom:10px;"></span><br /><code style="display:block;">- adapt: Adapt designs to work across different screen sizes...<br />-&nbsp; animate: Review a feature and enhance it with purposeful animations...<br />-&nbsp; animejs: Anime.js adapter patterns for HyperFrames...<br />- audit: Perform comprehensive audit of interface quality......<br />- 【100个 skill 的名称+描述，在用户发出第一条消息时，就和用户消息组装一起，发给了模型】</code></pre>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">如果我们安装了 100 个 skill，放在全局。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">即使这一次会话中只用到了 1 个 skill，这 100 个 skill 的列表和摘要 ，也会在会话之初，就由 harness 摆在了模型的工作台上。</p>
+
+<img src="skill管理思路-perbrand-02.png" style="width:100%;border-radius:8px;margin:0 8px 32px;box-sizing:border-box;display:block;" />
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">虽然单个 skill 的内容不多，但架不住量大。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">用不到的 skill 会默默占据上下文窗口，消耗 token 。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">随着会话变长，agent 会更容易"忘"你前面说过的话。</p>
+
+<ul style="margin-top:0;margin-bottom:32px;font-size:16px;padding-left:32px;padding-right:8px;list-style-type:disc;">
+<li style="margin-bottom:8px;font-size:16px;">旧信息离当前轮次越来越远</li>
+<li style="margin-bottom:8px;font-size:16px;">新信息不断堆上来</li>
+<li style="margin-bottom:8px;font-size:16px;">上下文窗口有限</li>
+<li style="margin-bottom:8px;font-size:16px;">所以前面的关键信息更容易被噪声淹没</li>
+</ul>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">为了方便理解，我们可以用数字做示意：</p>
+
+<pre style="margin-top:0;margin-bottom:32px;margin-left:8px;margin-right:8px;padding:14px;background:#111111;color:#f5f5f5;font-size:14px;line-height:1.6;white-space:pre-wrap;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;border-radius:8px;box-sizing:border-box;"><span style="display:inline-block;line-height:1;margin-bottom:10px;"></span><br /><code style="display:block;">第 1 轮<br />- harness 注入：1111<br />- 用户消息：2222<br />- 模型本轮看到：1111 + 2222<br /><br />第 2 轮<br />- 模型上一轮回复：3333<br />- 模型本轮可追溯的上下文近似变成：1111 + 2222 + 3333<br /><br />第 3 轮<br />- 用户新消息：4444<br />- 模型本轮看到：1111 + 2222 + 3333 + 4444<br /><br />第 4 轮<br />- 模型新回复：5555<br />- 模型本轮可追溯的上下文近似变成：1111 + 2222 + 3333 + 4444 + 5555</code></pre>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">如果会话继续增长，前面的 1111、2222 会越来越"远"。<br />如果 1111 本身就很臃肿，比如里面混了大量的 skill 描述、工具菜单、无关规则，真正重要的部分就更容易被冲淡。</p>
+
+<img src="skill管理思路-perbrand-03.png" style="width:100%;border-radius:8px;margin:0 8px 32px;box-sizing:border-box;display:block;" />
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">当然，实际上下文并不一定是"原封不动无限累加"；不同 agent 可能会做裁剪、压缩、摘要或分层加载。 但从最终结果是一样的：<strong style="color:#ff6827;font-weight:700;">会话越长，早期信息越容易失真、弱化或被挤出窗口</strong></p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">此外，skill 太多，还会让 agent 在该调用 A 的时候用了 B，在该调用的时候不调用，或者在不该调用的时候误触发。这个也很好理解，桌面越乱，找东西就越难。</p>
+
+<img src="skill管理思路-perbrand-04.png" style="width:100%;border-radius:8px;margin:0 8px 32px;box-sizing:border-box;display:block;" />
+
+<h1 style="margin-top:0px;margin-bottom:32px;font-size:22px;color:#003399;font-weight:700;line-height:1.35;padding-left:8px;padding-right:8px;">怎么解决</h1>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">有些 skill 使用频次不高，删除肯定不合适，但不删每次加载又都很浪费。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">baoyu 大佬提供了一个思路：skil 放到一个仓库统一管理端，claude / codex 新建项目时，按需从全局 skill 仓库，<strong style="color:#ff6827;font-weight:700;">为单个 skill 建一个软链接</strong>。</p>
+
+<img src="截屏2026-06-28 03.13.40.png" style="width:100%;border-radius:8px;margin:0 8px 32px;box-sizing:border-box;display:block;" />
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">可以把软链接理解成"快捷方式"</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">项目里看起来像有这个 skill，实际上文件本体仍然只保存在统一仓库里。</p>
+
+<img src="skill管理思路-perbrand-05.png" style="width:100%;border-radius:8px;margin:0 8px 32px;box-sizing:border-box;display:block;" />
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">这样做的好处是：</p>
+
+<ol style="margin-top:0;margin-bottom:32px;font-size:16px;padding-left:32px;padding-right:8px;list-style-type:decimal;">
+<li style="margin-bottom:8px;font-size:16px;">原件更新一次，所有项目同步生效</li>
+<li style="margin-bottom:8px;font-size:16px;">项目里改 skill，本质上改的是原件</li>
+<li style="margin-bottom:8px;font-size:16px;">不会在不同项目里出现多份 skill 副本，避免版本漂移</li>
+</ol>
+
+<h2 style="margin-top:0px;margin-bottom:32px;font-size:20px;color:#003399;font-weight:700;line-height:1.35;padding-left:8px;padding-right:8px;">1 skill的位置</h2>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">要理解这个，首先以 claude 、codex 为例，skill 有 2 个位置，</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">一个是用户级，所有项目都能看到<br />【claude code】<code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/.claude/skills/</code><br />【codex】<code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/.codex/skills/</code></p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">一个是项目级，只有这个项目才能看到<br /><code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/project01/.agents/skills</code></p>
+
+<h2 style="margin-top:0px;margin-bottom:32px;font-size:20px;color:#003399;font-weight:700;line-height:1.35;padding-left:8px;padding-right:8px;">2 具体操作</h2>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">【以下软链操作，我们可以通过自然语言，让 AI 去做】</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">建一个文件夹 A，把所有的 skill 保存在文件夹中。这些 agent 的存储路径就是 ：<br /><code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/A/skills/skill01</code><br /><code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/A/skills/skill02</code><br /><code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/A/skills/skill03</code><br /><code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/A/skills/skill04</code></p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">当我们要新建项目 project02，需要用到 skill02 和 skill04，我们就可以：</p>
+
+<ol style="margin-top:0;margin-bottom:32px;font-size:16px;padding-left:32px;padding-right:8px;list-style-type:decimal;">
+<li style="margin-bottom:8px;font-size:16px;">创建 project02，项目地址是：<code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/project02</code></li>
+<li style="margin-bottom:8px;font-size:16px;">在 <code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/project02</code> 里建 skill ：<code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/project02/.agents/skills/</code></li>
+<li style="margin-bottom:8px;font-size:16px;">然后把 skill02 和 skill04 链进去：
+<ol style="margin-top:8px;margin-bottom:0;font-size:16px;padding-left:32px;padding-right:8px;list-style-type:decimal;">
+<li style="margin-bottom:8px;font-size:16px;"><code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">ln -s ~/A/skills/skill02 ~/project02/.agents/skills/skill02</code></li>
+<li style="margin-bottom:8px;font-size:16px;"><code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">ln -s ~/A/skills/skill04 ~/project02/.agents/skills/skill04</code></li>
+</ol>
+</li>
+<li style="margin-bottom:8px;font-size:16px;">如果使用的是 claude code，还需要给 claude 补一层入口 ：
+<ol style="margin-top:8px;margin-bottom:0;font-size:16px;padding-left:32px;padding-right:8px;list-style-type:decimal;">
+<li style="margin-bottom:8px;font-size:16px;">新建 <code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/project02/.claude/skills/</code></li>
+<li style="margin-bottom:8px;font-size:16px;"><code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/project02/.claude/skills/</code> 指向 <code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">~/project02/.agents/skills</code></li>
+</ol>
+</li>
+</ol>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">这样处理后：</p>
+
+<table style="width:100%;border-collapse:collapse;margin-bottom:32px;font-size:14px;">
+<thead>
+<tr>
+<th style="border:1px solid #ddd;padding:6px 10px;box-sizing:border-box;text-align:left;">项目内的路径</th>
+<th style="border:1px solid #ddd;padding:6px 10px;box-sizing:border-box;text-align:left;">实际指向的位置（原件）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #ddd;padding:6px 10px;box-sizing:border-box;">~/project02/.agents/skills/skill02<br>~/project02/.claude/skills/skill02</td>
+<td style="border:1px solid #ddd;padding:6px 10px;box-sizing:border-box;">~/A/skills/skill02</td>
+</tr>
+<tr>
+<td style="border:1px solid #ddd;padding:6px 10px;box-sizing:border-box;">~/project02/.agents/skills/skill04<br>~/project02//.claude/skills/skill04</td>
+<td style="border:1px solid #ddd;padding:6px 10px;box-sizing:border-box;">~/A/skills/skill04</td>
+</tr>
+</tbody>
+</table>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">这样，project02 里的 skill02、skill04 指向 A 文件里 skill02、skill04<br />在 project02 中改 skill02，改动的源件，电脑中 skill 版本永远保持统一</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">到这里，这套 skill 管理方式的核心就很清楚了：</p>
+
+<ul style="margin-top:0;margin-bottom:32px;font-size:16px;padding-left:32px;padding-right:8px;list-style-type:disc;">
+<li style="margin-bottom:8px;font-size:16px;"><strong style="color:#ff6827;font-weight:700;">skill 原件只保存一份</strong></li>
+<li style="margin-bottom:8px;font-size:16px;"><strong style="color:#ff6827;font-weight:700;">每个项目只按需挂自己需要的 skill</strong></li>
+<li style="margin-bottom:8px;font-size:16px;"><strong style="color:#ff6827;font-weight:700;">不用复制，不怕版本漂移</strong></li>
+<li style="margin-bottom:8px;font-size:16px;"><strong style="color:#ff6827;font-weight:700;">哪个项目缺什么，就给哪个项目补什么</strong></li>
+<li style="margin-bottom:8px;font-size:16px;"><strong style="color:#ff6827;font-weight:700;">原件修一次，所有项目一起受益</strong></li>
+</ul>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">如此一来，agent 每次开工时，我们就能给它提供工具齐全，没有杂物的桌面。</p>
+
+<img src="skill管理思路-perbrand-06.png" style="width:100%;border-radius:8px;margin:0 8px 32px;box-sizing:border-box;display:block;" />
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">桌面越干净，模型越容易把注意力放在当前任务上。任务自然也就完成的越好。</p>
+
+</section>
+
+<div id="wechat-rich-copy-ui" style="position:fixed;right:18px;top:18px;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <button type="button" id="wechat-copy-button" style="border:0;border-radius:999px;background:#059669;color:#fff;font-size:14px;font-weight:700;padding:10px 16px;box-shadow:0 8px 24px rgba(5,150,105,.28);cursor:pointer;">复制到公众号</button>
+  <span id="wechat-copy-status" style="display:block;margin-top:8px;text-align:right;font-size:12px;color:#059669;"></span>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('wechat-copy-button');
+  var status = document.getElementById('wechat-copy-status');
+  function setStatus(text, ok) {
+    status.textContent = text;
+    status.style.color = ok ? '#059669' : '#dc2626';
+    btn.textContent = ok ? '已复制' : '复制失败';
+    window.setTimeout(function() {
+      btn.textContent = '复制到公众号';
+      status.textContent = '';
+    }, 1800);
+  }
+  async function copyRich() {
+    var root = document.getElementById('wechat-copy-root') || document.body.firstElementChild;
+    if (!root) return false;
+    var html = root.outerHTML;
+    var text = root.innerText || root.textContent || '';
+    try {
+      if (navigator.clipboard && window.ClipboardItem) {
+        await navigator.clipboard.write([new ClipboardItem({
+          'text/html': new Blob([html], { type: 'text/html' }),
+          'text/plain': new Blob([text], { type: 'text/plain' })
+        })]);
+        return true;
+      }
+    } catch (err) {}
+    try {
+      var range = document.createRange();
+      range.selectNode(root);
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      var ok = document.execCommand('copy');
+      selection.removeAllRanges();
+      return ok;
+    } catch (err) {
+      return false;
+    }
+  }
+  btn.addEventListener('click', async function() {
+    var ok = await copyRich();
+    setStatus(ok ? '正文富文本已进剪贴板' : '请手动选中正文复制', ok);
+  });
+})();
+</script>

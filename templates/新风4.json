@@ -1,0 +1,189 @@
+{
+  "_meta": {
+    "style_name": "新风4",
+    "source_url": "mp.weixin.qq.com",
+    "article_type": "消费文化观察 / 图文随笔（年轻人爆改风油精）",
+    "visual_style": "图片化设计：开头是设计好的整版 PNG 大标题（『01 风油精 年轻人爱疯了』焊在像素里），正文以浅绿描边（rgb(168,229,138)）大配图为主、文字极简——15px 黑字 + 2px 字距，墨绿强调，居中灰色图注。可克隆的 CSS 很薄，视觉门面在图里。"
+  },
+
+  "container": {
+    "description": "根容器：正文区最外层基础排版。文章里 99% 的文字字号/字体/行高/字距都从这里继承——正文 body_text 的 span 才显式重复这串，但根容器是真正的样式源头（事实取自占比最高的正文 span ×132）。块级 wrapper 只负责左右 16px 留白。",
+    "tag": "section",
+    "style": {
+      "font-size": "15px",
+      "color": "rgba(0, 0, 0, 0.9)",
+      "font-family": "mp-quote, \"PingFang SC\", system-ui, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", \"Hiragino Sans GB\", \"Microsoft YaHei UI\", \"Microsoft YaHei\", Arial, sans-serif",
+      "line-height": "1.6",
+      "letter-spacing": "0.034em",
+      "font-style": "normal",
+      "font-weight": "normal"
+    },
+    "sample": ""
+  },
+
+  "body_text": {
+    "description": "正文段落。块级 wrapper 是 <p style='margin:0px 16px'>（同款也出现为 <section style='margin:0px 16px'>），左右各 16px 边距、无其他装饰；内部文字 span 重复根容器那串排版并额外加 letter-spacing:2px（中文加宽字距是本风格的标志）。套用时段落文字包 inner_run 的 style、外层 <p> 包 block 的 style。",
+    "tag": "p",
+    "style": {
+      "margin": "0px 16px"
+    },
+    "inner_run": {
+      "font-size": "15px",
+      "color": "rgba(0, 0, 0, 0.9)",
+      "font-family": "mp-quote, \"PingFang SC\", system-ui, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", \"Hiragino Sans GB\", \"Microsoft YaHei UI\", \"Microsoft YaHei\", Arial, sans-serif",
+      "line-height": "1.6",
+      "letter-spacing": "2px",
+      "font-style": "normal",
+      "font-weight": "normal"
+    },
+    "sample": "曾经，打工人信奉的是“出门在外，身份是自己给的”，在职场上先得学会立人设。"
+  },
+
+  "heading_label": {
+    "description": "分节/收尾用的加粗行内标签——本文唯一具备『标题视觉角色』的元素（文章没有任何大字号 h1/h2，h2 标签是空 <br> 占位、非真标题；真正的大标题被做成了开头那张 hero_image PNG）。形态是正文段里一段 font-weight:bold 的 inline run（如『ENDING：』『【今日话题】』），靠加粗 + 多半居中独占一行来分节，字号仍是 15px。套用时：只有用户内容确有『分节标签 / 小标题』语义才用；纯粹是把一行字加粗，序号/步骤语义不要硬塞。",
+    "tag": "span",
+    "style": {
+      "letter-spacing": "2px",
+      "font-weight": "bold"
+    },
+    "block_when_centered": {
+      "margin": "0px 16px",
+      "text-align": "center"
+    },
+    "sample": "【今日话题】"
+  },
+
+  "highlight_green": {
+    "description": "墨绿色高亮强调：正文里把金句/观点片段染成深绿（rgb(64,118,0)）的 inline run，全文出现 18 次，是本风格唯一的强调色（呼应配图的浅绿边框）。仍带 2px 字距、字号继承。套用时包在用户想强调的句子上。",
+    "tag": "span",
+    "style": {
+      "letter-spacing": "2px",
+      "color": "rgb(64, 118, 0)"
+    },
+    "sample": "最通透的年轻人，把风油精盘成了时尚单品。"
+  },
+
+  "hero_image": {
+    "description": "★ 开头图片化大标题：整版设计好的 PNG，标题文字『01 风油精 年轻人爱疯了』焊死在像素里。位于正文最顶端、居中、无描边（区别于下方正文配图的浅绿边框）——这是整篇的视觉门面。单独登记为 hero 组件，不与正文配图混。CSS 能复刻的只有『居中 section + margin:0 16px』这一薄层，标题设计本身在图里。原图真实地址已抓进 SRC 槽位。",
+    "skeleton": "<section style=\"text-align: center;margin: 0px 16px;\"><img src=\"{{HERO_SRC}}\" type=\"block\" /></section>",
+    "slots": {
+      "HERO_SRC": {
+        "from": "开头整版设计大标题图地址",
+        "when": "图片化标题文章必有",
+        "example": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTKD9j1Sft9ibu7NTVdF16L8ZLrpbH4gceA3SlwSaDic8c3Wppj4OTOYnWwf4jg883icCM3NyzGib0rwEjU9dfia0uIVvpXaTmgbh0SU/640?wx_fmt=jpeg&from=appmsg",
+        "is_image": true,
+        "src": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTKD9j1Sft9ibu7NTVdF16L8ZLrpbH4gceA3SlwSaDic8c3Wppj4OTOYnWwf4jg883icCM3NyzGib0rwEjU9dfia0uIVvpXaTmgbh0SU/640?wx_fmt=jpeg&from=appmsg"
+      }
+    },
+    "structure_rules": [
+      "★ 图里的大标题文字是焊死在像素里的——这张图带的是参考文章的标题『01 风油精 年轻人爱疯了』。复刻同篇=可嵌原图 src；套新内容=必须换成你自己的标题设计图，绝不能直接搬（搬过来标题字就是错的）。提取只负责抓住 src + 标 is_image，用不用是套用时用户决定。",
+      "本 skill 克隆的是 CSS 排版；这篇视觉门面在图片里，能克隆的 CSS 仅『居中 section + margin:0 16px』。",
+      "hero 无 border（与正文配图不同），保持 text-align:center。"
+    ],
+    "sample": "（开头整版设计标题图：01 风油精 年轻人爱疯了）"
+  },
+
+  "image_block": {
+    "description": "★ 正文配图块：<section> 居中包一张带浅绿实线边框（rgb(168,229,138) 1px solid + 透明底）的图。三种尺寸形态——①满宽图 width:100%；②定高图带固定 width/height（如 546x832、546x748、544x768 等）；③原生尺寸图无宽高。共 22 张正文配图，每张真实 src 都已抓在 SRC 槽位的 sources 列表里。",
+    "skeleton": "<section style=\"text-align: center;margin: 0px 16px;box-sizing: border-box;\"><img src=\"{{IMAGE}}\" style=\"border-color: rgb(168, 229, 138);border-style: solid;border-width: 1px;background-color: transparent;box-sizing: border-box;\" /></section>",
+    "slots": {
+      "IMAGE": {
+        "from": "用户 md 里的图片 ![[x.png]]；复刻同篇时取下方 sources 里对应的真实 src",
+        "when": "用户该处有配图才出现",
+        "example": "https://mmbiz.qpic.cn/mmbiz_jpg/ciaicT8K5iceTK2FI3fMRZmoIgUyGdpAOfNaTvgWXPVsUAial4kczQ6tlXlxeThx9JSntYUm1MVauJYo5ic2AXiaWOLtINrZWcicLx78icT6elgbO6E/640?wx_fmt=jpeg",
+        "is_image": true,
+        "sources": [
+          "https://mmbiz.qpic.cn/mmbiz_jpg/ciaicT8K5iceTK2FI3fMRZmoIgUyGdpAOfNaTvgWXPVsUAial4kczQ6tlXlxeThx9JSntYUm1MVauJYo5ic2AXiaWOLtINrZWcicLx78icT6elgbO6E/640?wx_fmt=jpeg",
+          "https://mmbiz.qpic.cn/mmbiz_jpg/ciaicT8K5iceTLWDFHTPKWiaJLqfyDHoTXycdlfjOkvfrk8cSvHFPUXMYqp3qnBSXz3J4EWU1YgOLqIXOutXPHQJTa0ps9sB7cYI86gNHDicQeN8/640?wx_fmt=jpeg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTLErpuvAH8kdriazMOr39vEJ1WRICibibHaL4AdQnLRQ0yxkmXrrOy8ZpjHaTP24hzv5nnBknCdDJ5pmSm52y4So27SRr4WaicKzqQ/640?wx_fmt=jpeg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTIWLnpHuSzWkibWMqgdwIanR1EN6VPDkQHcUYFNnr8eVYTh27nXyp0t6r3KzSiaRXnHo2YBT73599OXQRcaMKWQIjBE5RSibiaOtuY/640?wx_fmt=jpeg&from=appmsg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTIru8pOTrU3AjhUeYia68eHllfcd7jHps5Ou2WHgsibu9h7eAE1f4icicNzOpfzcXyahgpMIs7QSX6uhFm56dBy8g2P2MukxsuIpCc/640?wx_fmt=jpeg&from=appmsg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTIUO0mORwtk7q8qYEnyMsQpbvjlvCa5gaPgicsLmMdZsWLTdB17kX0bESibwCNzX38dTib3I8lIARI5tU3ViaUdbbmj1OtCEQG4788/640?wx_fmt=jpeg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTKu6QgxquBR65PoiajNrEmvAbkoLicS7h87yMO00kqj2Yk3UZwjsqNydPtyBxuXaZbOXAIlYJbzkOdA8m0VFdr2tX9gLw7nNVc44/640?wx_fmt=jpeg&from=appmsg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTL2uHZQPLm8EkcaESPH8obPwUmgibxeRhwmGym49qbmK0x7LjCh0Ou6ibV8bialLlLkHZCyhUr4a76uX1N7icMticgzPBwXT0WzmWMs/640?wx_fmt=jpeg&from=appmsg",
+          "https://mmbiz.qpic.cn/mmbiz_jpg/ciaicT8K5iceTJrYSPW8NzbvcX80pKLs7zInPw0SIGSKoVGPUx4kEOsH8LetkJ0ibbXf9o51thLKjd64CuYjWziambORd2fRUlMZQNibrl26sgCTM/640?wx_fmt=jpeg&from=appmsg",
+          "https://mmbiz.qpic.cn/mmbiz_jpg/ciaicT8K5iceTLTyS8iaDePJRtqVujicbmbct6rO02rqAiawwUZibYHLXibXcjjx9uEQmuElLOm3mmXISFIfKj9aDTjknal9J1D9MKqXUnNr7MnZj5w/640?wx_fmt=jpeg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTLhzhKdGiaCa2p9XIJUibiaKFz0kiaSSVv4iaR5AjcroFTpUFAYNsFkbx1wtr1iciaJwNE1wOico6bHicUuV8ND1XQ7iaBcZpomAa6tkAYdU/640?wx_fmt=jpeg",
+          "https://mmbiz.qpic.cn/mmbiz_jpg/ciaicT8K5iceTKN3qcSZjpibLdicb6icyBhsianB4l8AfeyIKYjEu6ficd0TuxvxCh9l8oBEjsqmRddYbpNeXib8icpAHa9qfic0ROxCmvR3kDHsYOr0Rc/640?wx_fmt=jpeg&from=appmsg",
+          "https://mmbiz.qpic.cn/mmbiz_jpg/ciaicT8K5iceTI4wR8GZbBazeXs9Ayfnx87mZyGowf7Rb8icbdXAVgGCIicsbh3rkcibjFbojsbDgpTYzicEBibGFZRDyQvGPwSb9ibb7u4766b1YSQs/640?wx_fmt=jpeg&from=appmsg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTJfh3jhPoO4phHqAUSOq0P2tibXZD3II2TLqIp2Uh45kSSOK5oupKuNZ8OdmchBQ5ouoiaI9mlvaeumXicZfVIKc6yibzeMEydRdN8/640?wx_fmt=jpeg",
+          "https://mmbiz.qpic.cn/mmbiz_jpg/ciaicT8K5iceTJzEIJTibOIPVKzf9NPqP2K3q5vTAbyJIIYT7vQp5PMKy1XncU2vBe3twblxl4kibficIjfxbpAgJOwBETuznxEkJiccFbQ3JZznWw/640?wx_fmt=jpeg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTIxtAMdnZjSo4IQ4NfNTCUGxG92mk5l6UI8POBm2U5eItwhQsicYXfxic7aaELibw03xjLL6EKyNNP3h92jRN0ydCzSjnP4csiap8Y/640?wx_fmt=jpeg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTJwE1Zl6EXZOKprLZG9SJibuVvCYCU51Z0icyqV5eHv4rlLIRIPUf6FCcycgnCVGDZkPNdtqnqBxwIodMVbicsvNtxfBLwG5vnrNA/640?wx_fmt=jpeg&from=appmsg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTKQZ5OXNBXyDR18jE0ic8rcSMdpzFbN7uqFAWrvY8gFamRKjwSMia4e7gb36vA3EFHX77xct8lzQzVUwhia6pBTYUfjLWa8NkOc6E/640?wx_fmt=jpeg&from=appmsg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTLBw1wbatI0MI1jP78ynPL1olxHPib6AsPDH8DL2oMPhStvZzlO39pOAOEfm5wHOFn8E4m9EJV3L6F5U0qxW2Uf4HxXOBTn5BI4/640?wx_fmt=jpeg&from=appmsg",
+          "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ciaicT8K5iceTIc7ndPjgTibRWQSKE0csfJ06YnezCib7FnShMyILr8BhdRSbiaKHbZUmLcwYqwfzTUdKLNaLWLu7WWxjADEhp8dmfm879dl1aJv0/640?wx_fmt=jpeg",
+          "https://mmbiz.qpic.cn/mmbiz_jpg/ciaicT8K5iceTKLhpnibevmJqwarb0LxBcf4h0cSpx7rFJ4iceVYjPStjVEzJE3p7Lpdj8lqQEgp2oI85Ybwtk99ISe6Iqlgyicauu9gIlfYr0Qcw/640?wx_fmt=jpeg",
+          "https://mmbiz.qpic.cn/mmbiz_jpg/ciaicT8K5iceTJPxhv2GiaIboYUJ5N3WicB4aFllDzg3cWm102bvny2ucdILSGiau009BRnWAY5V9S0CV7scT7uiaP7T3dgbKhqTQ0XUda5Rt2vPto/640?wx_fmt=jpeg&from=appmsg"
+        ]
+      }
+    },
+    "structure_rules": [
+      "外层 <section> 必须 text-align:center 居中、margin:0px 16px、box-sizing:border-box。",
+      "<img> 保留浅绿边框三件套 border-color/-style/-width 与 background-color:transparent，补 box-sizing:border-box。",
+      "尺寸不固定：满宽图原文用 width:100%；定高图保留原 width/height 像素（如 width:546px;height:832px）；部分图无宽高（原生尺寸）。套用户内容时按用户图实际选其一，浅绿边框样式不变。",
+      "★ is_image：图里若带文字/截图/特定画面，那是参考文章的素材，原图 src 已抓在 sources 列表。复刻同篇→可嵌对应 src；套新内容→换用户自己的图或留占位，默认问用户、不擅自塞原图，也不复用原尺寸。"
+    ],
+    "sample": "（正文中央的浅绿描边大配图，共 22 张）"
+  },
+
+  "image_caption": {
+    "description": "图注 / 图源说明：配图下方一行，灰色（rgb(136,136,136)）14px（比正文小一号）的 inline run，文字形如『图源：xxx』。块级 wrapper 同 body_text 用 <p style='margin:0px 16px'>（偶尔居中）。套用时只有用户给了图片来源/说明才出现，参考的署名（图源：银河海盗舰长 等）不进产出。",
+    "tag": "span",
+    "style": {
+      "font-size": "14px",
+      "color": "rgb(136, 136, 136)",
+      "letter-spacing": "2px",
+      "font-family": "mp-quote, \"PingFang SC\", system-ui, -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", \"Hiragino Sans GB\", \"Microsoft YaHei UI\", \"Microsoft YaHei\", Arial, sans-serif",
+      "line-height": "1.6",
+      "font-style": "normal",
+      "font-weight": "normal"
+    },
+    "sample": "图源：银河海盗舰长"
+  },
+
+  "author_profile": {
+    "description": "文末作者名片：<section> 内嵌 <mp-common-profile> 公众号自动卡片（空自定义元素，内容由公众号后台自动渲染，原文里无任何可提取的内联样式）。非排版资产、不承载用户文字——套用时一般直接省略，留它仅为忠实记录原文结构。",
+    "skeleton": "<section style=\"margin-bottom: 0px;margin-left: 16px;margin-right: 16px;box-sizing: border-box;\"><mp-common-profile></mp-common-profile></section>",
+    "slots": {},
+    "structure_rules": [
+      "<mp-common-profile> 是微信平台专属的自动名片组件，套到用户内容时通常整块省略（用户内容无对应物）。",
+      "外层 <section> 若保留则维持 margin-left/right:16px、margin-bottom:0px、box-sizing:border-box。"
+    ],
+    "sample": "（公众号作者名片，自动渲染）"
+  },
+
+  "footer_topic": {
+    "description": "文末互动区：居中『【今日话题】』加粗标签 + 一句话题问句（沿用 heading_label 的加粗 inline run + 居中块）。【今日话题】是与内容无关的纯版式标签，可作常量直出；问句必须换成用户自己内容。",
+    "skeleton": "<p style=\"margin: 0px 16px;text-align: center;\"><span style=\"font-size: 15px;\"><span style=\"color: rgba(0, 0, 0, 0.9);font-family: mp-quote, &quot;PingFang SC&quot;, system-ui, -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;line-height: 1.6;letter-spacing: 0.034em;font-style: normal;font-weight: normal;\"><span style=\"letter-spacing: 2px;font-weight: bold;\">{{TOPIC_LABEL}}</span></span></span></p><p style=\"margin: 0px 16px;text-align: center;\"><span style=\"font-size: 15px;\"><span style=\"color: rgba(0, 0, 0, 0.9);font-family: mp-quote, &quot;PingFang SC&quot;, system-ui, -apple-system, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;line-height: 1.6;letter-spacing: 0.034em;font-style: normal;font-weight: normal;\"><span style=\"letter-spacing: 2px;\">{{TOPIC_QUESTION}}</span></span></span></p>",
+    "slots": {
+      "TOPIC_LABEL": {"from": "纯版式标签，与内容无关——固定为『【今日话题】』", "when": "文末互动区", "example": "【今日话题】", "default": "【今日话题】"},
+      "TOPIC_QUESTION": {"from": "用户为本文设计的互动问句", "when": "文末互动区", "example": "你开始用风油精了吗？"}
+    },
+    "structure_rules": [
+      "TOPIC_LABEL 是与内容无关的纯版式标签（章节名类），可作常量直出，故给 default。",
+      "TOPIC_QUESTION 必须换成用户自己内容的问句，参考问句『你开始用风油精了吗？』不进产出。",
+      "无 border/padding，纯文字居中。"
+    ],
+    "sample": "【今日话题】 / 你开始用风油精了吗？"
+  },
+
+  "footer_gif": {
+    "description": "文末装饰动图（引导关注 gif），居中、无描边。真实地址已抓进 GIF_SRC。",
+    "skeleton": "<section style=\"text-align: center;margin-bottom: 0px;margin-left: 16px;margin-right: 16px;\"><img src=\"{{GIF_SRC}}\" type=\"block\" /></section>",
+    "slots": {
+      "GIF_SRC": {
+        "from": "文末引导关注动图地址",
+        "when": "有文末引导图时",
+        "example": "https://mmbiz.qpic.cn/mmbiz_gif/rrBWOSuXd7JfVFOO2wNS14F8pz9XNq17icxVAUJpUr9Fd0u7icz4u5xen6x7ia9WpsP6aoEJvpWM3QjKrPibKF4qQA/640?wx_fmt=gif",
+        "is_image": true,
+        "src": "https://mmbiz.qpic.cn/mmbiz_gif/rrBWOSuXd7JfVFOO2wNS14F8pz9XNq17icxVAUJpUr9Fd0u7icz4u5xen6x7ia9WpsP6aoEJvpWM3QjKrPibKF4qQA/640?wx_fmt=gif"
+      }
+    },
+    "structure_rules": [
+      "参考的引导图带的是参考公众号的二维码/品牌，套新内容必须换成用户自己的，默认问用户。",
+      "居中、无 border。"
+    ],
+    "sample": "（文末关注引导动图）"
+  }
+}

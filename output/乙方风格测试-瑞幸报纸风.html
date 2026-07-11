@@ -141,3 +141,54 @@
 <p style="margin-left:32px;margin-right:32px;">
 <span style="font-size:14px">你以为买的是洋货，实则是桃酥的变体。甚至有桃酥门徒开始反向操作，把曲奇称为</span><span style="font-size:20px;background-color:rgb(217, 33, 66);color:rgb(255, 255, 255);font-weight:bold">&nbsp; "洋桃酥" &nbsp;</span><span style="font-size:14px">。</span>
 </p>
+
+<div id="wechat-rich-copy-ui" style="position:fixed;right:18px;top:18px;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <button type="button" id="wechat-copy-button" style="border:0;border-radius:999px;background:#059669;color:#fff;font-size:14px;font-weight:700;padding:10px 16px;box-shadow:0 8px 24px rgba(5,150,105,.28);cursor:pointer;">复制到公众号</button>
+  <span id="wechat-copy-status" style="display:block;margin-top:8px;text-align:right;font-size:12px;color:#059669;"></span>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('wechat-copy-button');
+  var status = document.getElementById('wechat-copy-status');
+  function setStatus(text, ok) {
+    status.textContent = text;
+    status.style.color = ok ? '#059669' : '#dc2626';
+    btn.textContent = ok ? '已复制' : '复制失败';
+    window.setTimeout(function() {
+      btn.textContent = '复制到公众号';
+      status.textContent = '';
+    }, 1800);
+  }
+  async function copyRich() {
+    var root = document.getElementById('wechat-copy-root') || document.body.firstElementChild;
+    if (!root) return false;
+    var html = root.outerHTML;
+    var text = root.innerText || root.textContent || '';
+    try {
+      if (navigator.clipboard && window.ClipboardItem) {
+        await navigator.clipboard.write([new ClipboardItem({
+          'text/html': new Blob([html], { type: 'text/html' }),
+          'text/plain': new Blob([text], { type: 'text/plain' })
+        })]);
+        return true;
+      }
+    } catch (err) {}
+    try {
+      var range = document.createRange();
+      range.selectNode(root);
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      var ok = document.execCommand('copy');
+      selection.removeAllRanges();
+      return ok;
+    } catch (err) {
+      return false;
+    }
+  }
+  btn.addEventListener('click', async function() {
+    var ok = await copyRich();
+    setStatus(ok ? '正文富文本已进剪贴板' : '请手动选中正文复制', ok);
+  });
+})();
+</script>

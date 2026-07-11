@@ -1,0 +1,146 @@
+{
+  "_meta": {
+    "style_name": "莫兰迪",
+    "source_reference": "用户提供的 Q-CAFE 咖啡包装标签截图",
+    "article_type": "轻量信息型长文 / 公众号文章",
+    "visual_style": "直角莫兰迪便签：斜体编号标题、米白纸面、深色文字、主题色下划线和同色高亮。",
+    "accent_palettes": {
+      "mint": "#c6dfd5",
+      "lavender": "#c4c0e1",
+      "yellow": "#f7d879"
+    },
+    "kami_constraints": [
+      "每篇文章只选一种主题色，并同步给标题编号、小标题下划线与高亮。",
+      "不使用渐变、硬阴影、圆角卡片或无语义装饰。",
+      "层级通过字号、字重、留白和细横线建立。",
+      "图片保持原比例，使用米灰细框，不为了填满版面裁切。",
+      "列表保留原生语义，内容只来自用户文章。"
+    ]
+  },
+  "container": {
+    "description": "文章纸面根容器。米白背景、16px 深色正文，左右留白与包装标签一致。",
+    "tag": "section",
+    "style": {
+      "max-width": "677px",
+      "margin": "0 auto",
+      "background": "#faf7ee",
+      "font-family": "Charter, Georgia, \"Songti SC\", \"STSong\", \"Noto Serif CJK SC\", serif",
+      "font-size": "16px",
+      "color": "#3d3d3a",
+      "line-height": "1.7",
+      "padding": "0 28px",
+      "box-sizing": "border-box"
+    },
+    "sample": ""
+  },
+  "heading_h1": {
+    "description": "一级标题。标题前按出现顺序标记 01、02，编号为斜体；标题保持在暖白纸面上。",
+    "skeleton": "<section style=\"padding:30px 0 10px;margin:0 0 26px;box-sizing:border-box;\"><i style=\"display:inline-block;font-size:16px;line-height:1;font-weight:700;color:#c6dfd5;margin-right:12px;vertical-align:middle;\">01</i><span style=\"display:inline;font-size:26px;line-height:1.2;font-weight:700;color:#3d3d3a;overflow-wrap:anywhere;\">{{TITLE}}</span></section>",
+    "slots": {
+      "TITLE": {
+        "from": "用户 Markdown 的一级标题",
+        "when": "文章有一级标题时",
+        "example": "把一篇文章排成清晰的阅读标签"
+      }
+    },
+    "structure_rules": [
+      "标题编号、小标题下划线和正文高亮必须使用同一种主题色。",
+      "不要在标题前后加入长条色块；保持直角，不加圆角、渐变和阴影。",
+      "外层有 padding，已包含 box-sizing:border-box。"
+    ],
+    "sample": "顶部单色色带标题"
+  },
+  "body_text": {
+    "description": "正文段落。16px 深色文字，1.7 行高，段落间使用 20px 留白。",
+    "tag": "p",
+    "style": {
+      "font-size": "16px",
+      "line-height": "1.7",
+      "margin": "0 0 20px",
+      "color": "#3d3d3a"
+    },
+    "sample": "正文在米白纸面上保持清晰、安静的阅读节奏。"
+  },
+  "heading_h2": {
+    "description": "正文分节标题。标题文字下方使用主题色细下划线，并保留足够留白。",
+    "tag": "h2",
+    "style": {
+      "font-size": "20px",
+      "font-weight": "700",
+      "line-height": "1.25",
+      "margin": "32px 0 16px",
+      "padding-bottom": "7px",
+      "border-bottom": "3px solid #c6dfd5",
+      "color": "#3d3d3a"
+    },
+    "sample": "正文分节标题"
+  },
+  "highlight": {
+    "description": "同色高亮。背景与顶部色带一致，默认示例为薄荷绿；套用时按所选主题色同步替换。",
+    "tag": "mark",
+    "style": {
+      "background": "#c6dfd5",
+      "color": "#3d3d3a",
+      "padding": "1px 3px",
+      "font-weight": "700"
+    },
+    "sample": "需要被读者记住的句子"
+  },
+  "blockquote": {
+    "description": "引用块。左侧 3px 主题色线条，不使用底色卡片。",
+    "tag": "blockquote",
+    "style": {
+      "border-left": "3px solid #c6dfd5",
+      "margin": "20px 0",
+      "padding": "4px 0 4px 14px",
+      "color": "#595954",
+      "background": "transparent"
+    },
+    "sample": "一句值得单独停留的引用。"
+  },
+  "code_block": {
+    "description": "代码块。灰色顶栏圆点、白色代码区、6px 圆角和淡灰阴影；代码本身使用 Menlo 优先等宽字体。",
+    "tag": "pre",
+    "style": {
+      "background": "#ffffff",
+      "border": "0",
+      "padding": ".6em 1em 1em",
+      "margin": "0",
+      "font-size": "13px",
+      "line-height": "1.6",
+      "white-space": "pre-wrap",
+      "word-break": "break-word",
+      "overflow-wrap": "anywhere",
+      "font-family": "Menlo, Monaco, Consolas, \"Courier New\", monospace",
+      "box-sizing": "border-box"
+    },
+    "sample": "const palette = 'mint';"
+  },
+  "list_item": {
+    "description": "原生列表项。保留 Markdown 的项目符号与编号，项间距 8px。",
+    "tag": "li",
+    "style": {
+      "margin": "0 0 8px",
+      "line-height": "1.7"
+    },
+    "sample": "一个清楚的要点。"
+  },
+  "image_block": {
+    "description": "正文图片。4px 圆角，无边框；淡色阴影需跟随当前主题色，保持完整比例。",
+    "skeleton": "<section style=\"text-align:center;box-sizing:border-box;\"><img src=\"{{IMAGE}}\" style=\"display:block;max-width:100%;height:auto;margin:1.5em auto;border:0;border-radius:4px;padding:0;background:transparent;box-shadow:rgba(198,223,213,.32) 0 2px 4px;box-sizing:border-box;\" /></section>",
+    "slots": {
+      "IMAGE": {
+        "from": "用户 Markdown 里的图片 ![[x.png]]",
+        "when": "该位置存在配图时",
+        "example": "用户图片",
+        "is_image": true
+      }
+    },
+    "structure_rules": [
+      "图片不使用外框；阴影颜色随当前主题色同步变化。",
+      "图片保留 height:auto，不裁切，不复用参考图素材。",
+      "外层与图片均已使用 box-sizing:border-box。"
+    ],
+    "sample": "（带细框的正文图片）"
+  }
+}

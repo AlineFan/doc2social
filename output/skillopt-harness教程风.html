@@ -1,0 +1,140 @@
+<section style="font-family:PingFangSC-light;font-size:16px;color:#000000;text-align:left;box-sizing:border-box;">
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">你有没有过这种时刻——</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">给 AI 写一段指令，让它按你的要求干活。结果不对。改一句，再试。还是不对。删掉重写，改到第八版，它依然在某个地方倔强地不听话。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">这件事有个名字，叫「调提示词」。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">几乎每个认真用过 AI 的人都干过。你写的那份 <code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">CLAUDE.md</code>、那段系统提示、那个让 AI「先这样再那样」的文档——本质上都是在手动调它。靠的是什么？手感。改完跑一遍，感觉好点就留下，感觉不对就再改。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">微软最近发了个东西，叫 <code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">SkillOpt</code>。它第一次把「调提示词」这件事，从手感变成了训练。</p>
+
+<p style="text-align:center;color:#ccc;margin:32px 0;">· · ·</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">论文作者是微软研究院的 Yifan Yang。他那条发布推文里有一句话，我觉得是整件事的题眼：</p>
+
+<blockquote style="margin-top:0;margin-bottom:32px;font-size:16px;padding:12px;border-left:3px solid #111111;background:#f3f3f3;color:#111111;margin-left:8px;margin-right:8px;">
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:0px;font-size:16px;line-height:1.75;text-indent:0;">Train the skill, not the model.（训练技能，而不是训练模型。）</p>
+</blockquote>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">怎么理解这句话？</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">想象你在带一个运动员。让他变强有两条老路：一条是改造他的身体——这相当于「微调模型」，又贵又像黑箱，换个人就不管用了。另一条是你站在场边喊「你这样不对，应该那样」——这就是我们现在手动调提示词，全凭你当时的判断。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">SkillOpt 走的是第三条：它不动运动员的身体（模型权重一个字节都不改），它专门训练那本<strong style="color:#ff6827;font-weight:700;">训练手册</strong>。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">怎么训练？让运动员按现在的手册实战一批任务，记录全过程，复盘哪几场输了、为什么输，然后对手册做几处小修改——加一句、删一句、或者改一句。改完之后，<strong style="color:#ff6827;font-weight:700;">只有在一批没见过的新题上真的考得更好，这次修改才算数</strong>，否则直接退回。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">一轮一轮这样跑下来，最后交给你一份文件，叫 <code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">best_skill.md</code>。三百到两千个字，不大。你拿去用的时候，它不需要任何额外开销，就是一份能直接读的文档。</p>
+
+<p style="text-align:center;color:#ccc;margin:32px 0;">· · ·</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">数字是真的有点吓人。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">在一个叫 SpreadsheetBench 的电子表格任务上，GPT-5.5 原本的成绩是 41.8 分。用了 SkillOpt 优化出来的技能文档之后，<strong style="color:#ff6827;font-weight:700;">80.7 分</strong>。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">41.8 是什么概念？不及格，一半题做不对。80.7 是什么概念？优秀。中间没换更强的模型，没加任何训练数据，就改了一份几百字的文档。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">办公文档类的任务，从 33.1 到 72.1。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">在 52 组「不同模型 × 不同任务 × 不同运行环境」的组合里，SkillOpt 全部第一或并列第一。被它压过去的，包括人工精心调出来的提示词、一次性让强模型生成的提示词，还有几个学术界专门做这件事的方法。</p>
+
+<p style="text-align:center;color:#ccc;margin:32px 0;">· · ·</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">这点最戳我。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">一个 5.4 万粉的 AI 博主 VincentLogic 拆完这篇论文，说了一句特别实在的话：</p>
+
+<blockquote style="margin-top:0;margin-bottom:32px;font-size:16px;padding:12px;border-left:3px solid #111111;background:#f3f3f3;color:#111111;margin-left:8px;margin-right:8px;">
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:0px;font-size:16px;line-height:1.75;text-indent:0;">对那些天天手动调 prompt 调到头秃的人来说，这个东西等于把调参这件事自动化了。</p>
+</blockquote>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">调到头秃。你品品这四个字，是不是你本人。</p>
+
+<p style="text-align:center;color:#ccc;margin:32px 0;">· · ·</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">但顺着这个往下说，有个限制我必须讲清楚，因为它和能力一样重要。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">SkillOpt 能自动优化的前提是——<strong style="color:#ff6827;font-weight:700;">你的任务得能打分</strong>。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">电子表格、数学题这类，对就是对，错就是错，机器能自己判断「这次改得好不好」，所以它能像验证答案一样，把没用的修改全部拦下来。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">可如果你的活儿是写文案、做设计、定策略呢？</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">「这版更好」这件事本身就是吵不清的。同一篇文章，十个人有十个看法。机器当不了这个裁判——你让 AI 来打分，它给的分跟人的真实判断只有七八成对得上。在这个吻合度下跑自动优化，最后训练出来的是「AI 评委喜欢的东西」，不一定是你真正想要的。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">所以<strong style="color:#ff6827;font-weight:700;">先想清楚「什么叫好」，才谈得上「怎么变好」</strong>。这不是 SkillOpt 的毛病，是「让机器自动评判」这件事本身的天花板。</p>
+
+<p style="text-align:center;color:#ccc;margin:32px 0;">· · ·</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">如果你手上正好有能打分的活儿，这工具今天就能用：GitHub 搜 SkillOpt，<code style="background:#f2f2f2;color:#111111;font-size:14px;padding:2px 6px;border-radius:4px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;">pip install skillopt</code>，MIT 开源，免费。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">但就算你暂时用不上，我觉得这件事更大的意义，VincentLogic 那条推文的结尾说得最透：</p>
+
+<blockquote style="margin-top:0;margin-bottom:32px;font-size:16px;padding:12px;border-left:3px solid #111111;background:#f3f3f3;color:#111111;margin-left:8px;margin-right:8px;">
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:0px;font-size:16px;line-height:1.75;text-indent:0;">竞争的胜负手，正在从「谁的模型更大」，悄悄变成「谁更懂自己的活儿，并能把它清清楚楚地写下来」。</p>
+</blockquote>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">你写给 AI 的每一份指令，从今天起可以换个眼光看了。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">它不是一份用完即弃的说明书。它是你这门手艺的沉淀，是一份能被训练、能被打磨、甚至能传给别人用的资产。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">模型是大厂的。但「你那份越调越好的文档」，是你的。</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:32px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">论文：arxiv.org/abs/2605.23904</p>
+
+<p style="margin:0px;padding:0px;box-sizing:border-box;margin-top:0px;margin-bottom:0px;font-size:16px;line-height:1.75;text-indent:0;padding-left:8px;padding-right:8px;">代码：github.com/microsoft/SkillOpt</p>
+
+</section>
+
+<div id="wechat-rich-copy-ui" style="position:fixed;right:18px;top:18px;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <button type="button" id="wechat-copy-button" style="border:0;border-radius:999px;background:#059669;color:#fff;font-size:14px;font-weight:700;padding:10px 16px;box-shadow:0 8px 24px rgba(5,150,105,.28);cursor:pointer;">复制到公众号</button>
+  <span id="wechat-copy-status" style="display:block;margin-top:8px;text-align:right;font-size:12px;color:#059669;"></span>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('wechat-copy-button');
+  var status = document.getElementById('wechat-copy-status');
+  function setStatus(text, ok) {
+    status.textContent = text;
+    status.style.color = ok ? '#059669' : '#dc2626';
+    btn.textContent = ok ? '已复制' : '复制失败';
+    window.setTimeout(function() {
+      btn.textContent = '复制到公众号';
+      status.textContent = '';
+    }, 1800);
+  }
+  async function copyRich() {
+    var root = document.getElementById('wechat-copy-root') || document.body.firstElementChild;
+    if (!root) return false;
+    var html = root.outerHTML;
+    var text = root.innerText || root.textContent || '';
+    try {
+      if (navigator.clipboard && window.ClipboardItem) {
+        await navigator.clipboard.write([new ClipboardItem({
+          'text/html': new Blob([html], { type: 'text/html' }),
+          'text/plain': new Blob([text], { type: 'text/plain' })
+        })]);
+        return true;
+      }
+    } catch (err) {}
+    try {
+      var range = document.createRange();
+      range.selectNode(root);
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      var ok = document.execCommand('copy');
+      selection.removeAllRanges();
+      return ok;
+    } catch (err) {
+      return false;
+    }
+  }
+  btn.addEventListener('click', async function() {
+    var ok = await copyRich();
+    setStatus(ok ? '正文富文本已进剪贴板' : '请手动选中正文复制', ok);
+  });
+})();
+</script>

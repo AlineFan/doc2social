@@ -26,6 +26,7 @@ output/**/*.png
 
 # Node/Bun（render-xshots 依赖：playwright-core + marked，可 bun install 重装）
 node_modules/
+__pycache__/
 
 # xshots 输出目录（3:4 截图，可重新生成）
 xshots/

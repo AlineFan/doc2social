@@ -118,7 +118,7 @@
 
   /* ── 正文 ── */
   .article-body {
-    padding: 0 48px;
+    padding: 0 16px;
     font-size: 17px;
     line-height: 1.75;
     color: #0f1419;
@@ -223,12 +223,12 @@
 
 <!-- ③ 横幅图 -->
 <div class="banner" id="banner-wrap">
-  <img id="banner-img" src="{{BANNER_URL}}" alt="" style="display:none"/>
+  <img id="banner-img" src="file:///private/tmp/claude-502/-Users-doushun-Desktop-workspace-proj04-obsidian-publisher/16563a12-8599-4759-9743-783d868317fb/scratchpad/banner.png" alt="" style="display:none"/>
   <div class="banner-placeholder" id="banner-placeholder">No banner image</div>
 </div>
 
 <!-- ④ 文章标题 -->
-<h1 class="article-title" id="article-title">how to be good at research</h1>
+<h1 class="article-title" id="article-title">Skill 装太多，Agent 反而变笨</h1>
 
 <!-- ⑤ 统计行 -->
 <div class="stats-row">
@@ -259,11 +259,158 @@
 
 <!-- ⑥ 正文（示例内容，会被替换） -->
 <div class="article-body" id="article-body">
-  <p>nobody really teaches you research. you get a desk, a problem someone else picked, and a vague instruction to produce something novel. so most people reverse-engineer the job from what they can see, which is papers, threads, and announcements, and what they end up learning is how to look like a researcher rather than how to be one. the actual skill is a stack of smaller skills, and almost every one of them can be deliberately trained.</p>
+<ul>
+<li>skill 太多会带来 <strong>噪声、误触发、上下文占用</strong></li>
+<li>解决方法： skill统一管理，项目级按需软链skill</li>
+</ul>
+<h1>为什么 skill 还没调用，就已经开始占上下文了</h1>
+<p>Agent 在工作时有一个上下文窗口，你可以把它想象成 claudecode /codex 的办公桌，办公桌的桌面大小 （上下文窗口）是有限的。</p>
+<p><img src="file:///Users/doushun/%E6%9C%AC%E5%9C%B0%E6%96%87%E7%A8%BF/Obsidian%20Vault/%E3%80%901%E3%80%91WAY2AI/%E3%80%901.2%E3%80%91%E6%B2%89%E6%B7%80%E7%AC%94%E8%AE%B0/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-illustrations/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-perbrand-01.png" alt=""></p>
+<p>每次开启一个会话，用户发出第一条消息，harness 就会给模型塞一堆信息，其中就包括skiLL的列表和摘要（skill name +descriptions）。</p>
+<p>以claude为例，启动+ 用户发出第一条消息时，harness和claude 模型之间的数据交互</p>
+<pre><code>用户
+  ↓
+Claude Code harness
+  ├─ 【1】读取 CLAUDE.md
+  ├─ 【2】读取 auto memory
+  ├─ 【3】发现的 skill列表（按需加载，本次发出的是name+descriptions） / commands / hooks / MCP
+  ├─ 【4】处理权限与工具调用
+  └─ 把用户消息和以上模块一起，组装上下文发给模型
+  ↓
+Claude 模型
+  ├─ 判断是否需要某个 skill
+  ├─ 决定是否调用工具
+  └─ 生成回复 / 工具调用
+  ↓
+Claude Code harness 执行并回传
+</code></pre>
+<p>skill 列表 中的 name + description </p>
+<pre><code>- adapt: Adapt designs to work across different screen sizes...
+-  animate: Review a feature and enhance it with purposeful animations...
+-  animejs: Anime.js adapter patterns for HyperFrames...
+- audit: Perform comprehensive audit of interface quality......
+- 【100个 skill 的名称+描述，在用户发出第一条消息时，就和用户消息组装一起，发给了模型】
+</code></pre>
+<p>如果我们安装了100个skill，放在全局。</p>
+<p>即使这一次会话中只用到了1个skill，这100个skill的列表和摘要 ，也会在会话之初，就由harness 摆在了模型的工作台上。</p>
+<p><img src="file:///Users/doushun/%E6%9C%AC%E5%9C%B0%E6%96%87%E7%A8%BF/Obsidian%20Vault/%E3%80%901%E3%80%91WAY2AI/%E3%80%901.2%E3%80%91%E6%B2%89%E6%B7%80%E7%AC%94%E8%AE%B0/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-illustrations/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-perbrand-02.png" alt=""></p>
+<p>虽然单个skill的内容不多，但架不住量大。</p>
+<p>用不到的skill 会默默占据上下文窗口，消耗token 。</p>
+<p>随着会话变长，agent 会更容易“忘”你前面说过的话。</p>
+<ul>
+<li>旧信息离当前轮次越来越远</li>
+<li>新信息不断堆上来</li>
+<li>上下文窗口有限</li>
+<li>所以前面的关键信息更容易被噪声淹没</li>
+</ul>
+<p>为了方便理解，我们可以用数字做示意：</p>
+<pre><code>第 1 轮
+- harness 注入：1111
+- 用户消息：2222
+- 模型本轮看到：1111 + 2222
 
-  <h2>pick your own problems</h2>
+第 2 轮
+- 模型上一轮回复：3333
+- 模型本轮可追溯的上下文近似变成：1111 + 2222 + 3333
 
-  <p>richard hamming had a habit at bell labs that made him unpopular at lunch. he'd ask whoever sat near him what the important problems in their field were, then ask why they weren't working on them. people changed tables. the question stings because most of us have no good answer. we don't choose problems, we absorb them, from an advisor, from whatever a big lab announced last quarter, from the paper everyone is quote-tweeting this week.</p>
+第 3 轮
+- 用户新消息：4444
+- 模型本轮看到：1111 + 2222 + 3333 + 4444
+
+第 4 轮
+- 模型新回复：5555
+- 模型本轮可追溯的上下文近似变成：1111 + 2222 + 3333 + 4444 + 5555
+</code></pre>
+<p>如果会话继续增长，前面的 1111、2222 会越来越“远”。
+如果 1111 本身就很臃肿，比如里面混了大量的 skill 描述、工具菜单、无关规则，真正重要的部分就更容易被冲淡。</p>
+<p><img src="file:///Users/doushun/%E6%9C%AC%E5%9C%B0%E6%96%87%E7%A8%BF/Obsidian%20Vault/%E3%80%901%E3%80%91WAY2AI/%E3%80%901.2%E3%80%91%E6%B2%89%E6%B7%80%E7%AC%94%E8%AE%B0/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-illustrations/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-perbrand-03.png" alt=""></p>
+<p>当然，实际上下文并不一定是“原封不动无限累加”；不同 agent 可能会做裁剪、压缩、摘要或分层加载。  但从最终结果是一样的：**会话越长，早期信息越容易失真、弱化或被挤出窗口</p>
+<p>此外，skill 太多，还会让agent 在该调用A的时候用了B，在该调用的时候不调用，或者在不该调用的时候误触发。这个也很好理解，桌面越乱，找东西就越难。</p>
+<p><img src="file:///Users/doushun/%E6%9C%AC%E5%9C%B0%E6%96%87%E7%A8%BF/Obsidian%20Vault/%E3%80%901%E3%80%91WAY2AI/%E3%80%901.2%E3%80%91%E6%B2%89%E6%B7%80%E7%AC%94%E8%AE%B0/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-illustrations/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-perbrand-04.png" alt=""></p>
+<h1>怎么解决</h1>
+<p>有些skill使用频次不高，删除肯定不合适，但不删每次加载又都很浪费。</p>
+<p>baoyu 大佬提供了一个思路：skil放到一个仓库统一管理端，claude / codex 新建项目时，按需从全局 skill 仓库，<strong>为单个 skill 建一个软链接</strong>。</p>
+<p>备注：如果skill数量不多，放在全局就可以。</p>
+<p><img src="file:///Users/doushun/%E6%9C%AC%E5%9C%B0%E6%96%87%E7%A8%BF/Obsidian%20Vault/%E3%80%901%E3%80%91WAY2AI/%E3%80%901.2%E3%80%91%E6%B2%89%E6%B7%80%E7%AC%94%E8%AE%B0/%E6%88%AA%E5%B1%8F2026-06-28%2003.13.40.png" alt=""></p>
+<p>可以把软链接理解成“快捷方式” </p>
+<p>项目里看起来像有这个 skill，实际上文件本体仍然只保存在统一仓库里。</p>
+<p><img src="file:///Users/doushun/%E6%9C%AC%E5%9C%B0%E6%96%87%E7%A8%BF/Obsidian%20Vault/%E3%80%901%E3%80%91WAY2AI/%E3%80%901.2%E3%80%91%E6%B2%89%E6%B7%80%E7%AC%94%E8%AE%B0/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-illustrations/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-perbrand-05.png" alt=""></p>
+<p>这样做的好处是：</p>
+<ol>
+<li>原件更新一次，所有项目同步生效</li>
+<li>项目里改 skill，本质上改的是原件</li>
+<li>不会在不同项目里出现多份 skill 副本，避免版本漂移</li>
+</ol>
+<h2>1 skill的位置</h2>
+<p>要理解这个，首先以claude 、codex 为例，skill 有2个位置，</p>
+<p>一个是用户级，所有项目都能看到</p>
+<blockquote>
+<p>claude code中用户级skill 位置：~/.claude/skills/
+codex中用户级skill 位置： ~/.codex/skills/ </p>
+</blockquote>
+<p>一个是项目级，只有这个项目才能看到</p>
+<blockquote>
+<p>~/project01/.agents/skills</p>
+</blockquote>
+<h2>2 具体操作</h2>
+<p>【以下软链操作，我们可以通过自然语言，让AI去做】</p>
+<p>建一个文件夹 A，把所有的skill保存在文件夹中。这些agent的存储路径就是 ：</p>
+<blockquote>
+<p>~/A/skills/skill01
+~/A/skills/skill02
+~/A/skills/skill03
+~/A/skills/skill04</p>
+</blockquote>
+<p>当我们要新建项目project02，需要用到skill02 和 skill04，我们就可以：</p>
+<blockquote>
+<ol>
+<li>创建project02，项目地址是：~/project02</li>
+<li>在~/project02里建skill ：~/project02/.agents/skills/</li>
+<li>然后把skill02 和 skill04 链进去： <ol>
+<li>ln -s ~/A/skills/skill02 ~/project02/.agents/skills/skill02</li>
+<li>ln -s ~/A/skills/skill04 ~/project02/.agents/skills/skill04</li>
+</ol>
+</li>
+<li>如果使用的是claude code，还需要给claude 补一层入口 ：<ol>
+<li>新建 ~/project02/.claude/skills/ </li>
+<li>~/project02/.claude/skills/  指向 ~/project02/.agents/skill</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>这样处理后，project02里的skill02、skill04 指向 A文件里 skill02、skill04
+在project02中改skill02，改动的源件，电脑中skill版本永远保持统一。</p>
+<table>
+<thead>
+<tr>
+<th>项目内的路径</th>
+<th>实际指向的位置（原件）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>~/project02/.agents/skills/skill02<br>~/project02/.claude/skills/skill02</td>
+<td>~/A/skills/skill02</td>
+</tr>
+<tr>
+<td>~/project02/.agents/skills/skill04<br>~/project02//.claude/skills/skill04</td>
+<td>~/A/skills/skill04</td>
+</tr>
+</tbody></table>
+<p>到这里，这套 skill 管理方式的核心就很清楚了：</p>
+<ul>
+<li><strong>skill 原件只保存一份</strong></li>
+<li><strong>每个项目只按需挂自己需要的 skill</strong></li>
+<li><strong>不用复制，不怕版本漂移</strong></li>
+<li><strong>哪个项目缺什么，就给哪个项目补什么</strong></li>
+<li><strong>原件修一次，所有项目一起受益</strong></li>
+</ul>
+<p>如此一来，agent 每次开工时，我们就能给它提供工具齐全，没有杂物的桌面。</p>
+<p><img src="file:///Users/doushun/%E6%9C%AC%E5%9C%B0%E6%96%87%E7%A8%BF/Obsidian%20Vault/%E3%80%901%E3%80%91WAY2AI/%E3%80%901.2%E3%80%91%E6%B2%89%E6%B7%80%E7%AC%94%E8%AE%B0/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-illustrations/skill%E7%AE%A1%E7%90%86%E6%80%9D%E8%B7%AF-perbrand-06.png" alt=""></p>
+<p>桌面越干净，模型越容易把注意力放在当前任务上。任务自然也就完成的越好。</p>
+<p>最后，本篇的skill管理方法，来自于宝玉 @dotey 大佬</p>
+<p><img src="file:///Users/doushun/%E6%9C%AC%E5%9C%B0%E6%96%87%E7%A8%BF/Obsidian%20Vault/%E3%80%901%E3%80%91WAY2AI/%E3%80%901.2%E3%80%91%E6%B2%89%E6%B7%80%E7%AC%94%E8%AE%B0/%E6%88%AA%E5%B1%8F2026-06-28%2015.58.03.png" alt=""></p>
+<p>原贴在此 <a href="https://x.com/dotey/status/2069632132431929651">https://x.com/dotey/status/2069632132431929651</a></p>
+
 </div>
 
 <div class="article-end"></div>
@@ -271,7 +418,7 @@
 <script>
 // ── 模板变量（由 proj04 渲染时替换，浏览器调试时为占位符） ──
 const TPL = {
-  bannerUrl:   '{{BANNER_URL}}',
+  bannerUrl:   'file:///private/tmp/claude-502/-Users-doushun-Desktop-workspace-proj04-obsidian-publisher/16563a12-8599-4759-9743-783d868317fb/scratchpad/banner.png',
   avatarUrl:   '{{AVATAR_URL}}',
   displayName: '{{DISPLAY_NAME}}',
   handle:      '{{HANDLE}}',
@@ -331,5 +478,57 @@ if (title) document.getElementById('article-title').textContent = title;
 const body = tplOrParam('body', '');
 if (body) document.getElementById('article-body').innerHTML = body;
 </script>
+
+<div id="wechat-rich-copy-ui" style="position:fixed;right:18px;top:18px;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;">
+  <button type="button" id="wechat-copy-button" style="border:0;border-radius:999px;background:#059669;color:#fff;font-size:14px;font-weight:700;padding:10px 16px;box-shadow:0 8px 24px rgba(5,150,105,.28);cursor:pointer;">复制到公众号</button>
+  <span id="wechat-copy-status" style="display:block;margin-top:8px;text-align:right;font-size:12px;color:#059669;"></span>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('wechat-copy-button');
+  var status = document.getElementById('wechat-copy-status');
+  function setStatus(text, ok) {
+    status.textContent = text;
+    status.style.color = ok ? '#059669' : '#dc2626';
+    btn.textContent = ok ? '已复制' : '复制失败';
+    window.setTimeout(function() {
+      btn.textContent = '复制到公众号';
+      status.textContent = '';
+    }, 1800);
+  }
+  async function copyRich() {
+    var root = document.getElementById('wechat-copy-root') || document.body.firstElementChild;
+    if (!root) return false;
+    var html = root.outerHTML;
+    var text = root.innerText || root.textContent || '';
+    try {
+      if (navigator.clipboard && window.ClipboardItem) {
+        await navigator.clipboard.write([new ClipboardItem({
+          'text/html': new Blob([html], { type: 'text/html' }),
+          'text/plain': new Blob([text], { type: 'text/plain' })
+        })]);
+        return true;
+      }
+    } catch (err) {}
+    try {
+      var range = document.createRange();
+      range.selectNode(root);
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      var ok = document.execCommand('copy');
+      selection.removeAllRanges();
+      return ok;
+    } catch (err) {
+      return false;
+    }
+  }
+  btn.addEventListener('click', async function() {
+    var ok = await copyRich();
+    setStatus(ok ? '正文富文本已进剪贴板' : '请手动选中正文复制', ok);
+  });
+})();
+</script>
+
 </body>
 </html>
