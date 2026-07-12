@@ -67,6 +67,11 @@
   .showcase-card figcaption span:last-child{color:var(--accent-deep);font-size:11px;font-weight:700;letter-spacing:.04em}
   .showcase-action{margin-top:24px;font-size:14px;font-weight:600;color:var(--accent);cursor:pointer}
   .showcase-action:hover{text-decoration:underline}
+  .gzh-showcase{margin-top:52px;padding-top:44px;border-top:1px solid var(--line)}
+  .gzh-showcase .showcase-intro{margin-bottom:24px}
+  .gzh-showcase .showcase-intro h3{font-family:var(--serif);font-size:27px;line-height:1.2;color:var(--text);font-weight:600;margin:0}
+  .gzh-wall{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+  .gzh-card img{aspect-ratio:1/1;object-fit:cover;object-position:top}
   .themestrip{display:flex;flex-wrap:wrap;gap:8px}
   .chip{font-family:var(--mono);font-size:12.5px;padding:7px 13px;border:1px solid var(--line);color:var(--muted)}
   .note{font-size:14.5px;color:var(--text);line-height:1.8;margin:26px 0 0;max-width:66ch;background:rgba(111,144,121,.08);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:16px 18px}
@@ -83,6 +88,9 @@
     .showcase-wall{columns:2 150px;column-gap:10px}
     .showcase-card{margin-bottom:10px}
     .showcase-card figcaption{padding:9px;font-size:11px}
+    .gzh-showcase{margin-top:40px;padding-top:34px}
+    .gzh-showcase .showcase-intro h3{font-size:24px;margin-bottom:12px}
+    .gzh-wall{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   }
   .toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:0 0 auto;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--surface)}
   .toolbar .grp{display:flex;align-items:center;gap:6px}
@@ -390,6 +398,20 @@
       <figure class="showcase-card"><img src="assets/xhs-showcase/dot-paper.png" alt="点阵纸小红书卡片导出效果"><figcaption><span>点阵纸</span><span>3:4</span></figcaption></figure>
     </div>
     <div class="showcase-action" data-go="xhs">打开小红书渲染器 →</div>
+    <div class="gzh-showcase">
+      <div class="showcase-intro">
+        <div><div class="eyebrow">公众号 · 5 款套版</div><h3>复制前，先看样式</h3></div>
+        <p>同一篇文章的真实首屏。标题、重点、代码块和图片都会按套版原样进入公众号编辑器。</p>
+      </div>
+      <div class="gzh-wall" aria-label="公众号真实排版效果">
+        <figure class="showcase-card gzh-card"><img src="assets/gzh-showcase/green-tech.png" alt="绿色科技公众号排版首屏"><figcaption><span>绿色科技</span><span>HTML</span></figcaption></figure>
+        <figure class="showcase-card gzh-card"><img src="assets/gzh-showcase/pingfang-weekly.png" alt="苹方周刊公众号排版首屏"><figcaption><span>苹方周刊</span><span>HTML</span></figcaption></figure>
+        <figure class="showcase-card gzh-card"><img src="assets/gzh-showcase/ink-minimal.png" alt="极简墨白公众号排版首屏"><figcaption><span>极简墨白</span><span>HTML</span></figcaption></figure>
+        <figure class="showcase-card gzh-card"><img src="assets/gzh-showcase/code-minimal.png" alt="极简代码公众号排版首屏"><figcaption><span>极简代码</span><span>HTML</span></figcaption></figure>
+        <figure class="showcase-card gzh-card"><img src="assets/gzh-showcase/morandi.png" alt="莫兰迪公众号排版首屏"><figcaption><span>莫兰迪</span><span>HTML</span></figcaption></figure>
+      </div>
+      <div class="showcase-action" data-go="gzh">打开公众号渲染器 →</div>
+    </div>
   </div></section>
   <section class="block"><div class="wrap"><h2>公众号套版</h2><div class="themestrip">
     <span class="chip">绿色科技</span><span class="chip">苹方周刊</span><span class="chip">极简墨白</span><span class="chip">极简代码</span><span class="chip">莫兰迪</span>
