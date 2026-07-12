@@ -112,7 +112,7 @@
   #xhsCard.tpl-min .xname{font-size:18px;font-weight:700;color:#1a1a1a}
   #xhsCard.tpl-min .xdate{font-size:14px;color:#9aa0aa;margin-top:3px;font-family:var(--sans)}
   #xhsCard.tpl-min .xbanner{margin:0 48px 26px;border-radius:14px;overflow:hidden}
-  #xhsCard.tpl-min .article-body{padding:0 48px 44px;font-size:19px;line-height:1.95;color:#1a1a1a;word-break:break-word}
+  #xhsCard.tpl-min .article-body{padding:0 48px 38px;font-size:19px;line-height:1.95;color:#1a1a1a;word-break:break-word}
   #xhsCard.tpl-min .article-body p{margin:0 0 24px}
   #xhsCard.tpl-min .article-body h1{font-size:25px;font-weight:700;margin:6px 0 18px;line-height:1.35}
   #xhsCard.tpl-min .article-body h2{font-size:21px;font-weight:700;margin:32px 0 14px}
@@ -127,6 +127,7 @@
   #xhsCard.tpl-min .article-body ul,#xhsCard.tpl-min .article-body ol{padding-left:26px;margin:0 0 24px}
   #xhsCard.tpl-min .article-body li{margin:0 0 10px}
   #xhsCard.tpl-min .article-body img{width:100%;display:block;border-radius:12px;margin:18px 0}
+  #xhsCard.tpl-min .article-end{height:0}
   /* X长文（X 全套 chrome）*/
   #xhsCard.tpl-x{color:#0f1419;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC",sans-serif}
   #xhsCard.tpl-x .pinned-bar{display:flex;align-items:center;gap:9px;padding:38px 16px 8px;color:#536471;font-size:13px;font-weight:500}
@@ -152,7 +153,7 @@
   #xhsCard.tpl-x .stat-num{font-weight:700;color:#0f1419}
   #xhsCard.tpl-x .stat-label{color:#536471}
   #xhsCard.tpl-x .stat-divider{width:1px;height:16px;background:#eff3f4;flex-shrink:0}
-  #xhsCard.tpl-x .article-body{padding:0 48px 44px;font-size:17px;line-height:1.75;color:#0f1419;word-break:break-word}
+  #xhsCard.tpl-x .article-body{padding:0 48px 38px;font-size:17px;line-height:1.75;color:#0f1419;word-break:break-word}
   #xhsCard.tpl-x .article-body p{margin:0 0 20px}
   #xhsCard.tpl-x .article-body h1{font-size:26px;font-weight:800;margin:26px 0 12px}
   #xhsCard.tpl-x .article-body h2{font-size:22px;font-weight:800;margin:28px 0 12px}
@@ -168,6 +169,162 @@
   #xhsCard.tpl-x .article-body ul,#xhsCard.tpl-x .article-body ol{padding-left:24px;margin:0 0 20px}
   #xhsCard.tpl-x .article-body li{margin:0 0 8px}
   #xhsCard.tpl-x .article-body img{width:100%;display:block;border-radius:12px;margin:16px 0;border:1px solid #eff3f4}
+  #xhsCard.tpl-x .article-end{height:0}
+
+  /* 莫兰迪：参考包装标签的直角色带、米白纸面与细横线 */
+  .coffee-swatches{display:none;align-items:center;gap:6px}
+  .coffee-swatches.on{display:flex}
+  .coffee-swatch{width:18px;height:18px;padding:0;border:1px solid rgba(0,0,0,.16);border-radius:0;background:var(--swatch);cursor:pointer}
+  .coffee-swatch.on{outline:2px solid var(--text);outline-offset:2px}
+  #xhsCard.tpl-coffee{--coffee-accent:#c6dfd5;background:#faf7ee;border:0;color:#3d3d3a;font-family:Charter,Georgia,"Songti SC","STSong","Noto Serif CJK SC",serif}
+  #xhsCard.tpl-coffee .coffee-head{background:var(--coffee-accent);padding:34px 48px 28px;display:flex;flex-direction:column;gap:36px;box-sizing:border-box}
+  #xhsCard.tpl-coffee .coffee-title{max-width:none;margin:0;font-size:34px;font-weight:700;letter-spacing:0;line-height:1.18;overflow-wrap:anywhere}
+  #xhsCard.tpl-coffee .coffee-byline{display:flex;justify-content:space-between;align-items:end;width:100%;font-size:17px;font-weight:600;line-height:1.3}
+  #xhsCard.tpl-coffee .coffee-byline span{font-size:17px;font-weight:500}
+  #xhsCard.tpl-coffee .coffee-author{display:flex;align-items:center;gap:12px}
+  #xhsCard.tpl-coffee .coffee-avatar{width:46px;height:46px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#faf7ee;border:1px solid rgba(61,61,58,.16);font-size:18px;font-weight:700;flex:0 0 46px}
+  #xhsCard.tpl-coffee .coffee-avatar img{width:100%;height:100%;object-fit:cover}
+  #xhsCard.tpl-coffee .article-body{padding:22px 48px 18px;font-size:18px;line-height:1.58;word-break:break-word}
+  #xhsCard.tpl-coffee .article-body p{margin:0 0 18px}
+  #xhsCard.tpl-coffee .article-body h1{font-size:28px;line-height:1.15;margin:28px 0 14px}
+  #xhsCard.tpl-coffee .article-body h2{font-size:22px;line-height:1.2;margin:30px 0 14px;padding-top:18px;border-top:1px solid #dedbd1}
+  #xhsCard.tpl-coffee .article-body h3{font-size:18px;line-height:1.3;margin:24px 0 12px}
+  #xhsCard.tpl-coffee .article-body strong{font-weight:800}
+  #xhsCard.tpl-coffee .article-body mark{background:var(--coffee-accent);color:#111;padding:1px 3px}
+  #xhsCard.tpl-coffee .article-body blockquote{margin:0 0 18px;padding:4px 0 4px 14px;border-left:3px solid var(--coffee-accent);color:#34312c}
+  #xhsCard.tpl-coffee .article-body blockquote p{margin:0}
+  #xhsCard.tpl-coffee .morandi-code{margin:1.5em 0;overflow:hidden;border:1px solid rgba(0,0,0,.08);border-radius:6px;background:#fafafa;box-shadow:rgba(140,140,160,.08) 0 1px 4px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace}
+  #xhsCard.tpl-coffee .morandi-code-head{display:block;padding:4px 10px;font-size:15px;line-height:1;letter-spacing:2px;color:#bbb;background:#f2f2f2;border-bottom:1px solid rgba(0,0,0,.04)}
+  #xhsCard.tpl-coffee .article-body code{background:transparent;border:0;padding:0;font-size:12px;font-family:Menlo,Monaco,Consolas,"Courier New",monospace;color:#383a42}
+  #xhsCard.tpl-coffee .article-body pre{background:#fff;border:0;padding:.6em 1em 1em;margin:0;font-size:14px;line-height:1.7;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;font-family:Menlo,Monaco,Consolas,"Courier New",monospace}
+  #xhsCard.tpl-coffee .article-body pre code{background:transparent;border:0;padding:0}
+  #xhsCard.tpl-coffee .article-body ul,#xhsCard.tpl-coffee .article-body ol{padding-left:24px;margin:0 0 18px}
+  #xhsCard.tpl-coffee .article-body li{margin:0 0 8px}
+  #xhsCard.tpl-coffee .article-body img{display:block;width:100%;height:auto;margin:1.5em 0;border:0;border-radius:4px;padding:0;background:transparent;box-shadow:var(--coffee-image-shadow,rgba(198,223,213,.3)) 0 2px 4px;box-sizing:border-box}
+  #xhsCard.tpl-coffee .coffee-footer{display:flex;align-items:center;justify-content:center;border-top:1px solid #dedbd1;padding:14px 48px 16px;font-size:13px;line-height:1.35;color:#444039}
+  #xhsCard.tpl-coffee .coffee-footer strong{font-weight:700;color:#171512}
+  #xhsCard.tpl-coffee .article-end{height:0}
+
+  /* 信笺系列：纸张材质与留白服务于长文阅读，所有内容仍来自 Markdown。 */
+  .letter-swatches{display:none;align-items:center;gap:6px}
+  .letter-swatches.on{display:flex}
+  .letter-swatch{width:18px;height:18px;padding:0;border:1px solid rgba(0,0,0,.16);border-radius:0;background:var(--swatch);cursor:pointer}
+  .letter-swatch.on{outline:2px solid var(--text);outline-offset:2px}
+  .letter-fonts{display:none;align-items:center;gap:2px;border:1px solid var(--line)}
+  .letter-fonts.on{display:flex}
+  .letter-font{font:inherit;font-size:12px;padding:5px 8px;border:0;border-left:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;line-height:1}
+  .letter-font:first-child{border-left:0}
+  .letter-font.on{background:var(--text);color:var(--surface)}
+  #xhsCard.tpl-tea{--tea-paper:#ebe7dc;--tea-ink:#2e2c28;--tea-line:#bdb7aa;--tea-outer:#050505;background:var(--tea-outer);padding:48px 24px;border:0;color:var(--tea-ink);font-family:Georgia,"Songti SC","STSong",serif;display:flex;flex-direction:column}
+  #xhsCard.tpl-tea .letter-sheet{position:relative;min-height:790px;padding:48px 30px 24px;background-color:var(--tea-paper);background-image:radial-gradient(rgba(62,55,46,.15) .7px,transparent .8px);background-size:13px 13px;box-sizing:border-box;display:flex;flex-direction:column;flex:1}
+  #xhsCard.tpl-tea .letter-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:18px;border-bottom:1px solid var(--tea-line);padding-bottom:17px}
+  #xhsCard.tpl-tea .letter-index{display:block;font-size:12px;letter-spacing:.08em;margin-bottom:20px}
+  #xhsCard.tpl-tea .letter-title{margin:0;max-width:none;font-size:33px;font-weight:600;line-height:1.18;letter-spacing:0;word-break:normal;overflow-wrap:normal;text-wrap:pretty}
+  #xhsCard.tpl-tea .letter-date{font-size:12px;line-height:1.4;white-space:nowrap}
+  #xhsCard.tpl-tea .article-body{padding:17px 0 0;font-size:17px;line-height:1.75;word-break:break-word}
+  #xhsCard.tpl-tea .article-body p{margin:0 0 19px}
+  #xhsCard.tpl-tea .article-body h1{font-size:25px;margin:28px 0 14px;line-height:1.2}
+  #xhsCard.tpl-tea .article-body h2{font-size:20px;margin:34px 0 14px;line-height:1.25}
+  #xhsCard.tpl-tea .article-body h3{font-size:17px;margin:26px 0 10px;line-height:1.3}
+  #xhsCard.tpl-tea .article-body strong{font-weight:700}
+  #xhsCard.tpl-tea .article-body mark{background:transparent;color:inherit;padding:0;border-bottom:2px solid currentColor}
+  #xhsCard.tpl-tea .article-body blockquote{margin:0 0 20px;padding:2px 0 2px 14px;border-left:1px solid var(--tea-line);color:inherit}
+  #xhsCard.tpl-tea .article-body blockquote p{margin:0}
+  #xhsCard.tpl-tea .article-body code{font-family:var(--mono);font-size:13px;background:rgba(255,255,255,.24);padding:2px 4px}
+  #xhsCard.tpl-tea .article-body pre{font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;margin:0 0 20px;padding:13px;background:rgba(255,255,255,.24);border:1px solid var(--tea-line)}
+  #xhsCard.tpl-tea .article-body pre code{background:transparent;padding:0}
+  #xhsCard.tpl-tea .article-body ul,#xhsCard.tpl-tea .article-body ol{padding-left:22px;margin:0 0 20px}
+  #xhsCard.tpl-tea .article-body li{margin:0 0 7px}
+  #xhsCard.tpl-tea .article-body img{display:block;width:100%;height:auto;margin:20px 0;border:1px solid var(--tea-line);padding:5px;box-sizing:border-box}
+  #xhsCard.tpl-tea .letter-foot{margin-top:auto;padding-top:14px;border-top:1px dashed var(--tea-line);text-align:center;font-size:11px;font-style:normal;color:var(--tea-ink)}
+  #xhsCard.tpl-tea .letter-foot strong{font-weight:700}
+  #xhsCard.tpl-tea .article-end{height:0}
+  #xhsCard.tpl-tea.tea-kaiti{font-family:"Kaiti SC","STKaiti","KaiTi","BiauKai",serif}
+  #xhsCard.tpl-tea.tea-kaiti .letter-title{font-size:38px;font-weight:600;line-height:1.16}
+  #xhsCard.tpl-tea.tea-kaiti .article-body{font-size:20px;line-height:1.72}
+  #xhsCard.tpl-tea.tea-kaiti .article-body h1{font-size:29px;font-weight:600}
+  #xhsCard.tpl-tea.tea-kaiti .article-body h2{font-size:24px;font-weight:600}
+
+  #xhsCard.tpl-walnut{background:#675548;padding:46px 24px;border:0;color:#29231e;font-family:Georgia,"Songti SC","STSong",serif;display:flex;flex-direction:column}
+  #xhsCard.tpl-walnut .walnut-sheet{min-height:820px;padding:48px 38px;background:#efeee5;box-sizing:border-box;display:flex;flex-direction:column;flex:1}
+  #xhsCard.tpl-walnut .walnut-date{display:block;text-align:right;font-size:13px;font-weight:700;line-height:1.3}
+  #xhsCard.tpl-walnut .walnut-title{margin:0 0 36px;font-size:36px;line-height:1.12;font-weight:700;overflow-wrap:anywhere}
+  #xhsCard.tpl-walnut .walnut-title span{display:block;margin-top:24px;font-size:21px;font-weight:600}
+  #xhsCard.tpl-walnut .article-body{padding-left:72px;font-size:17px;line-height:1.72;word-break:break-word}
+  #xhsCard.tpl-walnut .article-body p{margin:0 0 20px}
+  #xhsCard.tpl-walnut .article-body h1{font-size:26px;line-height:1.2;margin:30px 0 15px}
+  #xhsCard.tpl-walnut .article-body h2{font-size:20px;line-height:1.25;margin:34px 0 14px}
+  #xhsCard.tpl-walnut .article-body h3{font-size:17px;line-height:1.3;margin:25px 0 10px}
+  #xhsCard.tpl-walnut .article-body strong{font-weight:700}
+  #xhsCard.tpl-walnut .article-body mark{background:transparent;padding:0;border-bottom:2px solid #8b745d}
+  #xhsCard.tpl-walnut .article-body blockquote{margin:0 0 20px;padding:2px 0 2px 14px;border-left:1px solid #8b745d;color:#575049}
+  #xhsCard.tpl-walnut .article-body blockquote p{margin:0}
+  #xhsCard.tpl-walnut .article-body code{font-family:var(--mono);font-size:13px;background:#e4e1d7;padding:2px 4px}
+  #xhsCard.tpl-walnut .article-body pre{font-family:var(--mono);font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;margin:0 0 20px;padding:13px;background:#e4e1d7;border:1px solid #cbc5b8}
+  #xhsCard.tpl-walnut .article-body pre code{background:transparent;padding:0}
+  #xhsCard.tpl-walnut .article-body ul,#xhsCard.tpl-walnut .article-body ol{padding-left:22px;margin:0 0 20px}
+  #xhsCard.tpl-walnut .article-body li{margin:0 0 7px}
+  #xhsCard.tpl-walnut .article-body img{display:block;width:100%;height:auto;margin:20px 0;border:1px solid #cbc5b8;padding:5px;box-sizing:border-box}
+  #xhsCard.tpl-walnut .walnut-foot{margin-top:auto;padding-top:14px;border-top:1px dashed #cbc5b8;font-size:12px;color:#675548;text-align:center}
+  #xhsCard.tpl-walnut .walnut-foot strong{font-weight:700}
+  #xhsCard.tpl-walnut .article-end{height:0}
+
+  #xhsCard.tpl-rewild{background-color:#e8e4da;background-image:radial-gradient(rgba(87,73,49,.11) .8px,transparent .9px);background-size:14px 14px;border:0;color:#51452e;padding:52px 24px 12px;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+  #xhsCard.tpl-rewild .rewild-head{text-align:left;border-bottom:1px solid rgba(81,69,46,.24);padding:0 4px 28px}
+  #xhsCard.tpl-rewild .rewild-title{margin:0;font-size:38px;line-height:1.14;font-weight:800;letter-spacing:0;overflow-wrap:anywhere}
+  #xhsCard.tpl-rewild .rewild-subtitle{margin:24px 0 0;font-size:19px;line-height:1.15;font-weight:700;color:#998f7c;letter-spacing:.04em}
+  #xhsCard.tpl-rewild .article-body{counter-reset:rewild-section;padding-top:40px;font-size:17px;line-height:1.82;word-break:break-word}
+  #xhsCard.tpl-rewild .article-body p{margin:0 0 22px}
+  #xhsCard.tpl-rewild .article-body h1{font-size:27px;line-height:1.2;margin:32px 0 15px}
+  #xhsCard.tpl-rewild .article-body h2{counter-increment:rewild-section;position:relative;padding-left:42px;font-size:23px;line-height:1.25;margin:38px 0 15px;font-weight:800}
+  #xhsCard.tpl-rewild .article-body h2::before{content:counter(rewild-section);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:#66532d;color:#f4f1e8;font-size:15px;line-height:28px;text-align:center}
+  #xhsCard.tpl-rewild .article-body h3{font-size:18px;line-height:1.3;margin:28px 0 12px;font-weight:800}
+  #xhsCard.tpl-rewild .article-body strong{font-weight:800;border-bottom:2px solid #8d7b57}
+  #xhsCard.tpl-rewild .article-body mark{background:transparent;padding:0;border-bottom:2px solid #8d7b57}
+  #xhsCard.tpl-rewild .article-body blockquote{margin:0 0 22px;padding:3px 0 3px 15px;border-left:2px solid #8d7b57;color:#766b5a}
+  #xhsCard.tpl-rewild .article-body blockquote p{margin:0}
+  #xhsCard.tpl-rewild .article-body code{font-family:var(--mono);font-size:13px;background:rgba(255,255,255,.28);padding:2px 4px}
+  #xhsCard.tpl-rewild .article-body pre{font-family:var(--mono);font-size:13px;line-height:1.65;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;margin:0 0 22px;padding:13px;background:rgba(255,255,255,.28);border:1px solid rgba(81,69,46,.22)}
+  #xhsCard.tpl-rewild .article-body pre code{background:transparent;padding:0}
+  #xhsCard.tpl-rewild .article-body ul,#xhsCard.tpl-rewild .article-body ol{padding-left:24px;margin:0 0 22px}
+  #xhsCard.tpl-rewild .article-body li{margin:0 0 8px}
+  #xhsCard.tpl-rewild .article-body img{display:block;width:100%;height:auto;margin:22px 0;border:1px solid rgba(81,69,46,.22);padding:5px;box-sizing:border-box}
+  #xhsCard.tpl-rewild .rewild-foot{margin-top:24px;padding-top:10px;border-top:1px solid rgba(81,69,46,.24);font-size:12px;letter-spacing:.04em;color:#827966;text-align:center}
+  #xhsCard.tpl-rewild .rewild-foot strong{font-weight:800}
+  #xhsCard.tpl-rewild .article-end{height:0}
+
+  /* 彩色卡：高明度纯色承托一张可切页的宋体小票，保留 Kami 的克制层级。 */
+  .ticket-swatches{display:none;align-items:center;gap:6px}
+  .ticket-swatches.on{display:flex}
+  .ticket-swatch{width:18px;height:18px;padding:0;border:1px solid rgba(0,0,0,.16);border-radius:2px;background:var(--swatch);cursor:pointer}
+  .ticket-swatch.on{outline:2px solid var(--text);outline-offset:2px}
+  .fit-toggle{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);white-space:nowrap;cursor:pointer}
+  .fit-toggle input{width:14px;height:14px;margin:0;accent-color:var(--accent)}
+  #xhsCard.single-card{height:797px;overflow:hidden;box-sizing:border-box}
+  #xhsCard.single-card.tpl-tea .letter-sheet,#xhsCard.single-card.tpl-walnut .walnut-sheet{min-height:0}
+  #xhsCard.tpl-ticket{--ticket-wallpaper:#ffd72e;background:var(--ticket-wallpaper);color:#3d3d3a;padding:32px 20px;box-sizing:border-box;font-family:Charter,Georgia,"Songti SC","STSong","Noto Serif CJK SC",serif}
+  #xhsCard.tpl-ticket .article-end{height:0}
+  #xhsCard.tpl-ticket .ticket-paper{position:relative;background:#fffdf8;padding:30px 29px 0;box-sizing:border-box;min-height:720px;filter:drop-shadow(0 12px 18px rgba(38,32,68,.14));border-bottom:1px solid rgba(61,61,58,.14)}
+  #xhsCard.tpl-ticket .ticket-title{margin:0;font-size:38px;font-weight:700;line-height:1.15;letter-spacing:0;overflow-wrap:anywhere}
+  #xhsCard.tpl-ticket .ticket-author{margin:30px 0 22px;font-size:20px;line-height:1.4;color:#6f6e69}
+  #xhsCard.tpl-ticket .ticket-divider{height:1px;background:#d9d7cf;margin:0 0 32px}
+  #xhsCard.tpl-ticket .article-body{font-size:18px;line-height:1.72;word-break:break-word}
+  #xhsCard.tpl-ticket .article-body p{margin:0 0 20px}
+  #xhsCard.tpl-ticket .article-body h1{font-size:28px;line-height:1.25;margin:34px 0 14px}
+  #xhsCard.tpl-ticket .article-body h2{font-size:22px;line-height:1.3;margin:34px 0 15px;padding-top:16px;border-top:1px dashed #b9b6ad}
+  #xhsCard.tpl-ticket .article-body h3{font-size:19px;line-height:1.35;margin:28px 0 12px}
+  #xhsCard.tpl-ticket .article-body strong{font-weight:700}
+  #xhsCard.tpl-ticket .article-body mark{background:transparent;color:#3d3d3a;padding:0 1px;border-bottom:2px solid rgba(75,191,151,.65)}
+  #xhsCard.tpl-ticket .article-body blockquote{margin:0 0 20px;padding:4px 0 4px 15px;border-left:2px solid #8d8b83;color:#5c5b56}
+  #xhsCard.tpl-ticket .article-body blockquote p{margin:0}
+  #xhsCard.tpl-ticket .article-body code{background:#f4f1e8;padding:2px 5px;font-size:14px;font-family:var(--mono);color:#3d3d3a}
+  #xhsCard.tpl-ticket .article-body pre{background:#f4f1e8;padding:14px;margin:0 0 20px;font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;font-family:var(--mono)}
+  #xhsCard.tpl-ticket .article-body pre code{background:transparent;padding:0}
+  #xhsCard.tpl-ticket .article-body ul,#xhsCard.tpl-ticket .article-body ol{padding-left:24px;margin:0 0 20px}
+  #xhsCard.tpl-ticket .article-body li{margin:0 0 8px}
+  #xhsCard.tpl-ticket .article-body img{display:block;width:100%;height:auto;margin:20px 0;border:1px dashed #aaa79d;padding:7px;box-sizing:border-box}
+  #xhsCard.tpl-ticket .ticket-footer{margin-top:32px;padding:14px 0 16px;border-top:1px solid #d9d7cf;text-align:center;font-family:var(--mono);font-size:11px;line-height:1.4;color:#6f6e69}
+  #xhsCard.tpl-ticket .ticket-footer strong{font-weight:700;color:#3d3d3a}
 
   #drop{position:fixed;inset:0;background:color-mix(in srgb,var(--accent) 8%,transparent);border:2px dashed var(--accent);display:none;align-items:center;justify-content:center;font-family:var(--mono);font-size:16px;color:var(--accent);z-index:50}
   #drop.on{display:flex}
@@ -198,27 +355,27 @@
   <div class="hero">
     <div class="kicker">Obsidian markdown → 社媒成品</div>
     <h1>把笔记，一键变成能直接发的图文。</h1>
-    <p>连上 vault，选套版，实时预览。公众号复制即粘、小红书导出 3:4 长图，正文里的图片自动内嵌，不用再手搓排版。</p>
+    <p>连接 Obsidian，选套版，实时预览。公众号复制即粘、小红书导出 3:4 图文，正文里的图片自动内嵌，不用再手搓排版。</p>
     <div class="cta-row">
       <button class="btn" data-go="gzh">打开 公众号 渲染器</button>
       <button class="btn ghost" data-go="xhs">小红书 长图</button>
     </div>
   </div>
   <section class="block"><div class="wrap"><h2>怎么用</h2><div class="steps">
-    <div class="step"><div class="n">01</div><h3>连接 vault</h3><p>把笔记所在文件夹拖进来，或授权选择。笔记和图片一起进浏览器，全程本地、不上传。</p></div>
-    <div class="step"><div class="n">02</div><h3>选套版渲染</h3><p>公众号 4 款套版、小红书 2 款样式，边改边看。<code style="font-family:var(--mono);font-size:12px">![[图片]]</code> 按文件名自动解析内嵌。</p></div>
-    <div class="step"><div class="n">03</div><h3>复制或导出</h3><p>公众号一键复制粘贴（图自动传素材库）；小红书自动切成 3:4 多页，导出 PNG。</p></div>
+    <div class="step"><div class="n">01</div><h3>连接 Obsidian</h3><p>把 Obsidian 笔记文件夹拖进来，或授权选择。笔记和图片一起进浏览器，全程本地、不上传。</p></div>
+    <div class="step"><div class="n">02</div><h3>选套版渲染</h3><p>公众号 5 款套版、小红书 7 款样式，边改边看。<code style="font-family:var(--mono);font-size:12px">![[图片]]</code> 按文件名自动解析内嵌。</p></div>
+    <div class="step"><div class="n">03</div><h3>复制或导出</h3><p>公众号一键复制粘贴；小红书短文可选单卡 3:4，长文自动切页并导出 PNG。</p></div>
   </div></div></section>
   <section class="block"><div class="wrap"><h2>两个渲染器</h2><div class="renderers">
-    <div class="rcard"><div class="tag">md → 公众号</div><h3>套版 · 复制即粘</h3>
-      <p>把 markdown 套成 inline-style HTML，图片 base64 内嵌，复制进公众号编辑器直接成型。</p>
+    <div class="rcard"><div class="tag">md → 公众号</div><h3>5 款套版 · 复制即粘</h3>
+      <p>把 Markdown 渲染为可粘贴的 inline-style HTML；文章标题不进入正文，正文图片自动内嵌。</p>
       <div class="rprev"><div class="inner" id="prevGzh"></div></div><span class="rlink" data-go="gzh">打开渲染器 →</span></div>
-    <div class="rcard"><div class="tag">md → xhs图文</div><h3>极简风 / X长文 · 自动切页</h3>
-      <p>渲染成小红书长图卡片，长内容自动切成多张 3:4，导出 PNG。头像、banner 可自定义。</p>
+    <div class="rcard"><div class="tag">md → 小红书图文</div><h3>7 款卡片 · 单卡/自动切页</h3>
+      <p>渲染为小红书 3:4 卡片；短文可选单卡，长文自动切成多张 PNG。头像、日期和纸张色调可调整。</p>
       <div class="rprev xhs"><div class="inner" id="prevXhs"></div></div><span class="rlink" data-go="xhs">打开渲染器 →</span></div>
   </div></div></section>
   <section class="block"><div class="wrap"><h2>公众号套版</h2><div class="themestrip">
-    <span class="chip">绿色科技风</span><span class="chip">极简黑白（水墨）</span><span class="chip">椰树风</span><span class="chip">极简(支持代码)</span>
+    <span class="chip">绿色科技</span><span class="chip">苹方周刊</span><span class="chip">极简墨白</span><span class="chip">极简代码</span><span class="chip">莫兰迪</span>
   </div>
     <p class="note">当前网页支持简单模板，想要实现<strong>更复杂的主题格式</strong>，去 <a id="skilllink" href="#" target="_blank" rel="noopener">GitHub</a> 下载 skill（<code>gzh-layout-cloner</code>），提供公众号文章地址，<strong>AI 会自动为你生成套用模板</strong>。</p>
   </div></section>
@@ -234,21 +391,21 @@
 <div id="view-tool" class="view">
   <div class="toolbar">
     <div class="grp">
-      <button class="tb-btn" id="connect" title="Chrome/Edge：授权后可选 vault 里的 .md">连接 vault</button>
+      <button class="tb-btn" id="connect" title="Chrome/Edge：授权后选择 Obsidian 笔记文件夹">连接 Obsidian</button>
       <span class="lbl">或拖文件夹进来</span>
       <select id="mdpick" style="display:none"></select>
     </div>
     <span class="sp"></span>
-    <div class="grp" data-mode="gzh"><span class="lbl">套版</span><select id="theme"></select>
+    <div class="grp" data-mode="gzh"><span class="lbl">套版</span><select id="theme"></select><div class="coffee-swatches" id="gzhCoffeeSwatches" aria-label="莫兰迪颜色"><button class="coffee-swatch" type="button" data-coffee-swatch="mint" style="--swatch:#c6dfd5" title="薄荷绿"></button><button class="coffee-swatch" type="button" data-coffee-swatch="lavender" style="--swatch:#c4c0e1" title="薰衣草紫"></button><button class="coffee-swatch" type="button" data-coffee-swatch="yellow" style="--swatch:#f7d879" title="参考图黄"></button></div>
       <button class="tb-btn primary" id="copy">复制到公众号</button></div>
     <div class="grp" data-mode="xhs" style="display:none">
-      <span class="lbl">样式</span><select id="xhsTpl"><option>极简风</option><option>X长文</option></select>
+      <span class="lbl">样式</span><select id="xhsTpl"><option>极简风</option><option>X长文</option><option value="莫兰迪">莫兰迪</option><option value="渐变票据">彩色卡</option><option value="茶笺">茶色笺</option><option value="胡桃木信笺">胡桃木</option><option value="放生计划">点阵纸</option></select><div class="coffee-swatches" id="xhsCoffeeSwatches" aria-label="莫兰迪颜色"><button class="coffee-swatch" type="button" data-coffee-swatch="mint" style="--swatch:#c6dfd5" title="薄荷绿"></button><button class="coffee-swatch" type="button" data-coffee-swatch="lavender" style="--swatch:#c4c0e1" title="薰衣草紫"></button><button class="coffee-swatch" type="button" data-coffee-swatch="yellow" style="--swatch:#f7d879" title="参考图黄"></button></div><div class="ticket-swatches" id="ticketWallpaperSwatches" aria-label="彩色卡底色"><button class="ticket-swatch" type="button" data-ticket-wallpaper="yellow" style="--swatch:#ffd72e" title="亮黄"></button><button class="ticket-swatch" type="button" data-ticket-wallpaper="violet" style="--swatch:#8173ee" title="亮紫"></button><button class="ticket-swatch" type="button" data-ticket-wallpaper="green" style="--swatch:#39d6a5" title="亮薄荷绿"></button></div><div class="letter-swatches" id="teaToneSwatches" aria-label="茶色笺纸张颜色"><button class="letter-swatch" type="button" data-tea-tone="ivory" style="--swatch:#ebe7dc" title="象牙白"></button><button class="letter-swatch" type="button" data-tea-tone="kraft" style="--swatch:#b78a65" title="做旧牛皮纸"></button></div><div class="letter-fonts" id="teaFontSwitch" aria-label="茶色笺字体"><button class="letter-font" type="button" data-tea-font="serif">衬线</button><button class="letter-font" type="button" data-tea-font="kaiti">书摘体</button></div>
       <span class="lbl">署名</span><input class="field" id="xhsName" value="作者" style="width:56px">
       <input class="field" id="xhsDate" style="width:52px" title="日期 MM/DD">
       <input class="field" id="xhsHandle" value="@yourid" style="width:78px;display:none" title="@handle">
       <button class="tb-btn" id="avBtn" title="上传头像">头像</button>
       <button class="tb-btn" id="bannerBtn" title="换 banner（默认文中第一张图）">banner</button>
-      <button class="tb-btn primary" id="exportPng">导出 3:4 PNG</button>
+      <label class="fit-toggle" title="短文完整装入一张 3:4 卡片时自动启用"><input type="checkbox" id="singleCard"><span>单卡 3:4</span></label><button class="tb-btn primary" id="exportPng">导出 3:4 PNG</button>
       <input type="file" id="avFile" accept="image/*" hidden>
       <input type="file" id="bannerFile" accept="image/*" hidden></div>
   </div>
@@ -272,28 +429,46 @@ document.getElementById('ghlink').href=REPO_URL; document.getElementById('ghlink
 {const sl=document.getElementById('skilllink'); if(sl)sl.href=REPO_URL;}
 
 // 公众号复合件用 inline-block + margin（公众号 paste 会剥 flex/gap，改成它保留的写法）
-// 绿色科技风 底部三连引导卡（固定件，渲染时追加到正文末尾）
+// 绿色科技底部三连引导卡（固定件，渲染时追加到正文末尾）
 const GZH_FOOTER='<section style="background:radial-gradient(circle at center,#F9FAFB 0%,#FFFFFF 100%);border:1px solid #E5E7EB;border-radius:16px;padding:32px 20px;text-align:center;margin:36px 0 4px;box-sizing:border-box"><p style="font-size:13px;font-weight:bold;color:#111827;margin:0 0 20px">既然看到这里了，如果觉得有用，随手点个赞、在看、转发三连吧。</p><section style="display:inline-block;text-align:center;margin:0 10px;vertical-align:top"><span style="display:inline-block;width:40px;height:40px;background:#fff;border:1px solid #F3F4F6;border-radius:12px;box-shadow:0 2px 4px rgba(0,0,0,.05);line-height:40px"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg></span><span style="display:block;font-size:10px;font-weight:600;color:#6B7280;margin-top:6px">点赞</span></section><section style="display:inline-block;text-align:center;margin:0 10px;vertical-align:top"><span style="display:inline-block;width:40px;height:40px;background:#fff;border:1px solid #F3F4F6;border-radius:12px;box-shadow:0 2px 4px rgba(0,0,0,.05);line-height:40px"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span><span style="display:block;font-size:10px;font-weight:600;color:#6B7280;margin-top:6px">在看</span></section><section style="display:inline-block;text-align:center;margin:0 10px;vertical-align:top"><span style="display:inline-block;width:40px;height:40px;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:12px;box-shadow:0 2px 4px rgba(5,150,105,.15);line-height:40px"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M15 14l5-5-5-5"/><path d="M4 20v-7a4 4 0 0 1 4-4h12"/></svg></span><span style="display:block;font-size:10px;font-weight:600;color:#059669;margin-top:6px">转发</span></section><p style="font-size:10px;color:#9CA3AF;letter-spacing:1px;margin:18px 0 0">THANKS FOR READING</p></section>';
 const THEMES={
-  "绿色科技风":{container:{'max-width':'677px','margin':'0 auto','background':'#fff','font-family':"-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif",'color':'#374151','line-height':'1.75','letter-spacing':'.3px','padding':'0 48px','font-size':'15px'},
-    rules:{'p':{'font-size':'15px','line-height':'1.9','margin':'0 0 24px','text-align':'justify','color':'#374151'},'strong':{'color':'#059669','font-weight':'700'},'mark':{'background':'linear-gradient(120deg,#FDE68A 0%,rgba(255,255,255,0) 100%)','padding':'0 4px','border-radius':'2px','font-weight':'600','color':'#111827'},'h1':{'font-size':'23px','font-weight':'900','color':'#111827','margin':'8px 0 20px','letter-spacing':'-1px'},'h2':{'font-size':'18px','font-weight':'900','color':'#111827','margin':'34px 0 18px','padding-left':'12px','border-left':'4px solid #059669','line-height':'1.3'},'h3':{'font-size':'15px','font-weight':'800','color':'#111827','margin':'26px 0 14px'},'blockquote':{'border-left':'3px solid #111','background':'#f3f3f3','margin':'24px 0','padding':'12px 16px','border-radius':'4px','color':'#374151'},'blockquote p':{'margin':'0'},'code':{'background':'rgba(5,150,105,.15)','color':'#047a53','padding':'2px 7px','border-radius':'4px','font-family':'ui-monospace,Menlo,monospace','font-size':'13px','font-weight':'600'},'pre':{'background':'#f6f7f8','border':'1px solid #e5e7eb','border-radius':'8px','padding':'16px','margin':'24px 0','line-height':'1.6','white-space':'pre-wrap','word-break':'break-word','overflow-wrap':'anywhere'},'pre code':{'background':'none','color':'#374151','padding':'0'},'img':{'display':'block','max-width':'100%','margin':'8px auto 24px','border-radius':'12px'},'ul':{'padding-left':'1.4em','margin':'0 0 24px'},'ol':{'padding-left':'1.4em','margin':'0 0 24px'},'li':{'margin':'0 0 8px','line-height':'1.9'},'a':{'color':'#059669'},'hr':{'border':'0','border-top':'1px solid #e5e7eb','margin':'32px 0'}},
+  "绿色科技":{container:{'max-width':'677px','margin':'0 auto','background':'#fff','font-family':"-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif",'color':'#374151','line-height':'1.75','letter-spacing':'.3px','padding':'0 48px','font-size':'16px'},
+    rules:{'p':{'font-size':'16px','line-height':'1.9','margin':'0 0 24px','text-align':'justify','color':'#374151'},'strong':{'color':'#059669','font-weight':'700'},'mark':{'background':'linear-gradient(120deg,#FDE68A 0%,rgba(255,255,255,0) 100%)','padding':'0 4px','border-radius':'2px','font-weight':'600','color':'#111827'},'h1':{'font-size':'23px','font-weight':'900','color':'#111827','margin':'8px 0 20px','letter-spacing':'-1px'},'h2':{'font-size':'18px','font-weight':'900','color':'#111827','margin':'34px 0 18px','padding-left':'12px','border-left':'4px solid #059669','line-height':'1.3'},'h3':{'font-size':'15px','font-weight':'800','color':'#111827','margin':'26px 0 14px'},'blockquote':{'border-left':'3px solid #111','background':'#f3f3f3','margin':'24px 0','padding':'12px 16px','border-radius':'4px','color':'#374151'},'blockquote p':{'margin':'0'},'code':{'background':'rgba(5,150,105,.15)','color':'#047a53','padding':'2px 7px','border-radius':'4px','font-family':'ui-monospace,Menlo,monospace','font-size':'13px','font-weight':'600'},'pre':{'background':'#f6f7f8','border':'1px solid #e5e7eb','border-radius':'8px','padding':'16px','margin':'24px 0','line-height':'1.6','white-space':'pre-wrap','word-break':'break-word','overflow-wrap':'anywhere'},'pre code':{'background':'none','color':'#374151','padding':'0'},'img':{'display':'block','max-width':'100%','margin':'8px auto 24px','border-radius':'12px'},'ul':{'padding-left':'1.4em','margin':'0 0 24px'},'ol':{'padding-left':'1.4em','margin':'0 0 24px'},'li':{'margin':'0 0 8px','line-height':'1.9'},'a':{'color':'#059669'},'hr':{'border':'0','border-top':'1px solid #e5e7eb','margin':'32px 0'}},
     composites:{h1:(n,t)=>`<section style="margin:36px 0 22px"><section style="display:inline-block;vertical-align:middle;text-align:center;margin-right:16px"><span style="display:block;font-size:34px;font-weight:900;color:#059669;line-height:1;letter-spacing:-2px">${n}</span><span style="display:block;font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:3px;margin-top:3px">PART</span></section><span style="display:inline-block;vertical-align:middle;width:1px;height:40px;background:#E5E7EB;margin-right:16px"></span><span style="display:inline-block;vertical-align:middle;font-size:18px;font-weight:900;color:#111827;letter-spacing:.3px">${t}</span></section>`,
       h2:(n,t)=>`<section style="margin:26px 0 12px"><span style="display:inline-block;vertical-align:middle;background:#111827;color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;margin-right:10px">${n}</span><span style="display:inline-block;vertical-align:middle;font-size:15px;font-weight:800;color:#111827">${t}</span></section>`},footer:GZH_FOOTER},
-  "极简黑白（水墨）":{container:{'max-width':'640px','margin':'0 auto','background':'#fff','color':'#1a1a1a','font-family':"Georgia,'Songti SC','PingFang SC',serif",'line-height':'1.85','padding':'0 48px','font-size':'16px'},
+  "苹方周刊":{container:{'max-width':'677px','margin':'0 auto','background':'#fff','font-family':"Optima-Regular,Optima,PingFangSC-light,PingFangTC-light,'PingFang SC',Cambria,Cochin,Georgia,Times,'Times New Roman',serif",'color':'rgb(63, 63, 63)','line-height':'1.6','padding':'0 48px','font-size':'16px'},
+    rules:{'p':{'box-sizing':'border-box','margin':'10px','padding':'0','font-size':'16px','font-weight':'400','text-align':'left','color':'rgb(63, 63, 63)','line-height':'1.6'},'strong':{'color':'rgb(63, 63, 63)','font-size':'16px','font-weight':'700','line-height':'1.5'},'mark':{'background':'transparent','color':'inherit','font-weight':'700','padding':'0'},'h1':{'box-sizing':'border-box','margin':'20px 10px 32px','padding':'0','font-weight':'700','color':'rgb(63, 63, 63)','line-height':'1.35','font-size':'26px'},'h2':{'box-sizing':'border-box','margin':'40px 10px 20px','padding':'0','font-weight':'700','color':'rgb(63, 63, 63)','line-height':'1.5','font-size':'19.2px'},'h3':{'box-sizing':'border-box','margin':'40px 10px 20px','padding':'0','font-weight':'700','color':'rgb(63, 63, 63)','line-height':'1.5','font-size':'19.2px'},'blockquote':{'margin':'20px 10px','padding':'0 0 0 20px','border-left':'1px solid rgba(0,0,0,.1)','color':'rgb(63, 63, 63)'},'blockquote p':{'margin':'0'},'code':{'font-size':'12.6px','opacity':'.6','background':'transparent','padding':'0','font-family':'ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace'},'pre':{'margin':'20px 10px','padding':'12px','background':'#f6f6f4','color':'rgb(63, 63, 63)','line-height':'1.6','white-space':'pre-wrap','word-break':'break-word','overflow-wrap':'anywhere'},'pre code':{'opacity':'1','font-size':'13px'},'img':{'display':'block','max-width':'100%','height':'auto','margin':'20px auto','border-radius':'0'},'ul':{'margin':'20px 10px','padding-left':'20px'},'ol':{'margin':'20px 10px','padding-left':'20px'},'li':{'margin':'0 10px 10px 0','padding-left':'0','font-size':'16px','line-height':'1.5'},'a':{'color':'rgb(13, 117, 252)'},'hr':{'border-style':'solid','border-width':'1px 0 0','border-color':'rgba(0,0,0,.1)','transform-origin':'0 0','transform':'scale(1,.5)','margin':'30px 0'}},
+    composites:{h2:(n,t)=>`<h2 style="box-sizing:border-box;margin:40px 10px 20px;padding:0;font-weight:bold;color:rgb(63, 63, 63);line-height:1.5;font-size:19.2px">▍${t}</h2>`,h3:(n,t)=>`<h3 style="box-sizing:border-box;margin:40px 10px 20px;padding:0;font-weight:bold;color:rgb(63, 63, 63);line-height:1.5;font-size:19.2px">▍${t}</h3>`}},
+  "极简墨白":{container:{'max-width':'640px','margin':'0 auto','background':'#fff','color':'#1a1a1a','font-family':"Georgia,'Songti SC','PingFang SC',serif",'line-height':'1.85','padding':'0 48px','font-size':'16px'},
     rules:{'p':{'font-size':'16px','margin':'0 0 22px','color':'#1a1a1a'},'strong':{'font-weight':'700','color':'#000'},'mark':{'background':'#eee','padding':'0 3px'},'h1':{'font-size':'24px','font-weight':'700','margin':'8px 0 20px'},'h2':{'font-size':'19px','font-weight':'700','margin':'34px 0 16px','padding-bottom':'6px','border-bottom':'1px solid #ddd'},'h3':{'font-size':'16px','font-weight':'700','margin':'24px 0 12px'},'blockquote':{'border-left':'3px solid #ccc','margin':'22px 0','padding':'4px 16px','color':'#666','font-style':'italic'},'blockquote p':{'margin':'0'},'code':{'background':'#f0f0f0','padding':'2px 6px','border-radius':'3px','font-family':'ui-monospace,Menlo,monospace','font-size':'14px'},'pre':{'background':'#f7f7f7','border':'1px solid #e5e7eb','border-radius':'6px','padding':'16px','margin':'22px 0','white-space':'pre-wrap','word-break':'break-word','overflow-wrap':'anywhere'},'pre code':{'background':'none','padding':'0'},'img':{'display':'block','max-width':'100%','margin':'8px auto 22px','border-radius':'4px'},'ul':{'padding-left':'1.4em','margin':'0 0 22px'},'ol':{'padding-left':'1.4em','margin':'0 0 22px'},'li':{'margin':'0 0 6px'},'a':{'color':'#1a1a1a'},'hr':{'border':'0','border-top':'1px solid #ddd','margin':'30px 0'}}},
-  "椰树风":{container:{'max-width':'677px','margin':'0 auto','background':'#fff','font-family':"'PingFang SC',system-ui,-apple-system,'Microsoft YaHei',sans-serif",'color':'rgba(0,0,0,.9)','line-height':'1.6','letter-spacing':'.03em','padding':'0 48px','font-size':'17px'},
-    rules:{'p':{'font-size':'17px','margin':'0 0 20px','color':'rgba(0,0,0,.9)'},'strong':{'color':'#D92142','font-weight':'900'},'mark':{'background':'#FFFB00','color':'#D92142','font-weight':'900','padding':'0 4px'},'h1':{'display':'inline-block','background':'#FFFB00','color':'#D92142','font-weight':'900','font-size':'30px','padding':'6px 14px','margin':'8px 0 20px','line-height':'1.2'},'h2':{'display':'inline-block','background':'#CC3333','color':'#fff','font-weight':'900','font-size':'22px','padding':'4px 12px','margin':'30px 0 16px'},'h3':{'display':'inline-block','background':'#0066CC','color':'#fff','font-weight':'900','font-size':'18px','padding':'3px 10px','margin':'24px 0 12px'},'blockquote':{'border':'3px solid #1d1d1d','background':'#fff','margin':'22px 0','padding':'12px 16px','font-weight':'700','color':'#1d1d1d'},'blockquote p':{'margin':'0'},'code':{'background':'#000','color':'#FFFB00','padding':'2px 6px','font-weight':'700','font-family':'ui-monospace,Menlo,monospace','font-size':'14px'},'pre':{'background':'#1d1d1d','color':'#FFFB00','padding':'16px','margin':'22px 0','white-space':'pre-wrap','word-break':'break-word','overflow-wrap':'anywhere','font-family':'ui-monospace,Menlo,monospace','font-size':'13px','border':'3px solid #000'},'pre code':{'background':'none','color':'#FFFB00','padding':'0'},'img':{'display':'block','max-width':'100%','margin':'8px auto 22px','border':'3px solid #1d1d1d'},'ul':{'padding-left':'1.4em','margin':'0 0 20px'},'ol':{'padding-left':'1.4em','margin':'0 0 20px'},'li':{'margin':'0 0 8px','font-size':'17px'},'a':{'color':'#0066CC','font-weight':'700'},'hr':{'border':'0','border-top':'3px solid #1d1d1d','margin':'28px 0'}}},
-  "极简(支持代码)":{container:{'max-width':'677px','margin':'0 auto','background':'#fff','font-family':"'PingFang SC',system-ui,-apple-system,'Microsoft YaHei',sans-serif",'color':'#000','line-height':'1.75','padding':'0 48px','font-size':'16px'},
+  "极简代码":{container:{'max-width':'677px','margin':'0 auto','background':'#fff','font-family':"'PingFang SC',system-ui,-apple-system,'Microsoft YaHei',sans-serif",'color':'#000','line-height':'1.75','padding':'0 48px','font-size':'16px'},
     rules:{'p':{'font-size':'16px','line-height':'1.75','margin':'0 0 24px','color':'#000'},'strong':{'color':'#ff6827','font-weight':'700'},'mark':{'background':'#fff3cd','padding':'0 4px'},'h1':{'font-size':'22px','color':'#003399','font-weight':'700','line-height':'1.35','margin':'8px 0 24px'},'h2':{'font-size':'20px','color':'#003399','font-weight':'700','line-height':'1.35','margin':'32px 0 20px'},'h3':{'font-size':'18px','color':'#003399','font-weight':'700','line-height':'1.35','margin':'26px 0 14px'},'blockquote':{'border-left':'3px solid #111','background':'#f3f3f3','color':'#111','margin':'24px 0','padding':'12px','font-size':'16px'},'blockquote p':{'margin':'0'},'code':{'background':'#f2f2f2','color':'#111','font-size':'14px','padding':'2px 6px','border-radius':'4px','font-family':"ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace"},'pre':{'background':'#111','color':'#f5f5f5','font-size':'14px','line-height':'1.6','padding':'14px','margin':'24px 0','white-space':'pre-wrap','word-break':'break-word','overflow-wrap':'anywhere','border-radius':'8px','font-family':"ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace"},'pre code':{'background':'none','color':'#f5f5f5','padding':'0'},'img':{'display':'block','max-width':'100%','margin':'8px auto 24px','border-radius':'4px'},'ul':{'padding-left':'32px','margin':'0 0 32px','list-style-type':'disc'},'ol':{'padding-left':'32px','margin':'0 0 32px','list-style-type':'decimal'},'li':{'margin':'0 0 8px','font-size':'16px'},'a':{'color':'#003399'},'hr':{'border':'0','border-top':'1px solid #ddd','margin':'30px 0'}}}
 };
 
 const $=s=>document.querySelector(s);
 const editor=$('#editor'),gzhPreview=$('#gzhPreview'),themeSel=$('#theme'),statusEl=$('#status'),mdpick=$('#mdpick'),dropEl=$('#drop');
+const NOTE_PALETTES=Object.freeze({mint:'#c6dfd5',lavender:'#c4c0e1',yellow:'#f7d879'});
+const TICKET_WALLPAPERS=Object.freeze({yellow:{name:'亮黄',value:'#ffd72e'},violet:{name:'亮紫',value:'#8173ee'},green:{name:'亮薄荷绿',value:'#39d6a5'}});
+const TEA_TONES=Object.freeze({ivory:{name:'象牙白',paper:'#ebe7dc',ink:'#2e2c28',line:'#bdb7aa'},kraft:{name:'做旧牛皮纸',paper:'#b78a65',ink:'#fffdf7',line:'#c08f6a'}});
+let coffeeColor='mint';
+let ticketWallpaper='yellow';
+let teaTone='ivory';
+let teaFont='serif';
+THEMES['莫兰迪']={};
 Object.keys(THEMES).forEach(n=>{const o=document.createElement('option');o.value=o.textContent=n;themeSel.appendChild(o);});
 let imageIndex={},mode='gzh';
 const norm=s=>s.normalize('NFC').toLowerCase();
 const setStatus=t=>statusEl.textContent=t;
 const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const hexWithAlpha=(hex,alpha)=>`${hex}${Math.round(alpha*255).toString(16).padStart(2,'0')}`;
+
+function makeCoffeeTheme(){
+  const accent=NOTE_PALETTES[coffeeColor],shadow=hexWithAlpha(accent,.32);
+  return {edgePaddingTop:'0',edgePaddingBottom:'0',container:{'max-width':'677px','margin':'0 auto','background':'#faf7ee','font-family':"Charter,Georgia,'Songti SC','STSong','Noto Serif CJK SC',serif",'color':'#3d3d3a','line-height':'1.7','padding':'0 28px','font-size':'16px'},
+    rules:{'p':{'font-size':'16px','line-height':'1.7','margin':'0 0 20px','color':'#3d3d3a'},'strong':{'font-weight':'700','color':'#3d3d3a'},'mark':{'background':accent,'color':'#3d3d3a','padding':'1px 3px','font-weight':'700'},'h1':{'font-size':'26px','font-weight':'700','line-height':'1.2','margin':'0'},'h2':{'font-size':'20px','font-weight':'700','line-height':'1.25','margin':'32px 0 16px','padding-top':'18px','border-top':'1px solid #dedbd1','color':'#3d3d3a'},'h3':{'font-size':'17px','font-weight':'700','line-height':'1.35','margin':'24px 0 12px','color':'#3d3d3a'},'blockquote':{'border-left':'3px solid '+accent,'margin':'20px 0','padding':'4px 0 4px 14px','color':'#595954','background':'transparent'},'blockquote p':{'margin':'0'},'code':{'background':'transparent','border':'0','padding':'0','font-family':'Menlo,Monaco,Consolas,"Courier New",monospace','font-size':'12px','color':'#383a42'},'pre':{'background':'#fff','border':'0','padding':'.6em 1em 1em','margin':'0','line-height':'1.7','white-space':'pre-wrap','word-break':'break-word','overflow-wrap':'anywhere','font-family':'Menlo,Monaco,Consolas,"Courier New",monospace'},'pre code':{'background':'none','border':'0','padding':'0'},'img':{'display':'block','max-width':'100%','height':'auto','margin':'1.5em auto','border':'0','border-radius':'4px','padding':'0','background':'transparent','box-shadow':shadow+' 0 2px 4px','box-sizing':'border-box'},'ul':{'padding-left':'1.4em','margin':'0 0 20px'},'ol':{'padding-left':'1.4em','margin':'0 0 20px'},'li':{'margin':'0 0 8px','line-height':'1.7'},'a':{'color':'#193b69','text-decoration':'underline'},'hr':{'border':'0','border-top':'1px solid #dedbd1','margin':'28px 0'}},
+    composites:{h1:(n,t)=>`<section style="padding:30px 0 10px;margin:0 0 26px;box-sizing:border-box"><i style="display:inline-block;font-size:16px;line-height:1;font-weight:700;color:${accent};margin-right:12px;vertical-align:middle">${n}</i><span style="display:inline;font-size:26px;line-height:1.2;font-weight:700;color:#3d3d3a;overflow-wrap:anywhere">${t}</span></section>`,h2:(n,t)=>`<section style="margin:32px 0 16px;box-sizing:border-box"><span style="display:inline-block;font-size:20px;line-height:1.25;font-weight:700;color:#3d3d3a;padding-bottom:7px;border-bottom:3px solid ${accent}">${t}</span></section>`,pre:(n,t)=>`<section style="background:#fafafa;color:#000;display:block;margin:1.5em 0;line-height:26px;padding:0;border:1px solid rgba(0,0,0,.08);border-radius:6px;font-family:Menlo,Monaco,Consolas,'Courier New',monospace;box-shadow:rgba(140,140,160,.08) 0 1px 4px;overflow:hidden;box-sizing:border-box"><span style="display:block;padding:4px 10px;font-size:15px;line-height:1;color:#bbb;letter-spacing:2px;background-color:#f2f2f2;border-bottom:1px solid rgba(0,0,0,.04)">●</span><pre style="background:#fff;color:#000;margin:0;white-space:pre-wrap;overflow-x:auto;padding:.6em 1em 1em"><code style="white-space:pre-wrap;display:block;font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:12px;background:transparent;color:#383a42;padding:0">${t}</code></pre></section>`}};
+}
+function activeGzhTheme(){return themeSel.value==='莫兰迪'?makeCoffeeTheme():THEMES[themeSel.value];}
 
 function addFiles(files){
   let imgs=0;const mds=[];const IMG=/\.(png|jpe?g|webp|gif|svg)$/i;
@@ -318,12 +493,23 @@ function readEntry(entry,out){return new Promise(res=>{
   else res();});}
 $('#connect').addEventListener('click',async()=>{
   if(!window.showDirectoryPicker){setStatus('此环境不支持选择文件夹，请拖文件夹进来。');return;}
-  try{const dir=await window.showDirectoryPicker({mode:'read'});setStatus('读取 vault 中…');const out=[];await walkHandle(dir,'',out);addFiles(out);}
+  try{const dir=await window.showDirectoryPicker({mode:'read'});setStatus('读取 Obsidian 笔记中…');const out=[];await walkHandle(dir,'',out);addFiles(out);}
   catch(e){if(e.name!=='AbortError')setStatus('打不开：'+e.message+'（file:// 下改用拖拽，或用 localhost 打开）');}
 });
 async function walkHandle(dir,prefix,out){for await(const[name,h] of dir.entries()){if(name.startsWith('.'))continue;
   if(h.kind==='file')out.push({name:prefix+name,file:await h.getFile()});else await walkHandle(h,prefix+name+'/',out);}}
-mdpick.addEventListener('change',async e=>{const i=e.target.value;if(i==='')return;editor.value=await mdpick._files[i].file.text();render();});
+const markdownTitleFromName=name=>name.split('/').pop().replace(/\.md$/i,'').trim();
+function selectedMarkdownTitle(){const item=mdpick.value===''?null:mdpick._files?.[mdpick.value];return item?markdownTitleFromName(item.name):'';}
+function splitFrontmatter(source){
+  const text=String(source||'');
+  const match=text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
+  if(!match)return {body:text,title:''};
+  const titleLine=match[1].match(/^\s*title\s*:\s*(.+?)\s*$/mi);
+  const raw=titleLine?titleLine[1].trim():'';
+  const title=raw.replace(/^(?:["'])(.*)(?:["'])$/,'$1').trim();
+  return {body:text.slice(match[0].length),title};
+}
+mdpick.addEventListener('change',async e=>{const i=e.target.value;if(i==='')return;const item=mdpick._files[i];editor.value=await item.file.text();render();});
 
 const fileToDataURL=f=>new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(f);});
 // 找不到图时用占位图（自带模板 img 样式，能看出各套版的图框），而非红字提示
@@ -348,18 +534,18 @@ function replaceComposites(root,t){
   const mk=(fn,num,el)=>{const w=document.createElement('div');w.innerHTML=fn(String(num).padStart(2,'0'),esc(el.textContent.trim())).trim();if(w.firstElementChild)el.replaceWith(w.firstElementChild);};
   let h1n=0,h2n=0;
   [...root.children].forEach(el=>{const tag=el.tagName.toLowerCase();
-    if(tag==='h1'&&t.composites.h1){h1n++;h2n=0;mk(t.composites.h1,h1n,el);}else if(tag==='h2'&&t.composites.h2){h2n++;mk(t.composites.h2,h2n,el);}});
+    if(tag==='h1'&&t.composites.h1){h1n++;h2n=0;mk(t.composites.h1,h1n,el);}else if(tag==='h2'&&t.composites.h2){h2n++;mk(t.composites.h2,h2n,el);}else if(tag==='pre'&&t.composites.pre){mk(t.composites.pre,0,el);}});
 }
 function applyTheme(root,t){root.removeAttribute('style');
   for(const[k,v] of Object.entries(t.container))root.style.setProperty(k,v);
   for(const[sel,st] of Object.entries(t.rules))root.querySelectorAll(sel).forEach(el=>{for(const[k,v] of Object.entries(st))el.style.setProperty(k,v);});}
 async function renderGzh(){
-  const t=THEMES[themeSel.value];
+  const t=activeGzhTheme();
   gzhPreview.innerHTML=await mdToHtml(editor.value);
   replaceComposites(gzhPreview,t);applyTheme(gzhPreview,t);
   if(t.footer) gzhPreview.insertAdjacentHTML('beforeend',t.footer);   // 追加底部三连卡（如有）
   // 顶部/底部留白与小红书极简风一致（38px）；首元素去掉 margin-top，避免 margin 塌陷/叠加
-  gzhPreview.style.paddingTop='38px';gzhPreview.style.paddingBottom='40px';
+  gzhPreview.style.paddingTop=t.edgePaddingTop??'38px';gzhPreview.style.paddingBottom=t.edgePaddingBottom??'40px';
   const first=gzhPreview.firstElementChild;if(first)first.style.marginTop='0';
 }
 
@@ -382,9 +568,39 @@ $('#copy').addEventListener('click',async()=>{
 });
 
 // ============ 小红书：极简风 / X长文 + 3:4 自动切页 ============
-const xhsCard=$('#xhsCard'),xhsName=$('#xhsName'),xhsDate=$('#xhsDate'),xhsHandle=$('#xhsHandle'),xhsTpl=$('#xhsTpl');
+const xhsCard=$('#xhsCard'),xhsName=$('#xhsName'),xhsDate=$('#xhsDate'),xhsHandle=$('#xhsHandle'),xhsTpl=$('#xhsTpl'),singleCard=$('#singleCard');
 const XW=598,XTILE=Math.round(XW*4/3);
 let avatarUrl=null,bannerUrl=null;
+function syncCoffeeSwatches(){
+  const gzhOn=themeSel.value==='莫兰迪',xhsOn=xhsTpl.value==='莫兰迪';
+  const label='莫兰迪';
+  [...themeSel.options].find(o=>o.value==='莫兰迪').textContent=label;
+  [...xhsTpl.options].find(o=>o.value==='莫兰迪').textContent=label;
+  $('#gzhCoffeeSwatches').classList.toggle('on',gzhOn);
+  $('#xhsCoffeeSwatches').classList.toggle('on',xhsOn);
+  document.querySelectorAll('[data-coffee-swatch]').forEach(b=>{const on=b.dataset.coffeeSwatch===coffeeColor;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});
+}
+document.querySelectorAll('[data-coffee-swatch]').forEach(b=>b.addEventListener('click',()=>{coffeeColor=b.dataset.coffeeSwatch;syncCoffeeSwatches();render();}));
+function syncTicketSwatches(){
+  const on=xhsTpl.value==='渐变票据';
+  [...xhsTpl.options].find(o=>o.value==='渐变票据').textContent='彩色卡';
+  $('#ticketWallpaperSwatches').classList.toggle('on',on);
+  document.querySelectorAll('[data-ticket-wallpaper]').forEach(b=>{const selected=b.dataset.ticketWallpaper===ticketWallpaper;b.classList.toggle('on',selected);b.setAttribute('aria-pressed',String(selected));});
+}
+document.querySelectorAll('[data-ticket-wallpaper]').forEach(b=>b.addEventListener('click',()=>{ticketWallpaper=b.dataset.ticketWallpaper;syncTicketSwatches();render();}));
+function syncTeaToneSwatches(){
+  const on=xhsTpl.value==='茶笺';
+  [...xhsTpl.options].find(o=>o.value==='茶笺').textContent='茶色笺';
+  $('#teaToneSwatches').classList.toggle('on',on);
+  document.querySelectorAll('[data-tea-tone]').forEach(b=>{const selected=b.dataset.teaTone===teaTone;b.classList.toggle('on',selected);b.setAttribute('aria-pressed',String(selected));});
+}
+document.querySelectorAll('[data-tea-tone]').forEach(b=>b.addEventListener('click',()=>{teaTone=b.dataset.teaTone;syncTeaToneSwatches();render();}));
+function syncTeaFontSwitch(){
+  const on=xhsTpl.value==='茶笺';
+  $('#teaFontSwitch').classList.toggle('on',on);
+  document.querySelectorAll('[data-tea-font]').forEach(b=>{const selected=b.dataset.teaFont===teaFont;b.classList.toggle('on',selected);b.setAttribute('aria-pressed',String(selected));});
+}
+document.querySelectorAll('[data-tea-font]').forEach(b=>b.addEventListener('click',()=>{teaFont=b.dataset.teaFont;syncTeaFontSwitch();render();}));
 function fmtToday(){const d=new Date();return String(d.getMonth()+1).padStart(2,'0')+'/'+String(d.getDate()).padStart(2,'0');}
 xhsDate.value=fmtToday();
 const PIN_SVG='<svg class="pin-icon" viewBox="0 0 24 24"><path d="M7 3a1 1 0 0 0 0 2h1v6l-2 3v1h5v5h2v-5h5v-1l-2-3V5h1a1 1 0 1 0 0-2H7z"/></svg>';
@@ -392,18 +608,27 @@ const VER_SVG='<svg class="verified-badge" viewBox="0 0 24 24"><path fill="#1d9b
 const STATS_HTML='<div class="stats-row"><div class="stat"><svg class="stat-icon" viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01zm8.005-6c-3.317 0-6.005 2.69-6.005 6 0 3.37 2.77 6.08 6.138 6.01l.351-.01h1.761v2.3l5.087-2.81c1.951-1.08 3.163-3.13 3.163-5.36 0-3.39-2.744-6.13-6.129-6.13H9.756z"/></svg><span class="stat-num">376</span> <span class="stat-label">Replies</span></div><div class="stat-divider"></div><div class="stat"><svg class="stat-icon" viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg><span class="stat-num">1.5K</span> <span class="stat-label">Reposts</span></div><div class="stat-divider"></div><div class="stat"><svg class="stat-icon" viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg><span class="stat-num">18.1K</span> <span class="stat-label">Likes</span></div><div class="stat-divider"></div><div class="stat"><svg class="stat-icon" viewBox="0 0 24 24"><path d="M8.75 21V3h2v18h-2zM18 21V8.5h2V21h-2zM4 21l.004-10h2L6 21H4zm9.248 0v-7h2v7h-2z"/></svg><span class="stat-num">6.6M</span> <span class="stat-label">Views</span></div></div>';
 const MORE_SVG='<svg class="more-icon" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>';
 const avHtml=nm=>avatarUrl?`<img src="${avatarUrl}" alt="">`:`<span>${esc([...nm][0]||'A')}</span>`;
-function splitTitle(md){const s=md.replace(/^\s+/,'');const m=s.match(/^#\s+(.+?)\s*(?:\n|$)/);return m?{title:m[1].trim(),body:s.slice(m[0].length)}:{title:'',body:s};}
+function splitTitle(md){const frontmatter=splitFrontmatter(md.replace(/^\s+/,'')),s=frontmatter.body;const m=s.match(/^#\s+(.+?)\s*(?:\n|$)/m);return m?{title:m[1].trim(),body:(s.slice(0,m.index)+s.slice(m.index+m[0].length)).replace(/^\s*\n/,'')}:{title:frontmatter.title,body:s};}
+function removeRepeatedTitle(md,title){if(!title)return md;const safe=title.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return md.replace(new RegExp(`(^|\\n)#\\s+${safe}\\s*(?=\\n|$)`),'$1');}
+function decorateMorandiCode(root){root.querySelectorAll('pre').forEach(pre=>{const frame=document.createElement('section'),head=document.createElement('span');frame.className='morandi-code';head.className='morandi-code-head';head.textContent='●';pre.replaceWith(frame);frame.append(head,pre);});}
 const firstImgRe=/(!\[\[([^\]|]+)(?:\|[^\]]*)?\]\])|(!\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\))/;
 
 async function renderXhs(){
-  const tpl=xhsTpl.value, isX=tpl==='X长文';
-  xhsCard.className=isX?'tpl-x':'tpl-min';
+  const tpl=xhsTpl.value, isX=tpl==='X长文', isCoffee=tpl==='莫兰迪', isTicket=tpl==='渐变票据', isTea=tpl==='茶笺', isWalnut=tpl==='胡桃木信笺', isRewild=tpl==='放生计划', isStationery=isTea||isWalnut||isRewild;
+  xhsCard.className=isX?'tpl-x':isCoffee?'tpl-coffee':isTicket?'tpl-ticket':isTea?'tpl-tea':isWalnut?'tpl-walnut':isRewild?'tpl-rewild':'tpl-min';
+  xhsCard.style.removeProperty('height');
+  xhsCard.classList.toggle('tea-kaiti',isTea&&teaFont==='kaiti');
+  if(isCoffee){xhsCard.style.setProperty('--coffee-accent',NOTE_PALETTES[coffeeColor]);xhsCard.style.setProperty('--coffee-image-shadow',hexWithAlpha(NOTE_PALETTES[coffeeColor],.32));}else{['--coffee-accent','--coffee-image-shadow'].forEach(p=>xhsCard.style.removeProperty(p));}
+  if(isTicket)xhsCard.style.setProperty('--ticket-wallpaper',TICKET_WALLPAPERS[ticketWallpaper].value);else xhsCard.style.removeProperty('--ticket-wallpaper');
+  if(isTea){const tone=TEA_TONES[teaTone];xhsCard.style.setProperty('--tea-paper',tone.paper);xhsCard.style.setProperty('--tea-ink',tone.ink);xhsCard.style.setProperty('--tea-line',tone.line);}else{['--tea-paper','--tea-ink','--tea-line'].forEach(p=>xhsCard.style.removeProperty(p));}
   xhsDate.style.display=isX?'none':'';
   xhsHandle.style.display=isX?'':'none';
   $('#bannerBtn').style.display=isX?'':'none';
+  $('#avBtn').style.display=(isTicket||isStationery)?'none':'';
   const nm=xhsName.value.trim()||'作者';
   let md=editor.value.replace(/^\s+/,''), title='', body=md;
-  if(isX){const s=splitTitle(md);title=s.title;body=s.body;}
+  if(isX||isCoffee||isTicket||isStationery){const s=splitTitle(md);title=s.title||selectedMarkdownTitle();body=s.body;}
+  if(isCoffee)body=removeRepeatedTitle(body,title);
   let inner;
   if(isX){
     const hd=xhsHandle.value.trim()||'@id';
@@ -414,22 +639,60 @@ async function renderXhs(){
     const header=`<div class="pinned-bar">${PIN_SVG}Pinned</div><div class="user-row"><div class="user-left"><div class="avatar">${avHtml(nm)}</div><div class="user-info"><div class="display-name-row"><span class="display-name">${esc(nm)}</span>${VER_SVG}</div><span class="handle">${esc(hd)}</span></div></div><div class="user-right"><button class="follow-btn">Follow</button>${MORE_SVG}</div></div>`;
     const ts=(title?`<h1 class="article-title">${esc(title)}</h1>`:'')+STATS_HTML;
     inner=header+banner+ts;
+  }else if(isCoffee){
+    const coffeeTitle=title||'文章标题';
+    inner=`<header class="coffee-head"><h1 class="coffee-title">${esc(coffeeTitle)}</h1><div class="coffee-byline"><span class="coffee-author"><span class="coffee-avatar">${avHtml(nm)}</span><span>${esc(nm)}</span></span><span>${esc(xhsDate.value.trim()||fmtToday())}</span></div></header>`;
+  }else if(isTicket){
+    const ticketTitle=title||'文章标题';
+    inner=`<section class="ticket-paper"><h1 class="ticket-title">${esc(ticketTitle)}</h1><p class="ticket-author">${esc(nm)}</p><div class="ticket-divider"></div>`;
+  }else if(isTea){
+    const teaTitle=title||'文章标题',date=xhsDate.value.trim()||fmtToday();
+    inner=`<section class="letter-sheet"><header class="letter-head"><div><span class="letter-index">NOTES · ${esc(nm)}</span><h1 class="letter-title">${esc(teaTitle)}</h1></div><span class="letter-date">${esc(date)}</span></header>`;
+  }else if(isWalnut){
+    const walnutTitle=title||'文章标题';
+    inner=`<section class="walnut-sheet"><h1 class="walnut-title">${esc(walnutTitle)}<span>${esc(nm)}</span></h1>`;
+  }else if(isRewild){
+    const rewildTitle=title||'文章标题',date=xhsDate.value.trim()||fmtToday();
+    inner=`<section class="rewild-sheet"><header class="rewild-head"><h1 class="rewild-title">${esc(rewildTitle)}</h1><p class="rewild-subtitle">${esc(nm)} · ${esc(date)}</p></header>`;
   }else{
     // 极简风：头像+署名+日期 → 直接正文，无 banner（图片留在正文里内联）
     inner=`<div class="xhead"><div class="xav">${avHtml(nm)}</div><div><div class="xname">${esc(nm)}</div><div class="xdate">${esc(xhsDate.value.trim()||fmtToday())}</div></div></div>`;
   }
-  xhsCard.innerHTML=inner+`<div class="article-body" id="xhsBody"></div><div class="article-end"></div>`;
+  const coffeeFooter=isCoffee?`<footer class="coffee-footer">made with <strong>doc2social</strong></footer>`:'';
+  const ticketFooter=isTicket?`<footer class="ticket-footer">made with <strong>doc2social</strong></footer></section>`:'';
+  const stationeryFooter=isTea?`<footer class="letter-foot">made with <strong>doc2social</strong></footer></section>`:isWalnut?`<footer class="walnut-foot">made with <strong>doc2social</strong></footer></section>`:isRewild?`<footer class="rewild-foot">made with <strong>doc2social</strong></footer></section>`:'';
+  xhsCard.innerHTML=inner+`<div class="article-body" id="xhsBody"></div>`+coffeeFooter+ticketFooter+stationeryFooter+`<div class="article-end"></div>`;
   $('#xhsBody').innerHTML=await mdToHtml(body);
+  if(isCoffee)decorateMorandiCode($('#xhsBody'));
   requestAnimationFrame(drawCutlines);
 }
 [xhsName,xhsDate,xhsHandle].forEach(el=>el.addEventListener('input',render));
-xhsTpl.addEventListener('change',render);
+singleCard.addEventListener('change',render);
+xhsTpl.addEventListener('change',()=>{syncCoffeeSwatches();syncTicketSwatches();syncTeaToneSwatches();syncTeaFontSwitch();render();});
 $('#avBtn').addEventListener('click',()=>$('#avFile').click());
 $('#avFile').addEventListener('change',async e=>{const f=e.target.files[0];if(f){avatarUrl=await fileToDataURL(f);render();}});
 $('#bannerBtn').addEventListener('click',()=>$('#bannerFile').click());
 $('#bannerFile').addEventListener('change',async e=>{const f=e.target.files[0];if(f){bannerUrl=await fileToDataURL(f);render();}});
 
-function computeCuts(){
+function exportFrame(){
+  const tpl=xhsTpl.value;
+  if(tpl==='胡桃木信笺')return {top:46,bottom:46,side:24,outer:'#675548',paper:'#efeee5'};
+  if(tpl==='茶笺')return {top:48,bottom:48,side:24,outer:teaTone==='kraft'?'#050505':'#050505',paper:TEA_TONES[teaTone].paper,dots:true,dotColor:teaTone==='kraft'?'rgba(73,50,36,.2)':'rgba(62,55,46,.15)'};
+  if(tpl==='渐变票据')return {top:32,bottom:32,side:20,outer:'ticket',paper:'#fffdf8'};
+  return {top:0,bottom:0,side:0,outer:'#fff',paper:'#fff'};
+}
+function fillExportFrame(ctx,frame,DPR){
+  const W=XW*DPR,H=XTILE*DPR,top=frame.top*DPR,bottom=frame.bottom*DPR,side=frame.side*DPR;
+  ctx.fillStyle=frame.outer==='ticket'?TICKET_WALLPAPERS[ticketWallpaper].value:frame.outer;
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle=frame.paper;ctx.fillRect(side,top,W-side*2,H-top-bottom);
+  if(frame.dots){
+    ctx.fillStyle=frame.dotColor;
+    for(let y=top+7*DPR;y<H-bottom;y+=13*DPR)for(let x=side+7*DPR;x<W-side;x+=13*DPR)ctx.fillRect(x,y,1.4*DPR,1.4*DPR);
+  }
+}
+function computeCuts(includeSingleCardHeight=false){
+  const frame=exportFrame(),pageHeight=XTILE-frame.top-frame.bottom;
   const cardTop=xhsCard.getBoundingClientRect().top+window.scrollY;
   const Y=v=>v+window.scrollY-cardTop;
   const lines=[];let maxB=0;
@@ -444,34 +707,48 @@ function computeCuts(){
     if(el.children.length)[...el.children].forEach(walk);else{const b=bot(el);if(b>maxB)maxB=b;}};
   [...xhsCard.children].forEach(walk);
   const contentBottom=Math.round(maxB);
-  const cuts=[0];let cur=0,guard=0;
-  while(cur<contentBottom-1&&guard++<600){
-    let target=cur+XTILE;
-    if(target>=contentBottom){cuts.push(contentBottom);break;}
+  const pageBottom=includeSingleCardHeight&&xhsCard.classList.contains('single-card')?XTILE-frame.bottom:contentBottom;
+  const cuts=[frame.top];let cur=frame.top,guard=0;
+  while(cur<pageBottom-1&&guard++<600){
+    let target=cur+pageHeight;
+    if(target>=pageBottom){cuts.push(pageBottom);break;}
     for(const ln of lines){if(ln.t+0.5<target&&target<ln.b-0.5){target=Math.floor(ln.t);break;}}
-    if(target<=cur)target=cur+XTILE;
+    if(target<=cur)target=cur+pageHeight;
     cuts.push(target);cur=target;
   }
-  return {cuts,contentBottom};
+  return {cuts,contentBottom:pageBottom,frame};
+}
+function fitSingleCard(){
+  xhsCard.classList.remove('single-card');
+  xhsCard.style.removeProperty('height');
+  if(!singleCard.checked)return false;
+  xhsCard.classList.add('single-card');
+  const {contentBottom,frame}=computeCuts();
+  if(contentBottom<=XTILE-frame.bottom)return true;
+  xhsCard.classList.remove('single-card');
+  xhsCard.style.removeProperty('height');
+  return false;
 }
 function drawCutlines(){
   xhsCard.querySelectorAll('.cutline').forEach(e=>e.remove());
-  const {cuts}=computeCuts();const n=Math.max(1,cuts.length-1);
+  const isSingle=fitSingleCard(),{cuts}=computeCuts(true);const n=Math.max(1,cuts.length-1);
   for(let i=1;i<cuts.length-1;i++){const d=document.createElement('div');d.className='cutline';d.style.top=cuts[i]+'px';d.innerHTML='<span>'+(i+1)+'/'+n+'</span>';xhsCard.appendChild(d);}
-  setStatus(`小红书「${xhsTpl.value}」：${n} 页 3:4（导出 @2x = ${XW*2}×${XTILE*2}）。蓝线=切页处。`);
+  const templateName=xhsTpl.selectedOptions[0]?.textContent||xhsTpl.value;
+  setStatus(`小红书「${templateName}」：${n} 页 3:4（导出 @2x = ${XW*2}×${XTILE*2}）。${isSingle?'单卡已收束。':'蓝线=切页处。'}`);
 }
 $('#exportPng').addEventListener('click',async()=>{
   setStatus('导出中…（若浏览器询问，请允许下载多个文件）');
   try{
     xhsCard.querySelectorAll('.cutline').forEach(e=>e.remove());
-    const {cuts}=computeCuts();const DPR=2;
+    fitSingleCard();
+    const {cuts,frame}=computeCuts(true);const DPR=2;
     const big=await html2canvas(xhsCard,{scale:DPR,backgroundColor:'#ffffff',width:XW,windowWidth:XW,useCORS:true,logging:false});
     const n=Math.max(1,cuts.length-1);
     for(let i=0;i<n;i++){
       const h=Math.max(1,(cuts[i+1]??cuts[i]+XTILE)-cuts[i]);
       const tile=document.createElement('canvas');tile.width=XW*DPR;tile.height=XTILE*DPR;
-      const ctx=tile.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,tile.width,tile.height);
-      ctx.drawImage(big,0,cuts[i]*DPR,XW*DPR,h*DPR,0,0,XW*DPR,h*DPR);
+      const ctx=tile.getContext('2d');fillExportFrame(ctx,frame,DPR);
+      ctx.drawImage(big,0,cuts[i]*DPR,XW*DPR,h*DPR,0,frame.top*DPR,XW*DPR,h*DPR);
       const a=document.createElement('a');a.download=`xhs-${String(i+1).padStart(2,'0')}.png`;a.href=tile.toDataURL('image/png');
       document.body.appendChild(a);a.click();a.remove();await new Promise(r=>setTimeout(r,150));
     }
@@ -482,7 +759,7 @@ $('#exportPng').addEventListener('click',async()=>{
 let renderTimer;
 function render(){if(mode==='gzh')renderGzh();else if(mode==='xhs')renderXhs();}
 editor.addEventListener('input',()=>{clearTimeout(renderTimer);renderTimer=setTimeout(render,240);});
-themeSel.addEventListener('change',render);
+themeSel.addEventListener('change',()=>{syncCoffeeSwatches();render();});
 
 function setView(v){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.view===v));
@@ -507,14 +784,14 @@ tgl.addEventListener('click',()=>setTheme(root.dataset.theme!=='dark'));
 (async()=>{
   const g=$('#prevGzh'),x=$('#prevXhs');
   const sg=`# 标题示例\n\n正文段落，**绿色加粗**与==高亮==混排。\n\n> 一句金句放这里。\n\n## 小标题\n\n- 要点一\n- 要点二`;
-  g.innerHTML=await mdToHtml(sg);const t=THEMES['绿色科技风'];replaceComposites(g,t);applyTheme(g,t);g.style.padding='0';g.style.maxWidth='none';
-  const sx=await mdToHtml(`先连 vault，再选样式。**图片自动内嵌**，长文自动切成多张 3:4。\n\n> 不用再手搓排版。`);
+  g.innerHTML=await mdToHtml(sg);const t=THEMES['绿色科技'];replaceComposites(g,t);applyTheme(g,t);g.style.padding='0';g.style.maxWidth='none';
+  const sx=await mdToHtml(`先连接 Obsidian，再选样式。**图片自动内嵌**，长文自动切成多张 3:4。\n\n> 不用再手搓排版。`);
   x.innerHTML=`<div style="width:598px;background:#fff;color:#1a1a1a;font-family:var(--song);border:1px solid #ececec">
     <div style="display:flex;gap:13px;align-items:center;padding:38px 48px 24px;font-family:var(--sans)"><div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#5b8def,#3a6fd8);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:19px">作</div><div><div style="font-weight:700;font-size:18px">作者</div><div style="font-size:14px;color:#9aa0aa;margin-top:3px">06/30</div></div></div>
     <div style="padding:0 48px 44px;font-size:19px;line-height:1.95">${sx}</div></div>`;
 })();
 
-editor.value=`# 标题写这里\n\n正文段落。**加粗强调**、==高亮==、\`行内代码\`。\n\n> 引用金句放这里。\n\n\`\`\`\nnpm install doc2social\nconst ok = true  // 代码块示例\n\`\`\`\n\n![[示例图.png]]\n\n## 小标题\n\n- 列表项一\n- 列表项二`;
+editor.value=`# 一级标题\n\n正文段落。**加粗强调**、==高亮==、\`行内代码\`。\n\n> 引用金句放这里。\n\n\`\`\`\nnpm install doc2social\nconst ok = true  // 代码块示例\n\`\`\`\n\n![[示例图.png]]\n\n## 小标题\n\n- 列表项一\n- 列表项二`;
 setView('home');
 </script>
 </body>
